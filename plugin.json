@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "identifier": "com.localtools.plugins.firefox-downloads",
+  "name": "Firefox Downloads",
+  "version": "1.0.5",
+  "developerName": "Local Build",
+  "description": "Firefox downloads in the notch: progress, speed or time left, Stop, Resume, Retry, Show in Finder and Open File. No browser extension needed.",
+  "executable": "firefox_downloads.py",
+  "arguments": [],
+  "icon": "icon.png",
+  "autoStart": true,
+  "settings": [
+    {
+      "id": "fileTypeIcons",
+      "type": "switch",
+      "title": "File-Type Icons",
+      "description": "Show the file's extension (pdf, dmg, zip…) in the pill. Off: the pill keeps the download arrow.",
+      "systemImage": "doc.on.doc",
+      "tint": "blue",
+      "default": true
+    },
+    {
+      "id": "downloadDetails",
+      "type": "select",
+      "title": "Download Details",
+      "description": "What follows the amount while downloading: the speed, the time left, or both, taking turns every 4 seconds.",
+      "systemImage": "t.circle",
+      "tint": "yellow",
+      "options": [
+        {
+          "title": "Speed",
+          "systemImage": "s.circle"
+        },
+        {
+          "title": "Time",
+          "systemImage": "t.circle"
+        },
+        {
+          "title": "Both",
+          "systemImage": "b.circle"
+        }
+      ],
+      "default": "Time"
+    },
+    {
+      "id": "returnFocus",
+      "type": "switch",
+      "title": "App Switching After Resume",
+      "description": "Resume has to bring the browser to the front for a moment. On: you're switched back to the app you were using right after.",
+      "systemImage": "rectangle.2.swap",
+      "tint": "green",
+      "default": true
+    },
+    {
+      "id": "focusMode",
+      "type": "switch",
+      "title": "Focus Mode",
+      "description": "Coming in a later update. This switch does nothing yet.",
+      "systemImage": "moon.fill",
+      "tint": "purple",
+      "default": false
+    },
+    {
+      "id": "waitWhenAway",
+      "type": "switch",
+      "title": "Delayed Display",
+      "description": "While you're away, a download that finishes, pauses, fails or is canceled doesn't open the notch. Its card opens when you're back.",
+      "systemImage": "hourglass",
+      "tint": "orange",
+      "default": true
+    },
+    {
+      "id": "awayAfter",
+      "type": "select",
+      "title": "Away After",
+      "description": "You count as away when the screen is locked, or after this long without touching the keyboard, mouse or trackpad.",
+      "systemImage": "timer",
+      "tint": "orange",
+      "options": [
+        {
+          "title": "1 min",
+          "systemImage": "1.circle"
+        },
+        {
+          "title": "3 min",
+          "systemImage": "3.circle"
+        },
+        {
+          "title": "5 min",
+          "systemImage": "5.circle"
+        },
+        {
+          "title": "10 min",
+          "systemImage": "10.circle"
+        }
+      ],
+      "default": "1 min"
+    },
+    {
+      "id": "sneakPeekDuration",
+      "type": "select",
+      "title": "Sneak Peek Duration",
+      "description": "How long the sneak peek stays open when a download finishes, pauses, fails or is canceled.",
+      "systemImage": "eye",
+      "tint": "pink",
+      "options": [
+        {
+          "title": "3 s",
+          "systemImage": "3.circle"
+        },
+        {
+          "title": "5 s",
+          "systemImage": "5.circle"
+        },
+        {
+          "title": "8 s",
+          "systemImage": "8.circle"
+        },
+        {
+          "title": "10 s",
+          "systemImage": "10.circle"
+        }
+      ],
+      "default": "5 s"
+    },
+    {
+      "id": "remainVisible",
+      "type": "slider",
+      "title": "Remain Visible",
+      "description": "How long the closed pill of a finished or canceled download stays after its sneak peek. At 0 it goes away together with the sneak peek.",
+      "systemImage": "capsule",
+      "tint": "pink",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "suffix": "s",
+      "default": 0
+    }
+  ]
+}
