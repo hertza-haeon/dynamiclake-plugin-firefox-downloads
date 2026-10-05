@@ -127,8 +127,8 @@ DynamicLake shows two things at a time: one in the notch, one as a small
   download keeps its place.
 - **You don't miss anything.** When a download that isn't the first one
   finishes, is canceled, pauses or fails, a card says so in the notch, with
-  its buttons, for the usual time. Then the first download is back. These
-  cards come one at a time.
+  its buttons, for the usual time. Then the notch goes back to what it
+  showed. These cards come one at a time.
 
 ## Settings
 
@@ -182,11 +182,12 @@ and choose **Settings**. Changes apply within a few seconds.
 - With Focus Mode on, a finished download leaves the notch at once and its
   card comes later, with Show in Finder and Open File. A download that's
   paused, failed or stalled doesn't keep finished cards waiting.
-- When another app's activity has the notch, your first download is the
-  capsule and its own sneak peek doesn't open there. If a card about
-  another download then shows in the notch, the first download has the
-  notch afterwards; the other activity comes back when the downloads are
-  done.
+- When something else has the notch (music, for example), your download
+  is the capsule beside it. When it finishes, is canceled, pauses or
+  fails, its card takes the notch for the usual time, with its sneak peek
+  and its buttons. Then the other activity is back.
+- The plugin can't tell what had the notch. If your download was there
+  before the music started, the music has the notch after such a card.
 - If you clicked the capsule to swap two downloads, they're swapped back
   after the next card about a download.
 

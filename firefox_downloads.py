@@ -152,10 +152,11 @@ PEEK_AFTER_CREATE = 0.2       # a sneak peek is asked for this long after its ca
 SPOT_MARGIN_SECONDS = 0.5     # a paused or failed download's status card in the main
                               # place stays this long past its sneak peek...
 SPOT_GAP_SECONDS = 1.5        # ...and the next status card comes this long after it left
-HAND_BACK_SECONDS = 0.8       # the card the main place goes back to keeps the high
+HAND_BACK_SECONDS = 0.8       # cards lowered to give the main place back keep the low
                               # priority this long (DynamicLake decides who moves up a
-                              # moment after a card is dismissed; with equal priorities
-                              # by then, it's the card updated last)
+                              # moment after a card is dismissed or lowered, by the
+                              # priorities of that moment; between equals, another
+                              # app's activity first, then the card updated last)
 FOCUS_SETTLE_SECONDS = 0.25   # after Resume: time for the browser to act on the
                               # command before focus goes back to your app
 MENU_GONE_SECONDS = 1.0       # ...which waits, this long at most, for the row's menu
@@ -6272,6 +6273,17 @@ ACTION_NAMES = {"stop": "Stop", "resume": "Resume", "retry": "Retry", "restart":
 # One at a time, oldest first (step 4b). A download that's over and isn't
 # first gives up its own card and its place at once.
 #
+# Another app's activity (music, say) may have the main place, with the
+# first download as the capsule: DynamicLake opens no sneak peek there. So
+# a status always takes the main place, with the high priority: a status
+# card is created with it, and the first download's own card gets it with
+# its status (its sneak peek is asked for again a moment later: asked for
+# a card that isn't in the main place yet, it's dropped). Afterwards the
+# place is given back with the low priority, never with the high one: a
+# card that leaves, or the plugin's cards lowered for a moment (the first
+# download's the least), let another app's activity move up when there's
+# one, and the first download when there's none (end_spot, steps 4c, 4e).
+#
 # With the setting "Focus Mode" on, a finished download's card waits while
 # any other download is still under way (Download.under_way): its own card
 # and its place go at once, whichever download it is, so that the next ones
@@ -6282,7 +6294,9 @@ ACTION_NAMES = {"stop": "Stop", "resume": "Resume", "retry": "Retry", "restart":
 #
 # DynamicLake never says where a card is: all this goes by the order above.
 # After a click on the capsule (which swaps the two cards), or beside
-# another app's activity, the cards may be elsewhere than the plugin thinks.
+# another app's activity, the cards may be elsewhere than the plugin thinks;
+# and a download that had the main place before another app's activity came
+# is behind it after a status has shown.
 # --------------------------------------------------------------------------
 
 def first_in_place(downloads) -> Download | None:
@@ -6398,7 +6412,10 @@ def main() -> None:
     next_replay_at = 0.0
     places_free_from = 0.0     # no card is given before then (see PLACE_GAP_SECONDS)
     spot_pinned = ""           # the card kept behind the capsule's while a status card has the main place
-    hand_back: tuple | None = None    # (card, when): it gets its normal priority back then (see end_spot)
+    raised: dict = {}          # a download's own card, at the high priority for its status: card -> when
+                               # the main place is given back (None: when the card goes, or at once)
+    settling: dict = {}        # cards at the low priority to give the main place back: card -> when
+                               # each gets its usual priority again (see end_spot, steps 4c and 4e)
 
     # Baseline pass: note .part files that already exist when we start so a
     # stale/abandoned one does not immediately show up as "downloading".
@@ -6433,6 +6450,17 @@ def main() -> None:
     def send_priority(activity_id: str, priority: str) -> None:
         dlk.send({"schemaVersion": 1, "type": "update", "activityID": activity_id, "priority": priority})
 
+    def own_cards(but: str = "") -> list:
+        """The downloads' own cards that are up (no status card), oldest download first."""
+        return [d.activity_id for d in sorted(tracked.values(), key=lambda d: d.seq)
+                if (d.own_card if d.spot else d.created) and d.activity_id != but]
+
+    def lower(cards, now: float) -> None:
+        """The low priority for these cards, in this order, for a moment (step 4c)."""
+        for card in cards:
+            send_priority(card, "low")
+            settling[card] = now + HAND_BACK_SECONDS
+
     def start_spot(dl: Download, kind: str, now: float) -> None:
         """Show this download's status in the main place, on a card made for
         that (its own card, if it has one, stays where it is). The card is
@@ -6440,8 +6468,7 @@ def main() -> None:
         The first download's card gets the low one meanwhile: behind the
         capsule's, so that the capsule goes on showing what it showed. The
         sneak peek is asked for a moment later (PEEK_AFTER_CREATE)."""
-        nonlocal spot_pinned, hand_back
-        hand_back = None
+        nonlocal spot_pinned
         first = first_in_place(tracked.values())
         dl.own_card, dl.created = dl.created, False
         dl.spot = True
@@ -6452,6 +6479,11 @@ def main() -> None:
         if first is not None and first is not dl and first.created:
             send_priority(first.activity_id, "low")
             spot_pinned = first.activity_id
+            settling.pop(spot_pinned, None)
+        for card in list(raised):                 # (a card that had the main place for its own status)
+            if card != spot_pinned:
+                send_priority(card, "normal")
+            del raised[card]
         dl.created, dl.created_at = True, now
         dl.last_signature, dl.line_phase_sent = signature, dl.line_phase
         seconds = present_seconds(kind)
@@ -6463,24 +6495,27 @@ def main() -> None:
             dl.spot_until = now + PEEK_AFTER_CREATE + seconds + SPOT_MARGIN_SECONDS
 
     def end_spot(dl: Download, now: float) -> None:
-        """The status card leaves the main place, which goes back to the
-        first download: its card gets the high priority just before the
-        status card is dismissed (DynamicLake would otherwise move up
-        whichever card was updated last), and the usual one again a moment
-        later, once it's there (HAND_BACK_SECONDS; step 4c)."""
-        nonlocal spot_pinned, next_replay_at, hand_back
+        """The status card leaves the main place. DynamicLake then moves up
+        another app's activity when there's one, else the plugin's card with
+        the highest priority (between equals, whichever was updated last):
+        so, just before the status card is dismissed, the first download's
+        card gets its usual priority and the plugin's other cards the low
+        one, which they keep for a moment (HAND_BACK_SECONDS; step 4c)."""
+        nonlocal spot_pinned, next_replay_at
         first = first_in_place(tracked.values())
-        back = first.activity_id if first is not None and first is not dl and first.created and not first.spot else ""
+        if first is dl:
+            back = dl.activity_id if dl.own_card else ""
+        else:
+            back = first.activity_id if first is not None and first.created and not first.spot else ""
         if back:
-            send_priority(back, "high")
-            hand_back = (back, now + HAND_BACK_SECONDS)
+            send_priority(back, "normal")
+            raised.pop(back, None)
+            settling.pop(back, None)
+        lower([card for card in own_cards(but=back) if card not in raised], now)
         dlk.send({"schemaVersion": 1, "type": "dismiss", "activityID": dl.card_id})
-        if spot_pinned and spot_pinned != back and any(
-                d.activity_id == spot_pinned and d.created and not d.spot for d in tracked.values()):
-            send_priority(spot_pinned, "normal")
         spot_pinned = ""
         log_event(f"{dl.filename}: its status card left the main place" + (
-            f", given back to {first.filename}" if back else " (no other card to give it back to)"))
+            f" ({first.filename} is first in line for it)" if back else " (no other card)"))
         dl.spot, dl.spot_until, dl.peek_owed = False, None, None
         dl.created, dl.own_card = dl.own_card, False
         dl.last_signature = None              # (its own card, if it has one, is brought up to date)
@@ -6500,8 +6535,8 @@ def main() -> None:
             # still open), or a new download's arrow to become its file type.
             waking = time.monotonic()
             dues = [places_free_from]                 # (a card for the next download in line)
-            if hand_back is not None:
-                dues.append(hand_back[1])
+            dues.extend(settling.values())
+            dues.extend(until for until in raised.values() if until is not None)
             for dl in tracked.values():
                 if dl.peek_owed is not None:
                     dues.append(dl.peek_owed[1])
@@ -6949,19 +6984,33 @@ def main() -> None:
                             dl.place = False
                             places_free_from = now + PLACE_GAP_SECONDS
                             on_card = False
+                again = False
                 if owed:
                     if present is None and dl.held is None and (kind in HOLDABLE or kind == "notice"):
-                        present = dl.peek_owed[0]
+                        present, again = dl.peek_owed[0], True
                         if dl.resolved_at is not None:
                             dl.resolved_at = now          # (it stays its usual time from the sneak peek)
                     dl.peek_owed = None
                 if not on_card:
                     dl.last_signature, dl.line_phase_sent = signature, dl.line_phase
                     continue
+                # Its own card says its status: the card takes the main place for
+                # that (another app's activity may have it; the plugin can't tell),
+                # with the high priority. Asked for a card that isn't in the main
+                # place yet, a sneak peek is dropped: it's asked for again a moment
+                # later (on a card that was there already, that changes nothing).
+                rise = bool(present) and supports_present_sneak_peek and kind in HOLDABLE and not dl.spot \
+                    and not again and NOTCH_PLACES > 0
+                if rise:
+                    payload["priority"] = "high"
+                    raised[dl.activity_id] = None
+                    settling.pop(dl.activity_id, None)
                 if msg_type == "create":
                     dl.created_at = now
                     if present:                           # (asked for with the card, it's ignored: a moment later)
                         dl.peek_owed, present = (present, now + PEEK_AFTER_CREATE), None
+                elif rise:
+                    dl.peek_owed = (present, now + PEEK_AFTER_CREATE)
                 if supports_present_sneak_peek and present:
                     payload["presentSneakPeek"] = present
                     dl.peek_until = now + present
@@ -6973,6 +7022,8 @@ def main() -> None:
                         elif NOTCH_PLACES > 0:            # (a status card waits until this one has been seen)
                             next_replay_at = max(next_replay_at, now + (
                                 keep_seconds(dl) if dl.resolved_at is not None else present) + 0.3)
+                        if dl.activity_id in raised and not dl.spot and dl.resolved_at is None:
+                            raised[dl.activity_id] = now + present + SPOT_MARGIN_SECONDS      # (step 4e)
                 elif supports_present_sneak_peek and (dl.line_phase_sent, dl.line_phase) == ("held", "scrolling") \
                         and dl.peek_until is not None and dl.peek_until - now >= 0.5:
                     # The line starts to scroll while the sneak peek the plugin
@@ -7028,6 +7079,14 @@ def main() -> None:
                     if supports_present_sneak_peek:
                         payload["presentSneakPeek"] = present_seconds(signature[0])
                         dl.peek_until = now + payload["presentSneakPeek"]
+                        if NOTCH_PLACES > 0:
+                            # (as in step 4: its card takes the main place for it,
+                            # and the sneak peek is asked for again a moment later)
+                            payload["priority"] = "high"
+                            settling.pop(dl.activity_id, None)
+                            raised[dl.activity_id] = None if dl.resolved_at is not None \
+                                else now + payload["presentSneakPeek"] + SPOT_MARGIN_SECONDS
+                            dl.peek_owed = (payload["presentSneakPeek"], now + PEEK_AFTER_CREATE)
                     dlk.send(payload)
                     dl.last_signature = signature
                     dl.line_phase_sent = dl.line_phase
@@ -7041,12 +7100,16 @@ def main() -> None:
                                   f"({now - since:.0f} s later)")
                     break
 
-            # 4c. The card that got the main place back is there by now: its
-            # usual priority again (if it's still there).
-            if hand_back is not None and now >= hand_back[1]:
-                if any(d.activity_id == hand_back[0] and d.created and not d.spot for d in tracked.values()):
-                    send_priority(hand_back[0], "normal")
-                hand_back = None
+            # 4c. The cards lowered to give the main place back: whatever moves
+            # up is there by now. Their usual priority again, the oldest
+            # download's first (those that are still there).
+            due = [card for card, when in settling.items() if now >= when]
+            if due:
+                for card in own_cards():
+                    if card in due and card not in raised and card != spot_pinned:
+                        send_priority(card, "normal")
+                for card in due:
+                    del settling[card]
 
             # 4d. A paused or failed download's status card has had its time in
             # the main place (not while a button works on it, or says something),
@@ -7059,6 +7122,27 @@ def main() -> None:
                 if dl.spot_until is None or now >= dl.spot_until or (
                         dl.shown_state(now) == "active" and not dl.browser_closed):
                     end_spot(dl, now)
+
+            # 4e. A download's own card has had the main place for its pause or
+            # its failure (not while a button works on it, or says something),
+            # or the download carries on: the place is given back. All the
+            # plugin's cards get the low priority for a moment, this one last:
+            # another app's activity moves up if there's one; if not, this card
+            # stays where it is (between equals, the card that's there stays).
+            # A finished or canceled download's card just goes at its time.
+            for card, until in list(raised.items()):
+                dl = next((d for d in tracked.values() if d.activity_id == card and d.created and not d.spot), None)
+                if dl is None:
+                    del raised[card]                      # (the card has gone)
+                    continue
+                if dl.resolved_at is not None or dl.peek_owed is not None:
+                    continue
+                if dl.job is not None or dl.restart_pending or (dl.notice and now < dl.notice_until):
+                    continue
+                if until is None or now >= until or (dl.shown_state(now) == "active" and not dl.browser_closed):
+                    del raised[card]
+                    lower([c for c in own_cards(but=card) if c not in raised and c != spot_pinned] + [card], now)
+                    log_event(f"{dl.filename}: its card has had the main place for its status; the place is given back")
 
             # 5. Dismiss cards whose grace period has elapsed (not while a button
             # works on them, nor while they wait for you).

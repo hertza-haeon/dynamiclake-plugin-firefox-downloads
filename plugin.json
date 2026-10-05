@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "identifier": "com.localtools.plugins.firefox-downloads",
   "name": "Firefox Downloads",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "developerName": "Local Build",
   "description": "Firefox downloads in the notch: progress, speed or time left, Stop, Resume, Retry, Show in Finder and Open File. No browser extension needed.",
   "executable": "firefox_downloads.py",
