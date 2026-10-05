@@ -41,10 +41,14 @@ download and open the finished file without going back to the browser.
 
 ## Install
 
-1. Open **DynamicLake → Settings → Plugins**.
-2. Click **Install Local** and choose the
-   `FirefoxDownloads.dynamiclakeplugin` folder. Keep that exact name.
-3. Give DynamicLake the two [permissions](#permissions) below.
+1. Download `FirefoxDownloads.dynamiclakeplugin.zip` from the
+   [latest release](https://github.com/hertza-haeon/dynamiclake-plugin-firefox-downloads/releases/latest)
+   and unzip it.
+2. Open **DynamicLake → Settings → Plugins**.
+3. Click **Install Local** and choose the
+   `FirefoxDownloads.dynamiclakeplugin` folder you unzipped. Keep that exact
+   name.
+4. Give DynamicLake the two [permissions](#permissions) below.
 
 That's all: start a download in your browser and it shows in the notch.
 
@@ -253,6 +257,6 @@ Its last lines usually tell what happened.
 
 ---
 
-<sub>The icon is Firefox's logo. That's fine for personal use; check
-Mozilla's trademark guidelines before publishing this plugin anywhere
-public.</sub>
+<sub>Firefox and the Firefox logo are trademarks of the Mozilla Foundation.
+This plugin is an independent project. It is not affiliated with, or
+endorsed by, Mozilla or DynamicLake.</sub>
