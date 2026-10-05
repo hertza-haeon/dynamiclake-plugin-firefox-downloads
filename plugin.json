@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "identifier": "com.localtools.plugins.firefox-downloads",
   "name": "Firefox Downloads",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "developerName": "Local Build",
   "description": "Firefox downloads in the notch: progress, speed or time left, Stop, Resume, Retry, Show in Finder and Open File. No browser extension needed.",
   "executable": "firefox_downloads.py",
@@ -25,7 +25,7 @@
       "title": "Download Details",
       "description": "What follows the amount while downloading: the speed, the time left, or both, taking turns every 4 seconds.",
       "systemImage": "t.circle",
-      "tint": "yellow",
+      "tint": "teal",
       "options": [
         {
           "title": "Speed",
@@ -55,9 +55,9 @@
       "id": "focusMode",
       "type": "switch",
       "title": "Focus Mode",
-      "description": "Coming in a later update. This switch does nothing yet.",
-      "systemImage": "moon.fill",
-      "tint": "purple",
+      "description": "Off: a finished download's card shows at once. On: it waits until every download is done, then the finished cards show one after the other.",
+      "systemImage": "target",
+      "tint": "orange",
       "default": false
     },
     {
@@ -66,7 +66,7 @@
       "title": "Delayed Display",
       "description": "While you're away, a download that finishes, pauses, fails or is canceled doesn't open the notch. Its card opens when you're back.",
       "systemImage": "hourglass",
-      "tint": "orange",
+      "tint": "pink",
       "default": true
     },
     {
@@ -75,7 +75,7 @@
       "title": "Away After",
       "description": "You count as away when the screen is locked, or after this long without touching the keyboard, mouse or trackpad.",
       "systemImage": "timer",
-      "tint": "orange",
+      "tint": "purple",
       "options": [
         {
           "title": "1 min",
@@ -102,7 +102,7 @@
       "title": "Sneak Peek Duration",
       "description": "How long the sneak peek stays open when a download finishes, pauses, fails or is canceled.",
       "systemImage": "eye",
-      "tint": "pink",
+      "tint": "indigo",
       "options": [
         {
           "title": "3 s",
@@ -129,7 +129,7 @@
       "title": "Remain Visible",
       "description": "How long the closed pill of a finished or canceled download stays after its sneak peek. At 0 it goes away together with the sneak peek.",
       "systemImage": "capsule",
-      "tint": "pink",
+      "tint": "indigo",
       "min": 0,
       "max": 30,
       "step": 1,

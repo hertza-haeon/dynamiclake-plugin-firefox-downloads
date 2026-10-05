@@ -96,6 +96,20 @@ MAX_PRESENT_SECONDS = 10      # the longest sneak peek DynamicLake accepts (a lo
                               # makes it refuse the whole update)
 DETAILS_TURN_SECONDS = 4      # "Download Details" on Both: the speed and the time left
                               # take turns, this long each
+SCROLL_HOLD_SECONDS = 3       # a status line too long for the sneak peek stays still this
+                              # long, cut short, before it starts to scroll
+FIT_POINTS = 196.0            # the widest text DynamicLake shows whole in the middle of a
+                              # sneak peek (a wider one scrolls). Measured on a notch, in
+                              # the font below: 202 pt with "100%" on its right, up to 220
+FIT_CHARS = 28                # ...in characters, where widths can't be measured
+PEEK_FONT = ".AppleSystemUIFontDemi"    # the sneak peek's text, as measured on a notch: the
+PEEK_FONT_SIZE = 14.0                   # system's semibold, at 14 pt
+LEAD_BLANK = "\u2800"         # an empty braille cell, put before a line that scrolls: it
+                              # starts where the left side fades out, which cut its first
+                              # letter (spaces there are trimmed; this isn't one)
+PAD_END = "\u034f"            # an invisible character after padding spaces, which keeps
+                              # DynamicLake from trimming them (others, such as U+2060,
+                              # make it refuse the whole update)
 MAX_TEXT_CHARS = 240          # ...and the longest text
 ICON_DELAY_SECONDS = 5        # a new download shows the blue arrow this long, then
                               # its file type
@@ -104,9 +118,12 @@ EARLY_STOP_CONFIRM = 0.09     # the browser closed the partial file: looked at a
                               # (it also closes it for an instant when it finishes)
 EARLY_STOP_CONFIRM_NO_TOTAL = 0.5   # ...longer when the size isn't known: "it's all
                               # there, so it's finishing" can't be told then
-EARLY_PEEK_DELAY = 0.4        # such a pause changes the pill at once, and opens the
-                              # sneak peek this much later: if the browser was in fact
-                              # quitting (it closes its files first), it never opens
+EARLY_PEEK_DELAY = 3.0        # a download stopped that way is a paused one or a failed
+                              # one: the card (pill and sneak peek) waits until the
+                              # browser's downloads.json says which, about 1.5 s later
+                              # -- this long at most, then it's shown as paused. (If
+                              # the browser was in fact quitting, it closes its files
+                              # first: the card says so instead.)
 CANCEL_GIVEUP_SECONDS = 8.0   # after Stop: file still there this long => report it
 RESTART_GIVEUP_SECONDS = 10.0 # after Resume/Retry: no data this long => report it
 STALL_SECONDS = 15            # downloading, but no data this long => "Stalled"
@@ -122,6 +139,23 @@ AWAY_SECONDS = 60             # no keyboard, mouse or trackpad input this long: 
                               # "Delayed Display")
 REPLAY_GAP_SECONDS = 6        # between two sneak peeks shown when you're back
 HOLD_MAX_SECONDS = 12 * 3600  # a sneak peek waits for you at most this long
+NOTCH_PLACES = 2              # downloads that have a card at the same time (DynamicLake
+                              # shows two: the main place and the capsule beside it).
+                              # The others wait their turn, oldest first: see "Places".
+                              # 0: no limit, every download has its card from the start
+                              # and shows its own status on it
+PLACE_GAP_SECONDS = 0.5       # after a card left, the next download's card comes no
+                              # sooner than this (created in the same breath, it would
+                              # take the main place from the card that moves up)
+PEEK_AFTER_CREATE = 0.2       # a sneak peek is asked for this long after its card was
+                              # created: DynamicLake ignores one that comes with it
+SPOT_MARGIN_SECONDS = 0.5     # a paused or failed download's status card in the main
+                              # place stays this long past its sneak peek...
+SPOT_GAP_SECONDS = 1.5        # ...and the next status card comes this long after it left
+HAND_BACK_SECONDS = 0.8       # the card the main place goes back to keeps the high
+                              # priority this long (DynamicLake decides who moves up a
+                              # moment after a card is dismissed; with equal priorities
+                              # by then, it's the card updated last)
 FOCUS_SETTLE_SECONDS = 0.25   # after Resume: time for the browser to act on the
                               # command before focus goes back to your app
 MENU_GONE_SECONDS = 1.0       # ...which waits, this long at most, for the row's menu
@@ -242,12 +276,12 @@ SETTING_DEFAULTS = {
     "fileTypeIcons": True,       # "File-Type Icons": the kind of file in the pill instead of the arrow
     "downloadDetails": "time",   # "Download Details": after the amounts, the "speed", the "time" left, or "both" in turn
     "returnFocus": True,         # "App Switching After Resume": after Resume, bring back the app you were in
+    "focusMode": False,          # "Focus Mode": a finished download's card waits until no download is under way
     "waitWhenAway": True,        # "Delayed Display": hold sneak peeks while you're away; show them when you're back
     "awayAfter": AWAY_SECONDS,   # "Away After": ...away after this long without input ("1 min", "5 min"...)
     "sneakPeekDuration": PEEK_SECONDS,   # "Sneak Peek Duration": how long a sneak peek opens ("3 s", "5 s"...)
     "remainVisible": REMAIN_SECONDS,     # "Remain Visible": how long a finished or canceled card's pill stays after it
 }
-# ("Focus Mode" is in plugin.json too: a switch that nothing reads yet.)
 
 
 def _setting_env_names(setting_id: str) -> list[str]:
@@ -994,7 +1028,8 @@ class Download:
         raw_name = part_path.name[: -len(".part")]
         self.final_path = part_path.with_name(real_name_from_part(raw_name))
         self.raw_final_path = part_path.with_name(raw_name)
-        self.activity_id = f"dl-{next(_activity_counter)}"
+        self.seq = next(_activity_counter)   # the order downloads started in
+        self.activity_id = f"dl-{self.seq}"
         self.samples: deque = deque(maxlen=SPEED_WINDOW)
         self.total_size: int | None = None   # from downloads.json, once known
         self.browser = ""                    # process of the browser downloading it
@@ -1036,6 +1071,19 @@ class Download:
         self.eta_shown_at = 0.0                  # ...when it was that much
         self.time_tick_at: float | None = None   # ...and when its next second shows
         self.text_due: float | None = None       # when the card's text changes by itself (see rate_text)
+        self.line_word: str | None = None        # the status its line is about ("Paused"...), since
+        self.line_from = 0.0                     # ...when (it stays still at first: see status_line),
+        self.line_phase = ""                     # ...whether it's "held" still or "scrolling" ("": fits),
+        self.line_phase_sent = ""                # ...and as it was last sent
+        self.peek_until: float | None = None     # until when the sneak peek the plugin opened stays open
+        # Its place among the cards -- see "Places", above the main loop
+        self.place = False                       # it has a card of its own (else it waits its turn)
+        self.spot = False                        # its status shows in the main place, on a card made for that...
+        self.spot_until: float | None = None     # ...which goes then (a paused or failed download's)
+        self.own_card = False                    # ...while its own card stays where it is (it has a place)
+        self.created_at = 0.0                    # when the card it has was created
+        self.peek_owed: tuple | None = None      # (seconds, not before): a sneak peek that card still has to open
+        self.held_why = ""                       # what `held` waits for: you ("away") or the main place ("turn")
         # Stop / Resume / Retry bookkeeping -- see README.md
         self.job: ActionJob | None = None           # browser automation running
         self.stop_pressed_at: float | None = None   # when Stop was pressed
@@ -1047,6 +1095,12 @@ class Download:
     @property
     def filename(self) -> str:
         return self.final_path.name
+
+    @property
+    def card_id(self) -> str:
+        """The card its updates go to: its own, or the one that shows its
+        status in the main place (see "Places")."""
+        return self.activity_id + "-s" if self.spot else self.activity_id
 
     def move_to(self, part_path: Path) -> None:
         """Follow the download to another partial file (Retry after a
@@ -1163,10 +1217,23 @@ class Download:
         return self.state == "active" and not self.browser_closed \
             and now - self.last_growth_at >= STALL_SECONDS
 
+    def under_way(self, now: float) -> bool:
+        """Still downloading: not over, not paused or failed, its browser
+        open, and data coming (not stalled). With "Focus Mode" on, finished
+        downloads' cards wait until no download is."""
+        return self.resolved_at is None and self.shown_state(now) == "active" \
+            and not self.browser_closed and not self.stalled(now)
+
     def shown_state(self, now: float) -> str:
         """The state the card shows: a pause held back after the Mac woke
-        (Firefox resumes those itself) still shows as downloading."""
+        (Firefox resumes those itself) still shows as downloading. So does
+        a download the browser has just stopped, until its downloads.json
+        says whether that's a pause or a failure (see EARLY_PEEK_DELAY): the
+        card then changes once, to the right one."""
         if self.state == "paused" and now < self.hold_until:
+            return "active"
+        if self.state == "paused" and self.early_paused and self.peek_not_before is not None \
+                and now < self.peek_not_before:
             return "active"
         return self.state
 
@@ -1233,11 +1300,12 @@ class Download:
         now = time.monotonic()
         gen = SETTINGS.generation
         self.text_due = None
+        self.line_phase = ""
         if self.resolved_at is not None:
             if self.succeeded:
-                surfaces, signature = done_surfaces(self, numeric_style), ("done", gen)
+                surfaces, signature = done_surfaces(self, numeric_style, now), ("done", gen)
             else:
-                surfaces = canceled_surfaces(self, self.resolved_reason)
+                surfaces = canceled_surfaces(self, self.resolved_reason, now)
                 signature = ("canceled", self.resolved_reason, gen)
         else:
             state = self.shown_state(now)
@@ -1266,6 +1334,9 @@ class Download:
                 surfaces = in_progress_surfaces(self, numeric_style, stalled=stalled, now=now)
                 signature = ("active", self.size, self.total_size, 0 if stalled else int(now // 2), stalled,
                              surfaces["sneakPeek"]["center"]["text"], icon, gen)
+        surfaces["extraLiveActivity"] = extra_surface(self)
+        if not self.line_phase and surfaces["sneakPeek"].get("center", {}).get("text", "").find(BULLET) < 0:
+            self.line_word = None          # (not a status line: the next one starts its time afresh)
         if self.notice and now < self.notice_until:
             surfaces["sneakPeek"]["center"] = {
                 "type": "text", "text": self.notice, "style": "marquee"
@@ -1418,6 +1489,97 @@ def _text_line(libs, text: str, size: float):
     return line, width, x_height
 
 
+_widths: dict = {}
+
+
+def text_width(text: str) -> float | None:
+    """How wide DynamicLake draws `text` in a sneak peek, in points (see
+    PEEK_FONT), or None where it can't be measured (not a Mac)."""
+    if text in _widths:
+        return _widths[text]
+    libs = _draw_libs()
+    if libs is None:
+        return None
+    cf, _, ct, constants = libs
+    width = None
+    try:
+        if "peek font" not in _draw:          # (kept for good)
+            name = cf.CFStringCreateWithCString(None, PEEK_FONT.encode("utf-8"), 0x08000100)
+            font = ct.CTFontCreateWithName(name, PEEK_FONT_SIZE, None) if name else None
+            if name:
+                cf.CFRelease(name)
+            _draw["peek font"] = font or ct.CTFontCreateUIFontForLanguage(3, PEEK_FONT_SIZE, None)
+        font = _draw["peek font"]
+        string = cf.CFStringCreateWithCString(None, text.encode("utf-8"), 0x08000100)
+        attributes = None
+        if font and string:
+            keys = (ctypes.c_void_p * 1)(constants["font"])
+            values = (ctypes.c_void_p * 1)(font)
+            attributes = cf.CFDictionaryCreate(None, keys, values, 1, constants["key callbacks"], constants["value callbacks"])
+        styled = cf.CFAttributedStringCreate(None, string, attributes) if attributes else None
+        line = ct.CTLineCreateWithAttributedString(styled) if styled else None
+        if line:
+            width = float(ct.CTLineGetTypographicBounds(line, None, None, None))
+        for made in (line, styled, attributes, string):
+            if made:
+                cf.CFRelease(made)
+    except Exception:
+        width = None
+    if len(_widths) > 4000:
+        _widths.clear()
+    _widths[text] = width
+    return width
+
+
+def fitted_text(text: str) -> str | None:
+    """`text` cut to what the sneak peek shows whole, ending with "…"; None
+    when all of it fits."""
+    whole = text_width(text)
+    if whole is None:                         # (by the number of characters, then)
+        return None if len(text) <= FIT_CHARS else text[:FIT_CHARS - 1].rstrip(" .•") + "…"
+    if whole <= FIT_POINTS:
+        return None
+    low, high = 0, len(text)                  # (the longest beginning that fits with its "…")
+    while high - low > 1:
+        middle = (low + high) // 2
+        if (text_width(text[:middle].rstrip(" .•") + "…") or 0.0) <= FIT_POINTS:
+            low = middle
+        else:
+            high = middle
+    return text[:low].rstrip(" .•") + "…"
+
+
+def _padding(points: float) -> str:
+    """Spaces adding up to `points` (to within half a point), followed by
+    the character that keeps them from being trimmed; "" for less."""
+    out = ""
+    for space in (" ", "\u2009", "\u200a"):            # an ordinary one, a thin one, a hair one
+        both, none = text_width("x" + space + "x"), text_width("xx")
+        if both is None or none is None or both - none <= 0.1:
+            continue
+        each = both - none
+        count = int((points + (each / 2 if space == "\u200a" else 0.0)) // each)
+        out += space * count
+        points -= count * each
+    return out + PAD_END if out else ""
+
+
+_DIGIT = re.compile(r"[0-9]")
+
+
+def same_width(shown: str, other: str) -> str:
+    """`shown`, followed by enough space to be as wide as the wider of the
+    two: where one takes the other's place (the speed and the time left, in
+    turn), the line then stays where it is. Digits count as the widest one,
+    so that it doesn't move every second either. As it is where widths
+    can't be measured."""
+    wide = [text_width(_DIGIT.sub("8", text)) for text in (shown, other)]
+    actual = text_width(shown)
+    if actual is None or None in wide:
+        return shown
+    return shown + _padding(max(wide) - actual)
+
+
 def draw_badge(kind: str, text: str = "") -> bytes | None:
     """One picture, as PNG: kind "type" (`text`, a file's extension) or
     "arrow" (the download arrow), in a blue circle; "failed" (!), "stalled"
@@ -1527,6 +1689,9 @@ def badge_image(kind: str, text: str = "") -> dict | None:
 # stays with the setting "File-Type Icons" off, and for a file without an
 # extension.
 #
+# Beside another activity that has the main place, a download is DynamicLake's
+# small capsule: it shows "type" alone, in every state (see extra_surface).
+#
 # The ring's place holds one of DynamicLake's own "status" symbols, or one of
 # the plugin's pictures in the same look, and every button is an SF Symbol
 # glyph on a tinted circle, so they all share one size and look.
@@ -1558,10 +1723,27 @@ def pill_icon_key(dl: "Download", now: float) -> str:
     return badge_text(dl.filename)
 
 
-def _pill_icon(dl: "Download", now: float | None = None) -> dict:
-    key = pill_icon_key(dl, time.monotonic() if now is None else now)
+def _icon(key: str) -> dict:
+    """The blue circle with the extension `key` in it, or with the download
+    arrow for ""."""
     picture = badge_image("type", key) if key else badge_image("arrow")
     return picture or {"type": "image", "source": "sfSymbol", "systemImage": ARROW_SYMBOL, "tint": "blue"}
+
+
+def _pill_icon(dl: "Download", now: float | None = None) -> dict:
+    return _icon(pill_icon_key(dl, time.monotonic() if now is None else now))
+
+
+def extra_surface(dl: "Download") -> dict:
+    """What DynamicLake's small capsule beside the notch shows for this
+    download while another activity has the main place: the file's type in
+    its blue circle (the arrow with the setting "File-Type Icons" off, and
+    for a file without an extension). DynamicLake draws the capsule once,
+    when the card gets there, and not again while it stays: a ring or a
+    status symbol would go on showing what was true at that moment. The
+    file's type stays true, so it's there from the first second, without
+    the arrow's turn."""
+    return {"leftSlot": _icon(badge_text(dl.filename) if SETTINGS["fileTypeIcons"] else "")}
 
 
 def _state_symbol(kind: str) -> dict | None:
@@ -1577,11 +1759,37 @@ def status_text(word: str, dl: "Download") -> str:
     (the line scrolls when it's long). Never longer than DynamicLake
     accepts: a very long name is shortened in the middle."""
     name = dl.filename
-    room = MAX_TEXT_CHARS - len(word) - len(BULLET)
+    room = MAX_TEXT_CHARS - len(word) - len(BULLET) - len(LEAD_BLANK)
     if len(name) > room:
         keep = room - 1
         name = name[: keep - keep // 2] + "…" + name[len(name) - keep // 2:]
     return f"{word}{BULLET}{name}"
+
+
+def status_line(word: str, dl: "Download", now: float | None = None) -> str:
+    """The status card's line. When it's too long for the sneak peek,
+    DynamicLake scrolls it, and starts at once: the status would be gone
+    before it's read. So for SCROLL_HOLD_SECONDS it's shown cut short, which
+    stays still ("Paused • Some.Long.Na…"), and only then whole, to scroll --
+    with a blank before it, to keep its first letter clear of the fade on
+    the left. The time counts from when the status came up, or from when
+    the plugin opened the sneak peek for it (Download.line_from)."""
+    now = time.monotonic() if now is None else now
+    full = status_text(word, dl)
+    short = fitted_text(full)
+    if dl.line_word != word:
+        dl.line_word, dl.line_from = word, now
+    if short is None:
+        dl.line_phase = ""
+        return full
+    until = dl.line_from + SCROLL_HOLD_SECONDS
+    if now < until:
+        dl.line_phase = "held"
+        if dl.text_due is None or until < dl.text_due:
+            dl.text_due = until
+        return short
+    dl.line_phase = "scrolling"
+    return LEAD_BLANK + full
 
 
 def _stop_button(dl: "Download") -> dict:
@@ -1647,24 +1855,29 @@ def _percent_slot(text: str, numeric_style: str) -> dict:
 
 def rate_text(dl: "Download", now: float) -> str:
     """After the amounts (setting "Download Details"): the speed, the time
-    left, or the two in turn, DETAILS_TURN_SECONDS each. The speed also
-    shows where the time left can't be told yet. Sets `dl.text_due`: when
-    this text changes by itself (the next second of the time left, the next
-    turn), for the main loop to send it on time."""
+    left, or the two in turn, DETAILS_TURN_SECONDS each -- each then as wide
+    as the wider of the two (same_width), so that the line stays where it
+    is when they change places. The speed also shows where the time left
+    can't be told yet. Sets `dl.text_due`: when this text changes by itself
+    (the next second of the time left, the next turn), for the main loop to
+    send it on time."""
     details = SETTINGS["downloadDetails"]
-    show_time = details == "time"
+    speed = human_speed(dl.speed)
+    if details == "speed":
+        return speed
+    turn, into = divmod(max(0.0, now - dl.started_at), DETAILS_TURN_SECONDS)
     if details == "both":
-        turn, into = divmod(max(0.0, now - dl.started_at), DETAILS_TURN_SECONDS)
-        show_time = int(turn) % 2 == 1                 # (the speed first)
         dl.text_due = now + DETAILS_TURN_SECONDS - into
-    if show_time:
-        left = dl.time_left(now)
-        if left is not None:
-            tick = dl.time_tick_at
-            if tick is not None and (dl.text_due is None or tick < dl.text_due):
-                dl.text_due = tick
-            return human_time(left)
-    return human_speed(dl.speed)
+    left = dl.time_left(now)
+    if left is None:
+        return speed
+    timed = human_time(left)
+    if details == "both" and int(turn) % 2 == 0:       # (the speed first)
+        return same_width(speed, timed)
+    tick = dl.time_tick_at
+    if tick is not None and (dl.text_due is None or tick < dl.text_due):
+        dl.text_due = tick
+    return same_width(timed, speed) if details == "both" else timed
 
 
 def in_progress_surfaces(dl: "Download", numeric_style: str = "compact",
@@ -1672,7 +1885,7 @@ def in_progress_surfaces(dl: "Download", numeric_style: str = "compact",
     now = time.monotonic() if now is None else now
     pct = dl.percent
     if stalled:
-        center = status_text("Stalled", dl)
+        center = status_line("Stalled", dl, now)
     elif pct is not None:
         center = f"{human_pair(dl.size, dl.total_size)} · {rate_text(dl, now)}"
     else:
@@ -1694,7 +1907,7 @@ def in_progress_surfaces(dl: "Download", numeric_style: str = "compact",
     }
 
 
-def done_surfaces(dl: "Download", numeric_style: str = "compact") -> dict:
+def done_surfaces(dl: "Download", numeric_style: str = "compact", now: float | None = None) -> dict:
     return {
         "compactLiveActivity": {
             "leftSlot": _pill_icon(dl),
@@ -1702,17 +1915,17 @@ def done_surfaces(dl: "Download", numeric_style: str = "compact") -> dict:
         },
         "sneakPeek": {
             "leftSlot": _show_button(dl),
-            "center": {"type": "text", "text": status_text("Complete", dl), "style": "marquee"},
+            "center": {"type": "text", "text": status_line("Complete", dl, now), "style": "marquee"},
             "rightSlot": _open_button(dl),
         },
     }
 
 
-def canceled_surfaces(dl: "Download", reason: str) -> dict:
+def canceled_surfaces(dl: "Download", reason: str, now: float | None = None) -> dict:
     """Canceled (in the browser, by Stop, or given up by the browser): Retry
     starts it over, like the panel's own Retry. Blocked: nothing to press
     here -- only you can decide about it, in the browser."""
-    sneak_peek: dict = {"center": {"type": "text", "text": status_text(reason, dl), "style": "marquee"}}
+    sneak_peek: dict = {"center": {"type": "text", "text": status_line(reason, dl, now), "style": "marquee"}}
     symbol = {"type": "status", "status": "failed", "tint": "red"}     # (DynamicLake's red X)
     if reason == "Canceled":
         sneak_peek = {"leftSlot": _retry_button(dl, "restart"), **sneak_peek}
@@ -1732,7 +1945,7 @@ def _kept_percent_slot(dl: "Download", numeric_style: str) -> dict:
 
 def paused_surfaces(dl: "Download", numeric_style: str = "compact", with_button: bool = True,
                     word: str = "Paused", now: float | None = None) -> dict:
-    sneak_peek: dict = {"center": {"type": "text", "text": status_text(word, dl), "style": "marquee"},
+    sneak_peek: dict = {"center": {"type": "text", "text": status_line(word, dl, now), "style": "marquee"},
                         **_kept_percent_slot(dl, numeric_style)}
     if with_button:
         sneak_peek = {"leftSlot": _resume_button(dl), **sneak_peek}
@@ -1747,7 +1960,7 @@ def paused_surfaces(dl: "Download", numeric_style: str = "compact", with_button:
 
 def failed_surfaces(dl: "Download", numeric_style: str = "compact", with_button: bool = True,
                     now: float | None = None) -> dict:
-    sneak_peek: dict = {"center": {"type": "text", "text": status_text("Failed", dl), "style": "marquee"},
+    sneak_peek: dict = {"center": {"type": "text", "text": status_line("Failed", dl, now), "style": "marquee"},
                         **_kept_percent_slot(dl, numeric_style)}
     if with_button:
         sneak_peek = {"leftSlot": _retry_button(dl), **sneak_peek}
@@ -6039,6 +6252,64 @@ FIRST_SEEN = ("first seen",)   # see Download.stale_version
 ACTION_NAMES = {"stop": "Stop", "resume": "Resume", "retry": "Retry", "restart": "Retry"}
 
 
+# --------------------------------------------------------------------------
+# Places
+#
+# DynamicLake shows two cards at a time: one in the main place, one as the
+# small capsule beside it. Left to itself with three or more, it keeps the
+# oldest in the main place, shows the newest in the capsule and, when the
+# main one leaves, moves that newest one up: the second download would come
+# last. So the plugin gives a card to NOTCH_PLACES downloads only, in the
+# order they started. The others wait without one, and each gets its card
+# when a place is free: when the card of a finished, canceled or blocked
+# download has gone (a paused or failed download keeps its place).
+#
+# The oldest download with a card is "first": by DynamicLake's rule it has
+# the main place, and it shows its status on its own card, as a single
+# download does. Any other download's status (finished, canceled, paused,
+# failed) shows in the main place on a card made for that, which takes the
+# place for its time and gives it back (start_spot and end_spot, in main).
+# One at a time, oldest first (step 4b). A download that's over and isn't
+# first gives up its own card and its place at once.
+#
+# With the setting "Focus Mode" on, a finished download's card waits while
+# any other download is still under way (Download.under_way): its own card
+# and its place go at once, whichever download it is, so that the next ones
+# move up; when none is under way, the finished cards that waited show in
+# the main place one after the other, in the order the downloads finished,
+# each on a status card. Only finished cards wait: a pause, a failure or a
+# cancellation shows at once, as with the setting off.
+#
+# DynamicLake never says where a card is: all this goes by the order above.
+# After a click on the capsule (which swaps the two cards), or beside
+# another app's activity, the cards may be elsewhere than the plugin thinks.
+# --------------------------------------------------------------------------
+
+def first_in_place(downloads) -> Download | None:
+    """The oldest download that has a card of its own."""
+    holders = [d for d in downloads if d.place]
+    return min(holders, key=lambda d: d.seq) if holders else None
+
+
+def assign_places(downloads, free_from: float, now: float) -> list:
+    """Give the free places to the downloads that wait, oldest first, and
+    return those. Only a download still under way gets one (a waiting one
+    that's over only has its status to show), and none right after a card
+    left (PLACE_GAP_SECONDS)."""
+    downloads = list(downloads)
+    if NOTCH_PLACES <= 0:
+        waiting = [d for d in downloads if not d.place]
+    else:
+        free = NOTCH_PLACES - sum(1 for d in downloads if d.place)
+        if free <= 0 or now < free_from:
+            return []
+        waiting = sorted((d for d in downloads if not d.place and d.resolved_at is None),
+                         key=lambda d: d.seq)[:free]
+    for d in waiting:
+        d.place = True
+    return waiting
+
+
 def adopt_restarted(tracked: dict, part_path: Path) -> Download | None:
     """A canceled download whose Retry was pressed here, started over in a
     new partial file (same folder, same file name): it keeps its card.
@@ -6125,6 +6396,9 @@ def main() -> None:
     presence = BrowserPresence()
     sleep_watch = SleepWatch()
     next_replay_at = 0.0
+    places_free_from = 0.0     # no card is given before then (see PLACE_GAP_SECONDS)
+    spot_pinned = ""           # the card kept behind the capsule's while a status card has the main place
+    hand_back: tuple | None = None    # (card, when): it gets its normal priority back then (see end_spot)
 
     # Baseline pass: note .part files that already exist when we start so a
     # stale/abandoned one does not immediately show up as "downloading".
@@ -6156,6 +6430,62 @@ def main() -> None:
             cache["away"] = bool(SETTINGS["waitWhenAway"]) and user_away()
         return cache["away"]
 
+    def send_priority(activity_id: str, priority: str) -> None:
+        dlk.send({"schemaVersion": 1, "type": "update", "activityID": activity_id, "priority": priority})
+
+    def start_spot(dl: Download, kind: str, now: float) -> None:
+        """Show this download's status in the main place, on a card made for
+        that (its own card, if it has one, stays where it is). The card is
+        created with the high priority, which takes the main place at once.
+        The first download's card gets the low one meanwhile: behind the
+        capsule's, so that the capsule goes on showing what it showed. The
+        sneak peek is asked for a moment later (PEEK_AFTER_CREATE)."""
+        nonlocal spot_pinned, hand_back
+        hand_back = None
+        first = first_in_place(tracked.values())
+        dl.own_card, dl.created = dl.created, False
+        dl.spot = True
+        dl.line_from = now                    # (its line stays still at first, from now)
+        surfaces, signature = dl.current_surfaces(numeric_style)
+        dlk.send({"schemaVersion": 1, "type": "create", "activityID": dl.card_id, "title": "Download",
+                  "priority": "high", "size": ACTIVITY_SIZE, "surfaces": surfaces})
+        if first is not None and first is not dl and first.created:
+            send_priority(first.activity_id, "low")
+            spot_pinned = first.activity_id
+        dl.created, dl.created_at = True, now
+        dl.last_signature, dl.line_phase_sent = signature, dl.line_phase
+        seconds = present_seconds(kind)
+        dl.peek_owed = (seconds, now + PEEK_AFTER_CREATE)
+        if dl.resolved_at is not None:
+            dl.resolved_at = now              # (it stays its usual time, from now)
+            dl.spot_until = None
+        else:
+            dl.spot_until = now + PEEK_AFTER_CREATE + seconds + SPOT_MARGIN_SECONDS
+
+    def end_spot(dl: Download, now: float) -> None:
+        """The status card leaves the main place, which goes back to the
+        first download: its card gets the high priority just before the
+        status card is dismissed (DynamicLake would otherwise move up
+        whichever card was updated last), and the usual one again a moment
+        later, once it's there (HAND_BACK_SECONDS; step 4c)."""
+        nonlocal spot_pinned, next_replay_at, hand_back
+        first = first_in_place(tracked.values())
+        back = first.activity_id if first is not None and first is not dl and first.created and not first.spot else ""
+        if back:
+            send_priority(back, "high")
+            hand_back = (back, now + HAND_BACK_SECONDS)
+        dlk.send({"schemaVersion": 1, "type": "dismiss", "activityID": dl.card_id})
+        if spot_pinned and spot_pinned != back and any(
+                d.activity_id == spot_pinned and d.created and not d.spot for d in tracked.values()):
+            send_priority(spot_pinned, "normal")
+        spot_pinned = ""
+        log_event(f"{dl.filename}: its status card left the main place" + (
+            f", given back to {first.filename}" if back else " (no other card to give it back to)"))
+        dl.spot, dl.spot_until, dl.peek_owed = False, None, None
+        dl.created, dl.own_card = dl.own_card, False
+        dl.last_signature = None              # (its own card, if it has one, is brought up to date)
+        next_replay_at = max(next_replay_at, now + SPOT_GAP_SECONDS)
+
     last_tick = -POLL_INTERVAL
     last_error = ("", 0.0)
     while True:
@@ -6169,6 +6499,19 @@ def main() -> None:
             # ...and on time for a card that's due to go (with its sneak peek
             # still open), or a new download's arrow to become its file type.
             waking = time.monotonic()
+            dues = [places_free_from]                 # (a card for the next download in line)
+            if hand_back is not None:
+                dues.append(hand_back[1])
+            for dl in tracked.values():
+                if dl.peek_owed is not None:
+                    dues.append(dl.peek_owed[1])
+                if dl.spot_until is not None:
+                    dues.append(dl.spot_until)
+                if dl.held is not None and dl.held_why == "turn":
+                    dues.append(max(next_replay_at, dl.created_at + PEEK_AFTER_CREATE if dl.created else 0.0))
+            for due in dues:
+                if due > waking:
+                    remaining = min(remaining, due - waking + 0.01)
             for dl in tracked.values():
                 if dl.resolved_at is None:
                     due = dl.started_at + ICON_DELAY_SECONDS
@@ -6425,8 +6768,10 @@ def main() -> None:
                     if dl.state != "paused":
                         dl.early_paused, dl.peek_not_before = False, None
                     elif stopped_early and was_active and listed not in ("paused", "failed"):
-                        # Paused by the closed file alone, so far: the pill says
-                        # so at once, the sneak peek opens a moment later.
+                        # Stopped, by the closed file alone so far. A pause or
+                        # a failure? The card waits for downloads.json to tell
+                        # (shown_state), so that it changes once, to the right
+                        # one; the loop looks often meanwhile (settling).
                         dl.early_paused, dl.peek_not_before = True, now + EARLY_PEEK_DELAY
                     elif dl.early_paused and listed == "paused":
                         dl.early_paused = False                    # downloads.json says so too:
@@ -6531,21 +6876,39 @@ def main() -> None:
             # 4. Send whatever changed. The sneak peek opens by itself when a
             # download finishes, pauses, fails or is canceled, and for messages --
             # unless you're away: then it waits until you're back (step 4b).
+            # Only NOTCH_PLACES downloads have a card of their own, and only the
+            # first of them shows its status on it: see "Places".
+            for dl in assign_places(tracked.values(), places_free_from, now):
+                if NOTCH_PLACES > 0 and dl.last_signature is not None:        # (it waited)
+                    log_event(f"{dl.filename}: its turn, it has a card ({now - dl.started_at:.0f} s after it started)")
+            first = first_in_place(tracked.values())
+            in_spot = any(d.spot for d in tracked.values())
             for dl in tracked.values():
                 surfaces, signature = dl.current_surfaces(numeric_style)
                 kind = signature[0]
+                if dl.resolved_at is not None and dl.place and NOTCH_PLACES > 0 and dl is not first and not dl.spot:
+                    # Another download than the first is over: its card goes and
+                    # its place is the next one's. Its status shows in the main place.
+                    if dl.created:
+                        dlk.send({"schemaVersion": 1, "type": "dismiss", "activityID": dl.activity_id})
+                        dl.created = False
+                    dl.place = False
+                    places_free_from = now + PLACE_GAP_SECONDS
+                on_card = dl.place or dl.spot             # (else it waits: nothing to send)
                 # A pause known only from the closed partial file changes the
                 # pill at once and opens its sneak peek a moment later (see
                 # EARLY_PEEK_DELAY).
                 peek_waits = kind == "paused" and dl.peek_not_before is not None and now < dl.peek_not_before
                 peek_due = kind == "paused" and dl.peek_not_before is not None and not peek_waits \
                     and dl.presented_state != kind
-                if signature == dl.last_signature and not peek_due:
-                    continue
+                owed = dl.created and dl.peek_owed is not None and now >= dl.peek_owed[1]
+                if signature == dl.last_signature and not peek_due and dl.line_phase == dl.line_phase_sent \
+                        and not owed and (dl.created or not on_card):
+                    continue                              # (the same card, and its line where it was)
                 msg_type = "create" if not dl.created else "update"
                 payload = {
                     "schemaVersion": 1, "type": msg_type,
-                    "activityID": dl.activity_id, "surfaces": surfaces,
+                    "activityID": dl.card_id, "surfaces": surfaces,
                 }
                 if msg_type == "create":
                     payload.update(title="Download", priority="normal", size=ACTIVITY_SIZE)
@@ -6559,16 +6922,67 @@ def main() -> None:
                 if kind in ("paused", "failed") and not peek_waits:
                     dl.presented_state = kind
                     dl.peek_not_before = None
-                if present and kind in HOLDABLE and waiting_for_you(away_cache):
-                    if dl.held is None:
-                        log_event(f"{dl.filename}: {kind} while you're away; shown when you're back")
-                    dl.held = (kind, present, dl.held[2] if dl.held else now)
-                    present = None
+                if present and kind in HOLDABLE:
+                    # It waits until you're back -- or for its turn in the main
+                    # place, when it isn't this download's own card that's there,
+                    # or when other cards wait for theirs. With "Focus Mode" on, a
+                    # finished one also waits while another download is under way,
+                    # and behind the finished ones that wait already.
+                    away = waiting_for_you(away_cache)
+                    others = [d for d in tracked.values() if d is not dl]
+                    queued = bool(SETTINGS["focusMode"]) and kind == "done" and not dl.spot and any(
+                        d.under_way(now) or (d.held is not None and d.held_why == "focus") for d in others)
+                    behind = not dl.spot and any(d.held is not None and d.held_why == "turn" for d in others)
+                    if away or queued or behind or not (NOTCH_PLACES <= 0 or dl.spot or (dl is first and not in_spot)):
+                        if dl.held is None and queued:
+                            log_event(f"{dl.filename}: done; shown when the other downloads are done too (Focus Mode)")
+                        elif dl.held is None and away:
+                            log_event(f"{dl.filename}: {kind} while you're away; shown when you're back")
+                        dl.held = (kind, present, dl.held[2] if dl.held else now)
+                        dl.held_why = "focus" if queued else ("away" if away else "turn")
+                        present = None
+                        if queued and dl.place and NOTCH_PLACES > 0:
+                            # Its card and its place go at once: the next ones move up.
+                            if dl.created:
+                                dlk.send({"schemaVersion": 1, "type": "dismiss", "activityID": dl.activity_id})
+                                dl.created = False
+                            dl.place = False
+                            places_free_from = now + PLACE_GAP_SECONDS
+                            on_card = False
+                if owed:
+                    if present is None and dl.held is None and (kind in HOLDABLE or kind == "notice"):
+                        present = dl.peek_owed[0]
+                        if dl.resolved_at is not None:
+                            dl.resolved_at = now          # (it stays its usual time from the sneak peek)
+                    dl.peek_owed = None
+                if not on_card:
+                    dl.last_signature, dl.line_phase_sent = signature, dl.line_phase
+                    continue
+                if msg_type == "create":
+                    dl.created_at = now
+                    if present:                           # (asked for with the card, it's ignored: a moment later)
+                        dl.peek_owed, present = (present, now + PEEK_AFTER_CREATE), None
                 if supports_present_sneak_peek and present:
                     payload["presentSneakPeek"] = present
+                    dl.peek_until = now + present
+                    if kind in HOLDABLE:                  # (its line stays still at first, from now)
+                        dl.line_from = now
+                        payload["surfaces"], signature = dl.current_surfaces(numeric_style)
+                        if dl.spot and dl.resolved_at is None:
+                            dl.spot_until = now + present + SPOT_MARGIN_SECONDS
+                        elif NOTCH_PLACES > 0:            # (a status card waits until this one has been seen)
+                            next_replay_at = max(next_replay_at, now + (
+                                keep_seconds(dl) if dl.resolved_at is not None else present) + 0.3)
+                elif supports_present_sneak_peek and (dl.line_phase_sent, dl.line_phase) == ("held", "scrolling") \
+                        and dl.peek_until is not None and dl.peek_until - now >= 0.5:
+                    # The line starts to scroll while the sneak peek the plugin
+                    # opened is still open. DynamicLake only shows a new text
+                    # in it when it's asked for again: for the time that's left.
+                    payload["presentSneakPeek"] = max(1, min(MAX_PRESENT_SECONDS, int(round(dl.peek_until - now))))
                 dlk.send(payload)
                 dl.created = True
                 dl.last_signature = signature
+                dl.line_phase_sent = dl.line_phase
 
             # 4b. You're back: open the sneak peeks that waited, one at a time,
             # oldest first. A finished or canceled card then stays its usual time.
@@ -6577,31 +6991,74 @@ def main() -> None:
                     dl.held = None                        # waited long enough
                     if dl.resolved_at is not None:
                         dl.resolved_at = now
-            if now >= next_replay_at and any(dl.held is not None for dl in tracked.values()) \
-                    and not waiting_for_you(away_cache):
-                for dl in sorted((d for d in tracked.values() if d.held is not None), key=lambda d: d.held[2]):
+            # The same goes for the sneak peeks that waited for their turn in the
+            # main place: a download that isn't the first shows there on a card
+            # made for that (see "Places").
+            # Finished cards that wait because of "Focus Mode" join the line
+            # when no download is under way (or the setting is turned off).
+            if not SETTINGS["focusMode"] or not any(d.under_way(now) for d in tracked.values()):
+                for dl in tracked.values():
+                    if dl.held is not None and dl.held_why == "focus":
+                        dl.held_why = "turn"
+            in_line = [d for d in tracked.values() if d.held is not None and d.held_why != "focus"]
+            if now >= next_replay_at and in_line \
+                    and not any(dl.spot for dl in tracked.values()) and not waiting_for_you(away_cache):
+                first = first_in_place(tracked.values())
+                for dl in sorted(in_line, key=lambda d: (d.held[2], d.seq)):
                     surfaces, signature = dl.current_surfaces(numeric_style)
                     if signature[0] == "active":
                         dl.held = None                    # it carries on: nothing to show
                         continue
                     if signature[0] not in HOLDABLE:
                         continue                          # a message on it for now, or its browser closed: later
-                    since = dl.held[2]
+                    since, why = dl.held[2], dl.held_why
+                    if NOTCH_PLACES > 0 and dl is not first:
+                        dl.held = None
+                        start_spot(dl, signature[0], now)
+                        log_event(f"{dl.filename}: {signature[0]}, shown in the main place" + (
+                            f" now that you're back ({now - since:.0f} s later)" if why == "away" else ""))
+                        break
+                    if not dl.created or now - dl.created_at < PEEK_AFTER_CREATE:
+                        break                             # (its card is only just there: in a moment)
                     dl.held = None
+                    dl.line_from = now                    # (its line stays still at first, from now)
+                    surfaces, signature = dl.current_surfaces(numeric_style)
                     payload = {"schemaVersion": 1, "type": "update", "activityID": dl.activity_id,
                                "surfaces": surfaces}
                     if supports_present_sneak_peek:
                         payload["presentSneakPeek"] = present_seconds(signature[0])
+                        dl.peek_until = now + payload["presentSneakPeek"]
                     dlk.send(payload)
                     dl.last_signature = signature
+                    dl.line_phase_sent = dl.line_phase
                     gap = REPLAY_GAP_SECONDS
                     if dl.resolved_at is not None:
                         dl.resolved_at = now
                         gap = max(gap, keep_seconds(dl) + 0.3)    # (after this card has gone)
                     next_replay_at = now + gap
-                    log_event(f"{dl.filename}: {signature[0]}, shown now that you're back "
-                              f"({now - since:.0f} s later)")
+                    if why == "away":
+                        log_event(f"{dl.filename}: {signature[0]}, shown now that you're back "
+                                  f"({now - since:.0f} s later)")
                     break
+
+            # 4c. The card that got the main place back is there by now: its
+            # usual priority again (if it's still there).
+            if hand_back is not None and now >= hand_back[1]:
+                if any(d.activity_id == hand_back[0] and d.created and not d.spot for d in tracked.values()):
+                    send_priority(hand_back[0], "normal")
+                hand_back = None
+
+            # 4d. A paused or failed download's status card has had its time in
+            # the main place (not while a button works on it, or says something),
+            # or the download carries on.
+            for dl in tracked.values():
+                if not dl.spot or dl.resolved_at is not None or dl.peek_owed is not None:
+                    continue
+                if dl.job is not None or dl.restart_pending or (dl.notice and now < dl.notice_until):
+                    continue
+                if dl.spot_until is None or now >= dl.spot_until or (
+                        dl.shown_state(now) == "active" and not dl.browser_closed):
+                    end_spot(dl, now)
 
             # 5. Dismiss cards whose grace period has elapsed (not while a button
             # works on them, nor while they wait for you).
@@ -6611,8 +7068,13 @@ def main() -> None:
                 if dl.resolved_at is None or dl.job is not None or dl.restart_pending or dl.held is not None:
                     continue
                 if now - dl.resolved_at > keep_seconds(dl):
-                    dlk.send({"schemaVersion": 1, "type": "dismiss",
-                              "activityID": dl.activity_id})
+                    if dl.spot:
+                        end_spot(dl, now)
+                    if dl.created:
+                        dlk.send({"schemaVersion": 1, "type": "dismiss",
+                                  "activityID": dl.activity_id})
+                    if dl.place:
+                        places_free_from = now + PLACE_GAP_SECONDS
                     del tracked[part_path]
                     baseline_sizes.pop(part_path, None)
                     if dl.resolved_reason == "Blocked":

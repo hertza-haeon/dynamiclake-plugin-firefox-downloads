@@ -1,272 +1,258 @@
 # Firefox Downloads
 
-A DynamicLake plugin that shows Firefox downloads in the notch: progress,
-speed or time left, a Stop button, Resume when a download pauses, Retry when it fails
-or is canceled, and Show in Finder and Open File when it's done. No browser
-extension needed. Also works with LibreWolf, Waterfox, Pale Moon and Tor Browser.
+<p align="center">
+  <img src="icon.png" alt="Firefox Downloads icon" width="128">
+</p>
 
-## What it shows
+<p align="center">
+  <b>Your Firefox downloads, in the notch.</b><br>
+  A plugin for <a href="https://dynamiclake.com">DynamicLake</a>.
+</p>
 
-|  | Pill, left | Pill, right | Sneak peek, left | Sneak peek, center | Sneak peek, right |
-| --- | --- | --- | --- | --- | --- |
-| Downloading | file type | progress ring | Stop (red square) | `294/871MB · 2 min 34 s` | `18%` |
-| Stalled | file type | red … | Stop (red square) | `Stalled • report.pdf` | `18%` |
-| Paused | file type | orange pause | Resume (green play) | `Paused • report.pdf` | `18%` |
-| Failed | file type | red ! | Retry (blue circular arrow) | `Failed • report.pdf` | `18%` |
-| Canceled | file type | red ✕ | Retry (blue circular arrow) | `Canceled • report.pdf` | |
-| Blocked | file type | red – | | `Blocked • report.pdf` | |
-| Finished | file type | green ✓ | Show in Finder (blue folder) | `Complete • report.pdf` | Open File (blue file) |
-| Browser closed | file type | orange pause | | `Browser closed • report.pdf` | `18%` |
+Firefox Downloads shows every download in your MacBook's notch: how far it
+is, how fast it goes, how long is left. You can stop, resume or retry a
+download and open the finished file without going back to the browser.
 
-The pill shows the file's type: its extension in a blue circle (`pdf`,
-`dmg`, `zip`; four characters at most). A download starts with the blue
-download arrow and shows its type 5 seconds later. A file without an
-extension keeps the arrow.
+- **No browser extension.** Nothing to install in the browser.
+- **Works with** Firefox, LibreWolf, Waterfox, Pale Moon and Tor Browser.
+- **Stays on your Mac.** The plugin sends nothing over the internet.
 
-While downloading, the middle shows the amount and the total, in whole
-megabytes for a file under 1 GB (`294/871MB`) and in gigabytes with two
-decimals from 1 GB (`0.83/2.00GB`), then the speed, the time left, or the
-two in turn (see Settings). The time left always has its seconds (`45 s`,
-`2 min 34 s`, `1 h 20 min 5 s`) and counts down every second. Until there's
-enough data to tell it, the speed shows in its place.
+## Contents
 
-When something happens to a download, the middle says what, then the file's
-name; a long name scrolls. While a button works, it reads `Stopping…`,
-`Resuming…` or `Retrying…`. The sneak peek opens by itself when a download
-pauses, fails, finishes or is canceled, unless you're away (see Settings),
-and stays open for 5 seconds. A finished or canceled card then goes, together
-with its sneak peek. Both times are settings: how long the sneak peek stays
-open, and how long the closed pill stays after it. A paused or failed
-download stays in the pill until it carries on or is canceled. A download that gets no data for 15 seconds shows `Stalled`
-until data comes again. A download the browser holds back as a potential
-security risk shows `Blocked` for a moment: only you can decide about it, in
-the browser. Several downloads at once each get their own activity.
+- [What you need](#what-you-need)
+- [Install](#install)
+- [Permissions](#permissions)
+- [What you see](#what-you-see)
+- [The buttons](#the-buttons)
+- [Several downloads at once](#several-downloads-at-once)
+- [Settings](#settings)
+- [Good to know](#good-to-know)
+- [If something goes wrong](#if-something-goes-wrong)
+- [What the plugin does on your Mac](#what-the-plugin-does-on-your-mac)
+- [Uninstall](#uninstall)
+
+## What you need
+
+- A Mac with [DynamicLake](https://dynamiclake.com).
+- One of the browsers above. The plugin shows what's saved to the download
+  folder set in the browser (your Downloads folder unless you changed it).
+- The **Downloads button on the browser's toolbar** (it's there unless you
+  removed it). The plugin's buttons work through it.
 
 ## Install
 
-1. In DynamicLake: **Settings → Plugins → Install Local**, then choose the
-   `FirefoxDownloads.dynamiclakeplugin` folder (keep that exact name).
-2. Give DynamicLake the permissions below.
+1. Open **DynamicLake → Settings → Plugins**.
+2. Click **Install Local** and choose the
+   `FirefoxDownloads.dynamiclakeplugin` folder. Keep that exact name.
+3. Give DynamicLake the two [permissions](#permissions) below.
 
-If DynamicLake says the executable isn't runnable, run
-`chmod +x FirefoxDownloads.dynamiclakeplugin/firefox_downloads.py`.
+That's all: start a download in your browser and it shows in the notch.
+
+To update, install the newer folder the same way and confirm **Update**.
+Your settings are kept.
 
 ## Permissions
 
-Stop, Resume and Retry need two macOS permissions for DynamicLake:
+The plugin runs inside DynamicLake, so the permissions are DynamicLake's.
 
-- **Accessibility:** System Settings → Privacy & Security → Accessibility →
-  turn on DynamicLake.
-- **Automation:** allow DynamicLake to control System Events when macOS asks
-  (later: Privacy & Security → Automation → DynamicLake).
+| Permission | What it's for | Where to turn it on |
+| --- | --- | --- |
+| **Accessibility** | Stop, Resume and Retry: pressing the browser's own buttons for you | System Settings → Privacy & Security → Accessibility → DynamicLake |
+| **Automation** (System Events) | The same three buttons | Click **OK** when macOS asks, or System Settings → Privacy & Security → Automation → DynamicLake |
 
-Progress, Show in Finder and Open File need nothing extra.
+Without them, everything else still works: progress, Show in Finder and
+Open File need no permission. The three buttons then say
+`Needs Accessibility access` or `Needs Automation access`.
+
+## What you see
+
+A download shows in two ways:
+
+- **The pill**, in the closed notch: the file's type on the left, a progress
+  ring or a status symbol on the right.
+- **The sneak peek**, the larger view that opens when you point at the
+  notch: a button, a line of text and a percentage. It also opens by itself
+  when a download finishes, pauses, fails or is canceled.
+
+The file's type is its extension in a blue circle (`pdf`, `dmg`, `zip`). A
+download starts with a blue arrow and shows its type 5 seconds later.
+
+| The download is… | Pill, right side | Sneak peek | Buttons |
+| --- | --- | --- | --- |
+| Downloading | progress ring | `294/871MB · 2 min 34 s` and `18%` | Stop |
+| Stalled (no data for 15 seconds) | red **…** | `Stalled • report.pdf` | Stop |
+| Paused | orange pause | `Paused • report.pdf` | Resume |
+| Failed | red **!** | `Failed • report.pdf` | Retry |
+| Canceled | red **✕** | `Canceled • report.pdf` | Retry |
+| Blocked by the browser | red **–** | `Blocked • report.pdf` | none: decide in the browser |
+| Finished | green **✓** | `Complete • report.pdf` | Show in Finder, Open File |
+| Waiting for its browser, which is closed | orange pause | `Browser closed • report.pdf` | none until the browser is open again |
+
+While downloading, the line reads the amount and the total (`294/871MB`, or
+`0.83/2.00GB` from 1 GB), then the time left, the speed, or both in turn:
+your choice in [Settings](#settings).
+
+A finished or canceled card goes away after its sneak peek. A paused or
+failed download stays until it carries on or is canceled. A name too long
+to fit stays still for 3 seconds, then scrolls.
+
+## The buttons
+
+| Button | What it does |
+| --- | --- |
+| **Stop** | Cancels the download in the browser. |
+| **Resume** | Carries on with a paused download. |
+| **Retry** | Carries on with a failed download from where it stopped, when the server allows. On a canceled card, starts the download over. |
+| **Show in Finder** | Shows the finished file in the Finder. |
+| **Open File** | Opens the finished file, as a double-click would. |
+
+While a button works, the line reads `Stopping…`, `Resuming…` or
+`Retrying…`. If it can't do what you asked, it says why: see
+[If something goes wrong](#if-something-goes-wrong).
+
+## Several downloads at once
+
+DynamicLake shows two things at a time: one in the notch, one as a small
+**capsule** beside it.
+
+- **The first download** is in the notch, **the second** is the capsule.
+  The capsule shows the file's type. Click it to bring that download to
+  the notch, with its progress and its buttons.
+- **The others wait.** Each takes a place, in the order they started, when
+  a download before it has finished or been canceled. A paused or failed
+  download keeps its place.
+- **You don't miss anything.** When a download that isn't the first one
+  finishes, is canceled, pauses or fails, a card says so in the notch, with
+  its buttons, for the usual time. Then the first download is back. These
+  cards come one at a time.
 
 ## Settings
 
-In DynamicLake → Settings → Plugins → Firefox Downloads. Changes apply
-within a few seconds, to the downloads on screen too.
+In **DynamicLake → Settings → Plugins**, right-click **Firefox Downloads**
+and choose **Settings**. Changes apply within a few seconds.
 
-- **File-Type Icons** (on): the file's extension in a blue circle in the
-  pill. Off, the pill keeps the download arrow.
-- **Download Details** (Time): what follows the amount while downloading.
-  **Speed**: `294/871MB · 1.2 MB/s`. **Time**: the time left,
-  `294/871MB · 2 min 34 s`. **Both**: the speed and the time left take
-  turns, 4 seconds each.
-- **App Switching After Resume** (on): Resume opens the download's menu in
-  the browser, which takes the keyboard, and leaves the browser's Downloads
-  panel floating over the app you're using. On, the plugin gives your app
-  the keyboard back and makes the browser close its panel: the browser
-  comes to the front for an instant, then your app is back (see How it
-  works). Off, the plugin leaves all that alone: the panel stays until you
-  click in the browser.
-- **Focus Mode** (off): does nothing yet. It's there for a later update.
-- **Delayed Display** (on): while you're away, a download that finishes,
-  pauses, fails or is canceled updates its pill but doesn't open the notch.
-  When you're back, the sneak peeks open one by one, oldest first, and
-  finished or canceled cards stay their usual time from then on.
-- **Away After** (1 min): you count as away when the screen is locked, or
-  after this long without keyboard, mouse or trackpad input: 1, 3, 5 or 10
-  minutes.
-- **Sneak Peek Duration** (5 s): how long the sneak peek stays open when a
-  download finishes, pauses, fails or is canceled: 3, 5, 8 or 10 seconds.
-- **Remain Visible** (0 s): how long the closed pill of a finished or
-  canceled download stays after its sneak peek has closed, from 0 to 30
-  seconds. At 0, the card goes away together with its sneak peek.
+| Setting | Default | What it does |
+| --- | --- | --- |
+| **File-Type Icons** | On | Shows the file's extension in a blue circle. Off: the blue arrow. |
+| **Download Details** | Time | What follows the amount while downloading. **Speed**: `1.2 MB/s`. **Time**: `2 min 34 s`. **Both**: each in turn, 4 seconds at a time. |
+| **App Switching After Resume** | On | Resume makes the browser take the keyboard and leave its Downloads panel open over your app. On: the plugin gives your app the keyboard back and has the browser close its panel; the browser comes to the front for an instant. Off: the panel stays until you click in the browser. |
+| **Focus Mode** | Off | When a finished download's card shows. Off: as soon as it finishes. On: it waits while another download is still running, then the finished cards show one after the other. A pause, a failure or a cancellation always shows at once. |
+| **Delayed Display** | On | While you're away, nothing opens the notch. When you're back, the sneak peeks you missed open one by one. |
+| **Away After** | 1 min | You count as away when the screen is locked, or after this long without touching the keyboard, mouse or trackpad: 1, 3, 5 or 10 minutes. |
+| **Sneak Peek Duration** | 5 s | How long the sneak peek stays open when something happens to a download: 3, 5, 8 or 10 seconds. |
+| **Remain Visible** | 0 s | How long the closed pill of a finished or canceled download stays after its sneak peek, from 0 to 30 seconds. |
 
-## How it works
+## Good to know
 
-**Progress.** Firefox saves a download as a `.part` file until it
-finishes. The plugin watches the download folders set in your browser
-profiles. The amount downloaded is that file's size, and the speed is how
-fast it grows; the time left comes from the speed, smoothed so that it
-counts down steadily instead of jumping around. The total size, and whether
-a download is paused or failed, come from `downloads.json`, the file Firefox
-keeps in each profile listing downloads in progress. The plugin only reads
-it. Firefox updates it about 1.5 s after a change, so the ring starts
-filling that long after the download starts.
+**Timing**
 
-If there's no total size, the ring keeps spinning and the percentage shows
-`—`. That happens when the server doesn't report a size, or for
-private-window downloads, which Firefox doesn't save to disk.
+- A pause or a failure shows about a second and a half after it happens:
+  the plugin waits for the browser to say which of the two it is.
+- After your Mac wakes up, a pause can take 15 seconds to show. The browser
+  pauses downloads when the Mac sleeps and resumes them by itself.
+- The ring starts filling a moment after a download starts. If the server
+  doesn't give the file's size, the ring keeps spinning and the percentage
+  reads `—`.
 
-**Paused or failed?** A download pauses when you pause it in the browser,
-or when Firefox pauses it because the Mac goes to sleep or offline. A
-connection that drops mid-download makes it fail instead; Retry then carries
-on from where it stopped, or starts over when the server can't resume
-downloads.
+**The buttons**
 
-A pause shows in about a second: the pill first, the sneak peek a moment
-later. The browser closes the partial file the moment it stops a download,
-and the plugin sees that: it asks macOS whether the browser still has the
-file open, and changes nothing. Whether the stop is a pause or a failure,
-only `downloads.json` tells, about 1.5 s later; so a failed download shows
-as paused for that moment, then as failed.
-
-**Sleep.** When the Mac goes to sleep, Firefox pauses the downloads in
-progress and resumes them by itself 10 s after the Mac wakes up. So for 15 s
-after a wake, a pause of a download that was in progress isn't shown (it
-shows as in progress, with no speed yet); only if Firefox hasn't resumed it
-by then does the Paused card appear. A download you'd paused yourself stays
-paused, and shows so.
-
-**Browser closed.** When no data comes for a few seconds, the plugin checks
-whether the browser the download belongs to is still open, by the lock its
-profile holds while it's open (it only looks; it never takes the lock).
-Closed, the card shows `Browser closed` with no button, since the buttons
-need the browser. Firefox carries on with a download that was in progress
-when you open it again, and the card follows. A paused or failed download
-keeps its card, without Resume or Retry until the browser is back. This
-needs to know which browser profile a download belongs to, from its
-`downloads.json`: a private-window download (which the browser deletes when
-it quits) or one from a browser the plugin doesn't know shows as stalled
-instead.
-
-**Show in Finder and Open File**, on the finished card, don't involve the
-browser. Open File opens the file in the app for its type, as a double-click
-in the Finder would; macOS asks first about an app or a script that came
-from the internet.
-
-**Stop, Resume and Retry** work like the browser's own and keep it in the background.
-The plugin presses the toolbar's Downloads button through macOS
-Accessibility (a direct action, not a keystroke) and finds the one row for
-this file in the panel:
-
-- **Stop** presses the row's Cancel button. Finished entries with the same
-  name are ignored.
-- **Retry** presses the Retry button of the row showing Failed. On a
-  canceled card, it presses the Retry button of the row showing Canceled
-  (or Failed, when the browser deleted what it had): the browser starts the
-  download over, and the same card follows it. Retry in the browser's own
-  panel brings a canceled card back to life too, while it's still up.
-- **Resume** has no button in the panel: it's in the row's right-click
-  menu. The plugin opens that menu and chooses Resume at once, so the menu
-  only flashes. To open the menu, the browser moves the pointer onto the
-  row; the plugin puts it straight back. The menu takes the keyboard while
-  it's up, and afterwards the browser keeps its Downloads panel floating
-  over whatever app you're in. The browser only closes that panel when it
-  comes to the front, so the plugin brings it to the front and your app
-  straight back, about a tenth of a second later (see Settings to turn this
-  off). It does so only when it's sure you're still where you were: the app
-  you were in is the one in front, and you haven't clicked or typed since
-  you pressed Resume. Otherwise it leaves the panel alone. Nothing is
-  clicked, and nothing is typed.
-
-It only ever presses Firefox's own Cancel or Retry button, in the single row
-whose title starts with this exact file name, checked again right before
-pressing. The panel shows a long name shortened in the middle; such a row
-counts only when the full name it keeps for its tooltip is exactly this
-file's, read again right before pressing. For Resume, it chooses the item labelled exactly Resume in that row's menu,
-once it has checked the menu opened for that row, is the Downloads menu and
-has exactly one such item. Otherwise the menu is closed untouched. Labels
-are matched in any of Firefox's languages. It never types anything and never
-touches web page content. To respond fast, it compiles
-its script once (cached in `~/Library/Caches/FirefoxDownloads/`) and warms up
-when a download starts, at most every 2 minutes. The warm-up only finds the
-button; it presses nothing.
-
-## Limits
-
-- The buttons need the Downloads button on the browser toolbar (it's there
-  by default).
+- Resume can't be invisible: the browser's menu flashes, the pointer moves
+  for an instant and is put back, and with App Switching After Resume on,
+  the browser's window comes to the front for an instant.
 - After Stop or Retry, the browser's Downloads panel stays open in the
-  browser window until your next click there (closing it would take a
-  keystroke). After Resume the plugin makes the browser close it, as
-  described above; if you click or type right after pressing Resume, the
-  panel is left alone and stays, over your app, until you click in the
-  browser.
-- The panel lists the 5 most recent downloads, so the buttons can't reach a
-  download older than that.
-- When a download from a server that can't resume fails again after Retry,
-  Firefox deletes its partial file, so it shows as Canceled; its Retry then
-  starts it over.
-- Resume can't be completely invisible: the panel has no Resume button, so
-  the browser's right-click menu flashes for an instant, and the browser
-  window comes to the front for an instant to close its panel. Only a
-  browser extension could resume a download without them.
-- Private-window downloads never show Paused or Failed: a paused one shows
-  as stalled.
-- A canceled card stays up for the time of Sneak Peek Duration plus Remain
-  Visible (5 seconds unless you change them), so its Retry has to be
-  pressed within that time; later, retry in the browser.
+  browser window until your next click there.
+- The buttons reach the 5 most recent downloads in the browser's panel.
+- Retry on a canceled card has to be pressed while the card is up. Later,
+  retry in the browser.
+- When a server can't carry on with a download, a failed download can show
+  as canceled after Retry. Retry again starts it over.
+- If you quit the browser during a download, its card waits. The browser
+  carries on with the download when you open it again.
+- A download that waits for its turn has no card, so no button: use the
+  browser until then.
 
-## Messages
+**The capsule and other apps**
 
-| Message | Meaning |
+- The capsule shows the file's type only. DynamicLake draws a plugin's
+  capsule once, so it can't follow the progress. Click it to see more.
+- With Focus Mode on, a finished download leaves the notch at once and its
+  card comes later, with Show in Finder and Open File. A download that's
+  paused, failed or stalled doesn't keep finished cards waiting.
+- When another app's activity has the notch, your first download is the
+  capsule and its own sneak peek doesn't open there. If a card about
+  another download then shows in the notch, the first download has the
+  notch afterwards; the other activity comes back when the downloads are
+  done.
+- If you clicked the capsule to swap two downloads, they're swapped back
+  after the next card about a download.
+
+**What isn't shown**
+
+- A file you save somewhere other than the browser's download folder.
+- For a private-window download: its size (the ring keeps spinning), and a
+  pause or a failure (a paused one shows as stalled).
+
+## If something goes wrong
+
+**The buttons don't work.** Check the two [permissions](#permissions), and
+that the Downloads button is on the browser's toolbar.
+
+**DynamicLake says the plugin can't be run.** In Terminal:
+
+```bash
+chmod +x FirefoxDownloads.dynamiclakeplugin/firefox_downloads.py
+```
+
+**A button answers with a message.** Nothing wrong was pressed: when the
+plugin isn't sure, it does nothing and tells you.
+
+| Message | What it means |
 | --- | --- |
-| Didn't stop / resume / restart — … in browser | The press went through, but the download didn't change. |
-| Not in the Downloads panel | No row for this file in the panel (for Stop: no active one). |
-| Not paused in the browser | The browser doesn't show it as paused. Nothing was chosen. |
-| Nothing to retry in the panel | The browser doesn't offer Retry for it. |
-| No menu — resume in browser | The row's menu didn't open, or wasn't the Downloads menu. |
-| Row hidden — resume in browser | The row isn't fully in view (in the panel, inside the browser window), so its menu wasn't opened. |
-| Resume failed — resume in browser | Choosing Resume didn't work; the menu was closed. |
-| Menu left open — click elsewhere | The row's menu wouldn't close. Nothing was chosen in it. |
-| Several matches — … in browser | More than one row has this name. Nothing was pressed. |
-| Panel busy — try again | Downloads changed while it was checking. Nothing was pressed. |
-| Downloads panel didn't open | The panel didn't appear. |
-| No Downloads button in toolbar | See Limits. |
-| Browser isn't running | No Firefox-family browser is open. |
-| Couldn't reach the browser | The automation failed or timed out. Use the browser. |
-| Needs Accessibility access / Needs Automation access | See Permissions. |
+| `Needs Accessibility access`, `Needs Automation access` | See [Permissions](#permissions). |
+| `No Downloads button in toolbar` | Put the Downloads button back on the browser's toolbar. |
+| `Browser isn't running` | No supported browser is open. |
+| `Not in the Downloads panel` | The browser's panel doesn't list this download. |
+| `Not paused in the browser` | The browser doesn't show it as paused. |
+| `Nothing to retry in the panel` | The browser doesn't offer Retry for it. |
+| `Several matches — … in browser` | More than one download has this name. Use the browser. |
+| `Panel busy — try again` | Downloads changed while the plugin was looking. Press again. |
+| `Downloads panel didn't open` | The browser's panel didn't appear. Press again. |
+| `No menu — resume in browser`, `Row hidden — resume in browser`, `Resume failed — resume in browser` | Resume couldn't be chosen. Resume in the browser. |
+| `Menu left open — click elsewhere` | The browser's menu stayed open. Click anywhere to close it. |
+| `Didn't stop — … in browser` (or resume, restart) | The button was pressed, but the download didn't change. Use the browser. |
+| `Couldn't reach the browser` | The browser didn't answer in time. Use the browser. |
 
-## Log
+**Still stuck?** The plugin keeps a log of what it did and why:
 
-`~/Library/Logs/FirefoxDownloads/plugin.log` records each button press (the
-result, how long it took and each step; after Resume, what was done about
-the keyboard and the browser's panel, and why), each file opened with Open File, each warm-up, the settings, each download's total size,
-when it pauses, fails, stalls or carries on, when its browser is closed or
-opened again, when the Mac wakes up, and which sneak peeks waited for you.
-It rolls over at 256 KB. If something goes wrong, check its last few lines
-first.
+```
+~/Library/Logs/FirefoxDownloads/plugin.log
+```
 
-## Customizing
+Its last lines usually tell what happened.
 
-Besides the settings above, a few values are constants at the top of
-`firefox_downloads.py`:
+## What the plugin does on your Mac
 
-- `ACTIVITY_SIZE`: pill width, `"small"` (default), `"normal"` or
-  `"large"`.
-- `POLL_INTERVAL`: how often the download folders are checked (0.6 s).
-- `DETAILS_TURN_SECONDS`: with Download Details on Both, how long the speed
-  and the time left each show (4 s).
-- `ICON_DELAY_SECONDS`: how long a download shows the arrow before its file
-  type (5 s).
-- `STALL_SECONDS`: no data this long shows `Stalled` (15 s).
-- `WAKE_GRACE_SECONDS`: how long after the Mac wakes up a pause waits
-  before it's shown (15 s).
-- `REPLAY_GAP_SECONDS`: the time between sneak peeks opening when you're
-  back (6 s).
-- `WARMUP_MIN_GAP`: minimum time between warm-ups (120 s).
-- `FIREFOX_FAMILY`: which browsers' profiles are read.
+- It **watches** your browser's download folder and **reads** the browser's
+  own list of downloads. It never changes the browser's files.
+- For Stop, Resume and Retry, it **presses the browser's own button** for
+  that one download, after checking twice that it's the right one. If
+  anything is unclear, it presses nothing.
+- It **never types** anything and never touches the pages you browse.
+- It **sends nothing** over the internet.
 
 ## Uninstall
 
-In DynamicLake → Settings → Plugins, right-click Firefox Downloads and
-choose Uninstall, then delete
-`~/Library/Logs/FirefoxDownloads/` and `~/Library/Caches/FirefoxDownloads/`.
+1. In **DynamicLake → Settings → Plugins**, right-click **Firefox
+   Downloads** and choose **Uninstall**.
+2. Optionally, delete what it left behind:
+
+```
+~/Library/Logs/FirefoxDownloads/
+~/Library/Caches/FirefoxDownloads/
+```
 
 ---
 
-The icon is Firefox's logo: fine for personal use, but check Mozilla's
-trademark guidelines before publishing this plugin anywhere public.
+<sub>The icon is Firefox's logo. That's fine for personal use; check
+Mozilla's trademark guidelines before publishing this plugin anywhere
+public.</sub>
