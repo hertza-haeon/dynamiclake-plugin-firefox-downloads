@@ -3,7 +3,7 @@
   "identifier": "com.localtools.plugins.firefox-downloads",
   "name": "Firefox Downloads",
   "version": "1.1.2",
-  "developerName": "Local Build",
+  "developerName": "Hertza Haeon",
   "description": "Firefox downloads in the notch: progress, speed or time left, Stop, Resume, Retry, Show in Finder and Open File. No browser extension needed.",
   "executable": "firefox_downloads.py",
   "arguments": [],
