@@ -38,6 +38,18 @@ download and open the finished file without going back to the browser.
   folder set in the browser (your Downloads folder unless you changed it).
 - The **Downloads button on the browser's toolbar** (it's there unless you
   removed it). The plugin's buttons work through it.
+- **Python 3** (3.9 or later). The plugin is a Python program, and macOS
+  doesn't always have Python. To check, open Terminal and type:
+
+  ```bash
+  python3 --version
+  ```
+
+  If it answers with a number such as `Python 3.9.6`, you're set. If macOS
+  offers to install the "command line developer tools" instead, click
+  **Install**: Python comes with them. Python from
+  [Homebrew](https://brew.sh) or [python.org](https://www.python.org/downloads/)
+  works too.
 
 ## Install
 
@@ -93,8 +105,9 @@ download starts with a blue arrow and shows its type 5 seconds later.
 | Waiting for its browser, which is closed | orange pause | `Browser closed • report.pdf` | none until the browser is open again |
 
 While downloading, the line reads the amount and the total (`294/871MB`, or
-`0.83/2.00GB` from 1 GB), then the time left, the speed, or both in turn:
-your choice in [Settings](#settings).
+`0.83/2.00GB` from 1 GB), then the time left, the speed, how many downloads
+are waiting, or all of these in turn: your choice in
+[Settings](#settings).
 
 A finished or canceled card goes away after its sneak peek. A paused or
 failed download stays until it carries on or is canceled. A name too long
@@ -124,7 +137,8 @@ DynamicLake shows two things at a time: one in the notch, one as a small
   the notch, with its progress and its buttons.
 - **The others wait.** Each takes a place, in the order they started, when
   a download before it has finished or been canceled. A paused or failed
-  download keeps its place.
+  download keeps its place. With Download Details on Queue or All, the
+  line says how many are waiting: `+2 Queuing`.
 - **You don't miss anything.** When a download that isn't the first one
   finishes, is canceled, pauses or fails, a card says so in the notch, with
   its buttons, for the usual time. Then the notch goes back to what it
@@ -138,9 +152,9 @@ and choose **Settings**. Changes apply within a few seconds.
 | Setting | Default | What it does |
 | --- | --- | --- |
 | **File-Type Icons** | On | Shows the file's extension in a blue circle. Off: the blue arrow. |
-| **Download Details** | Time | What follows the amount while downloading. **Speed**: `1.2 MB/s`. **Time**: `2 min 34 s`. **Both**: each in turn, 4 seconds at a time. |
+| **Download Details** | Time | What follows the amount while downloading. **Speed**: `1.2 MB/s`. **Time**: `2 min 34 s`. **Queue**: how many downloads wait for their turn, `+2 Queuing` (nothing when none does). **All**: each of these in turn, 3 seconds at a time. |
 | **App Switching After Resume** | On | Resume makes the browser take the keyboard and leave its Downloads panel open over your app. On: the plugin gives your app the keyboard back and has the browser close its panel; the browser comes to the front for an instant. Off: the panel stays until you click in the browser. |
-| **Focus Mode** | Off | When a finished download's card shows. Off: as soon as it finishes. On: it waits while another download is still running, then the finished cards show one after the other. A pause, a failure or a cancellation always shows at once. |
+| **Focus Mode** | Off | When a finished download's card shows. **Off**: as soon as it finishes. **On**: it waits while another download is still running, then the finished cards show one after the other. **Simplified**: the same, but the finished downloads share one card that says how many there are, `3 Downloads Completed`. A pause, a failure or a cancellation always shows at once. |
 | **Delayed Display** | On | While you're away, nothing opens the notch. When you're back, the sneak peeks you missed open one by one. |
 | **Away After** | 1 min | You count as away when the screen is locked, or after this long without touching the keyboard, mouse or trackpad: 1, 3, 5 or 10 minutes. |
 | **Sneak Peek Duration** | 5 s | How long the sneak peek stays open when something happens to a download: 3, 5, 8 or 10 seconds. |
@@ -182,6 +196,10 @@ and choose **Settings**. Changes apply within a few seconds.
 - With Focus Mode on, a finished download leaves the notch at once and its
   card comes later, with Show in Finder and Open File. A download that's
   paused, failed or stalled doesn't keep finished cards waiting.
+- With Focus Mode on Simplified, the one card for several finished
+  downloads has their number where a file's type is. Its Show in Finder
+  shows them all; it has no Open File. A single finished download shows
+  its usual card.
 - When something else has the notch (music, for example), your download
   is the capsule beside it. When it finishes, is canceled, pauses or
   fails, its card takes the notch for the usual time, with its sneak peek
@@ -198,6 +216,10 @@ and choose **Settings**. Changes apply within a few seconds.
   pause or a failure (a paused one shows as stalled).
 
 ## If something goes wrong
+
+**Nothing shows in the notch when a download starts.** Check that Python 3
+is installed (see [What you need](#what-you-need)), then quit DynamicLake
+and open it again.
 
 **The buttons don't work.** Check the two [permissions](#permissions), and
 that the Downloads button is on the browser's toolbar.

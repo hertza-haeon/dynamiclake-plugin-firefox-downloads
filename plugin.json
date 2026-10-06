@@ -23,7 +23,7 @@
       "id": "downloadDetails",
       "type": "select",
       "title": "Download Details",
-      "description": "What follows the amount while downloading: the speed, the time left, or both, taking turns every 4 seconds.",
+      "description": "What follows the amount while downloading: the speed, the time left, the downloads that wait (+2 Queuing), or all of them, taking turns every 3 seconds.",
       "systemImage": "t.circle",
       "tint": "teal",
       "options": [
@@ -36,8 +36,12 @@
           "systemImage": "t.circle"
         },
         {
-          "title": "Both",
-          "systemImage": "b.circle"
+          "title": "Queue",
+          "systemImage": "q.circle"
+        },
+        {
+          "title": "All",
+          "systemImage": "a.circle"
         }
       ],
       "default": "Time"
@@ -53,12 +57,26 @@
     },
     {
       "id": "focusMode",
-      "type": "switch",
+      "type": "select",
       "title": "Focus Mode",
-      "description": "Off: a finished download's card shows at once. On: it waits until every download is done, then the finished cards show one after the other.",
+      "description": "Off: a finished download's card shows at once. On: it waits until every download is done; the cards then show one by one. Simplified: one card for all, with their number.",
       "systemImage": "target",
       "tint": "orange",
-      "default": false
+      "options": [
+        {
+          "title": "Off",
+          "systemImage": "circle"
+        },
+        {
+          "title": "On",
+          "systemImage": "checkmark.circle"
+        },
+        {
+          "title": "Simplified",
+          "systemImage": "number.circle"
+        }
+      ],
+      "default": "Off"
     },
     {
       "id": "waitWhenAway",

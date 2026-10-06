@@ -94,8 +94,8 @@ PEEK_MARGIN_SECONDS = 2       # a card that goes with its sneak peek open asks f
                               # two go together (no moment with only the pill left)
 MAX_PRESENT_SECONDS = 10      # the longest sneak peek DynamicLake accepts (a longer one
                               # makes it refuse the whole update)
-DETAILS_TURN_SECONDS = 4      # "Download Details" on Both: the speed and the time left
-                              # take turns, this long each
+DETAILS_TURN_SECONDS = 3      # "Download Details" on All: the speed, the time left and
+                              # the downloads that wait take turns, this long each
 SCROLL_HOLD_SECONDS = 3       # a status line too long for the sneak peek stays still this
                               # long, cut short, before it starts to scroll
 FIT_POINTS = 196.0            # the widest text DynamicLake shows whole in the middle of a
@@ -275,9 +275,11 @@ def feature_set() -> set[str]:
 
 SETTING_DEFAULTS = {
     "fileTypeIcons": True,       # "File-Type Icons": the kind of file in the pill instead of the arrow
-    "downloadDetails": "time",   # "Download Details": after the amounts, the "speed", the "time" left, or "both" in turn
+    "downloadDetails": "time",   # "Download Details": after the amounts, the "speed", the "time" left, the
+                                 # "queue" (how many downloads wait for a card), or "all" of them in turn
     "returnFocus": True,         # "App Switching After Resume": after Resume, bring back the app you were in
-    "focusMode": False,          # "Focus Mode": a finished download's card waits until no download is under way
+    "focusMode": "off",          # "Focus Mode": "on", a finished download's card waits until no download is under
+                                 # way; "simplified", and several then show as one card with their number
     "waitWhenAway": True,        # "Delayed Display": hold sneak peeks while you're away; show them when you're back
     "awayAfter": AWAY_SECONDS,   # "Away After": ...away after this long without input ("1 min", "5 min"...)
     "sneakPeekDuration": PEEK_SECONDS,   # "Sneak Peek Duration": how long a sneak peek opens ("3 s", "5 s"...)
@@ -335,9 +337,22 @@ def _as_seconds(raw) -> int | None:
 
 
 def _as_details(raw) -> str | None:
-    """The choice of "Download Details", by its title."""
+    """The choice of "Download Details", by its title ("Both" is what "All"
+    was called while there were two things to show in turn)."""
     text = raw.strip().lower() if isinstance(raw, str) else None
-    return text if text in ("speed", "time", "both") else None
+    if text == "both":
+        text = "all"
+    return text if text in ("speed", "time", "queue", "all") else None
+
+
+def _as_focus(raw) -> str | None:
+    """The choice of "Focus Mode", by its title (it was a switch at first:
+    on or off)."""
+    text = raw.strip().lower() if isinstance(raw, str) else None
+    if text in ("off", "on", "simplified"):
+        return text
+    switch = _as_bool(raw)
+    return None if switch is None else ("on" if switch else "off")
 
 
 def _as_whole_seconds(raw, lowest: int, highest: int) -> int | None:
@@ -370,7 +385,7 @@ def _as_remain_seconds(raw) -> int | None:
     return _as_whole_seconds(raw, 0, REMAIN_MAX_SECONDS)
 
 
-_SETTING_PARSERS = {"downloadDetails": _as_details, "awayAfter": _as_seconds,
+_SETTING_PARSERS = {"downloadDetails": _as_details, "focusMode": _as_focus, "awayAfter": _as_seconds,
                     "sneakPeekDuration": _as_peek_seconds, "remainVisible": _as_remain_seconds}
 
 
@@ -1085,6 +1100,8 @@ class Download:
         self.created_at = 0.0                    # when the card it has was created
         self.peek_owed: tuple | None = None      # (seconds, not before): a sneak peek that card still has to open
         self.held_why = ""                       # what `held` waits for: you ("away") or the main place ("turn")
+        self.summary: list = []                  # "Focus Mode" on Simplified: the files of the finished downloads
+                                                 # this one's status card stands for (its own among them)
         # Stop / Resume / Retry bookkeeping -- see README.md
         self.job: ActionJob | None = None           # browser automation running
         self.stop_pressed_at: float | None = None   # when Stop was pressed
@@ -1303,6 +1320,9 @@ class Download:
         self.text_due = None
         self.line_phase = ""
         if self.resolved_at is not None:
+            if self.succeeded and self.summary:
+                # (the one card for several finished downloads: nothing else goes on it)
+                return summary_surfaces(self, len(self.summary)), ("done", len(self.summary), gen)
             if self.succeeded:
                 surfaces, signature = done_surfaces(self, numeric_style, now), ("done", gen)
             else:
@@ -1568,13 +1588,13 @@ def _padding(points: float) -> str:
 _DIGIT = re.compile(r"[0-9]")
 
 
-def same_width(shown: str, other: str) -> str:
-    """`shown`, followed by enough space to be as wide as the wider of the
-    two: where one takes the other's place (the speed and the time left, in
-    turn), the line then stays where it is. Digits count as the widest one,
-    so that it doesn't move every second either. As it is where widths
-    can't be measured."""
-    wide = [text_width(_DIGIT.sub("8", text)) for text in (shown, other)]
+def same_width(shown: str, *others: str) -> str:
+    """`shown`, followed by enough space to be as wide as the widest of
+    them all: where one takes another's place (the speed, the time left,
+    the downloads that wait, in turn), the line then stays where it is.
+    Digits count as the widest one, so that it doesn't move every second
+    either. As it is where widths can't be measured."""
+    wide = [text_width(_DIGIT.sub("8", text)) for text in (shown, *others)]
     actual = text_width(shown)
     if actual is None or None in wide:
         return shown
@@ -1854,31 +1874,54 @@ def _percent_slot(text: str, numeric_style: str) -> dict:
     return {"rightSlot": {"type": "text", "text": short, "style": numeric_style}}
 
 
+# How many downloads wait for a card (see "Places"): the main loop counts
+# them at every pass, for the line of the downloads that have one.
+QUEUE = {"waiting": 0}
+
+
+def queue_text() -> str:
+    """"+2 Queuing": the downloads that wait for a card; "" when none does."""
+    count = QUEUE["waiting"]
+    return f"+{count} Queuing" if count > 0 else ""
+
+
 def rate_text(dl: "Download", now: float) -> str:
     """After the amounts (setting "Download Details"): the speed, the time
-    left, or the two in turn, DETAILS_TURN_SECONDS each -- each then as wide
-    as the wider of the two (same_width), so that the line stays where it
-    is when they change places. The speed also shows where the time left
-    can't be told yet. Sets `dl.text_due`: when this text changes by itself
-    (the next second of the time left, the next turn), for the main loop to
-    send it on time."""
+    left, the downloads that wait ("+2 Queuing"; nothing when none does), or
+    all of them in turn, DETAILS_TURN_SECONDS each -- each then as wide as
+    the widest (same_width), so that the line stays where it is when they
+    change places. The speed also shows where the time left can't be told
+    yet. Sets `dl.text_due`: when this text changes by itself (the next
+    second of the time left, the next turn), for the main loop to send it
+    on time."""
     details = SETTINGS["downloadDetails"]
     speed = human_speed(dl.speed)
     if details == "speed":
         return speed
-    turn, into = divmod(max(0.0, now - dl.started_at), DETAILS_TURN_SECONDS)
-    if details == "both":
-        dl.text_due = now + DETAILS_TURN_SECONDS - into
+    if details == "queue":
+        return queue_text()
     left = dl.time_left(now)
-    if left is None:
-        return speed
-    timed = human_time(left)
-    if details == "both" and int(turn) % 2 == 0:       # (the speed first)
-        return same_width(speed, timed)
-    tick = dl.time_tick_at
-    if tick is not None and (dl.text_due is None or tick < dl.text_due):
-        dl.text_due = tick
-    return same_width(timed, speed) if details == "both" else timed
+    timed = human_time(left) if left is not None else None
+    if details == "time":
+        shown, turns = (speed if timed is None else timed), []
+    else:
+        # All: the speed first, then the time left, then the downloads that
+        # wait -- those that there are.
+        turns = [text for text in (speed, timed, queue_text()) if text]
+        turn, into = divmod(max(0.0, now - dl.started_at), DETAILS_TURN_SECONDS)
+        dl.text_due = now + DETAILS_TURN_SECONDS - into
+        shown = turns[int(turn) % len(turns)]
+    if timed is not None and shown is timed:
+        tick = dl.time_tick_at
+        if tick is not None and (dl.text_due is None or tick < dl.text_due):
+            dl.text_due = tick
+    return same_width(shown, *turns) if len(turns) > 1 else shown
+
+
+def amount_line(amount: str, detail: str) -> str:
+    """The downloading line: the amount, then what "Download Details" says
+    (nothing after it when there's nothing to say)."""
+    return f"{amount} · {detail}" if detail else amount
 
 
 def in_progress_surfaces(dl: "Download", numeric_style: str = "compact",
@@ -1888,9 +1931,11 @@ def in_progress_surfaces(dl: "Download", numeric_style: str = "compact",
     if stalled:
         center = status_line("Stalled", dl, now)
     elif pct is not None:
-        center = f"{human_pair(dl.size, dl.total_size)} · {rate_text(dl, now)}"
+        center = amount_line(human_pair(dl.size, dl.total_size), rate_text(dl, now))
     else:
-        center = f"{human_amount(dl.size)} · {human_speed(dl.speed)}"
+        # (no total size: no time left to tell, so the speed stands in for it)
+        wants_queue = SETTINGS["downloadDetails"] in ("queue", "all")
+        center = amount_line(human_amount(dl.size), rate_text(dl, now) if wants_queue else human_speed(dl.speed))
     ring: dict = {"type": "progress", "tint": "blue"}
     if pct is not None:
         ring["value"] = round(pct, 4)   # a real, filling ring
@@ -1919,6 +1964,21 @@ def done_surfaces(dl: "Download", numeric_style: str = "compact", now: float | N
             "center": {"type": "text", "text": status_line("Complete", dl, now), "style": "marquee"},
             "rightSlot": _open_button(dl),
         },
+    }
+
+
+def summary_surfaces(dl: "Download", count: int) -> dict:
+    """"Focus Mode" on Simplified: one card for several finished downloads
+    ("3 Downloads Completed"). Their number stands where a file's type
+    does, and Show in Finder shows them all (see main, step 1)."""
+    icon = _icon(str(count) if SETTINGS["fileTypeIcons"] else "")
+    return {
+        "compactLiveActivity": {"leftSlot": icon, "rightSlot": {"type": "status", "status": "success", "tint": "green"}},
+        "sneakPeek": {
+            "leftSlot": _show_button(dl),
+            "center": {"type": "text", "text": f"{count} Downloads Completed", "style": "marquee"},
+        },
+        "extraLiveActivity": {"leftSlot": icon},
     }
 
 
@@ -2679,8 +2739,24 @@ on statusKindOf(statusText)
     -- after the file name) starts with Firefox's word for that state, in any
     -- language; "" otherwise (downloading, finished...). No word of one kind
     -- starts with a word of another kind, in any language.
-    set restText to statusText as string
-    -- leading spaces and direction marks (right-to-left languages)
+    -- A row with a progress bar (downloading, paused) has the bar's value
+    -- between the file name and the status: that value is passed over.
+    set restText to my withoutLeadingBlanks(statusText as string)
+    set restText to my withoutLeadingBlanks(my afterBarValue(restText))
+    if restText is "" then return ""
+    if my cachedStateWords is missing value then set my cachedStateWords to {{"paused", my pausedWords()}, {"failed", my failedWords()}, {"canceled", my canceledWords()}}
+    repeat with kindPair in my cachedStateWords
+        repeat with oneWord in (item 2 of kindPair)
+            if restText starts with (contents of oneWord) then return (item 1 of kindPair)
+        end repeat
+    end repeat
+    return ""
+end statusKindOf
+
+on withoutLeadingBlanks(someText)
+    -- The text without the spaces and direction marks (right-to-left
+    -- languages) it starts with.
+    set restText to someText as string
     repeat while (length of restText) > 0
         if (id of (character 1 of restText)) is in {32, 9, 10, 13, 160, 8194, 8195, 8201, 8206, 8207, 8234, 8235, 8236, 8237, 8238, 8239, 8294, 8295, 8296, 8297} then
             if (length of restText) is 1 then
@@ -2692,15 +2768,37 @@ on statusKindOf(statusText)
             exit repeat
         end if
     end repeat
-    if restText is "" then return ""
-    if my cachedStateWords is missing value then set my cachedStateWords to {{"paused", my pausedWords()}, {"failed", my failedWords()}, {"canceled", my canceledWords()}}
-    repeat with kindPair in my cachedStateWords
-        repeat with oneWord in (item 2 of kindPair)
-            if restText starts with (contents of oneWord) then return (item 1 of kindPair)
-        end repeat
+    return restText
+end withoutLeadingBlanks
+
+on afterBarValue(statusText)
+    -- A progress bar's value as the browser writes it in a row's title:
+    -- digits, perhaps a point and more digits, then a percent sign and a
+    -- space ("42% Paused", "7.5% Paused"). Returns what follows that value;
+    -- the text as it is when it doesn't start with exactly that (so a text
+    -- that only looks a bit like it is never cut).
+    set textLen to length of statusText
+    set digitCount to 0
+    set markCount to 0
+    set pos to 1
+    repeat while pos <= textLen and pos <= 20
+        set charId to id of (character pos of statusText)
+        if charId is in {48, 49, 50, 51, 52, 53, 54, 55, 56, 57} then
+            set digitCount to digitCount + 1
+        else if charId is 46 and digitCount > 0 and markCount is 0 then
+            set markCount to 1
+        else
+            exit repeat
+        end if
+        set pos to pos + 1
     end repeat
-    return ""
-end statusKindOf
+    if digitCount is 0 or pos > textLen then return statusText
+    if (id of (character pos of statusText)) is not 37 then return statusText
+    if (id of (character (pos - 1) of statusText)) is 46 then return statusText
+    if pos is textLen then return statusText
+    if (id of (character (pos + 1) of statusText)) is not in {32, 9, 160, 8194, 8195, 8201, 8239} then return statusText
+    return text (pos + 1) thru -1 of statusText
+end afterBarValue
 
 on pausedWords()
     -- Firefox's word for a paused download (statePaused), in every language.
@@ -2900,18 +2998,16 @@ end canceledWords
 
 on nameEnd(rowTitle, nameVariants)
     -- Length of the file name this row title starts with, or 0. A title
-    -- reads "<file name> <status> <button label>", so the name must match
-    -- with the same case and be followed by a space (or end the title): a
-    -- row for "report.pdf.zip" is not a row for "report.pdf".
+    -- reads "<file name> <status> <button label>", so the name must be
+    -- there character for character (see sameText) and be followed by a
+    -- space (or end the title): a row for "report.pdf.zip" is not a row for
+    -- "report.pdf".
     set titleLen to length of rowTitle
     repeat with v in nameVariants
         set oneName to (contents of v) as string
         set nameLen to length of oneName
         if nameLen > 0 and not (titleLen < nameLen) then
-            set samePrefix to false
-            considering case
-                if (text 1 thru nameLen of rowTitle) is oneName then set samePrefix to true
-            end considering
+            set samePrefix to my sameText(text 1 thru nameLen of rowTitle, oneName)
             if samePrefix then
                 if titleLen is nameLen then return nameLen
                 if (id of (character (nameLen + 1) of rowTitle)) is in {32, 9, 10, 13, 160, 8194, 8195, 8201, 8239} then return nameLen
@@ -3132,6 +3228,38 @@ on rowKind(rowTitle, nameVariants)
     return my statusKindOf(text (nameLen + 2) thru -1 of rowTitle)
 end rowKind
 
+on statusShape(rowTitle, nameVariants)
+    -- For the log, when a row's state isn't recognised: how its status text
+    -- (the title after the file name) begins, with every digit written 9
+    -- and every letter a, so that neither a name nor a site shows
+    -- ("99% aaaaaa - 9.9 aa"). "" when there's nothing to tell. Only read.
+    set shapeText to ""
+    try
+        set nameLen to my nameEnd(rowTitle, nameVariants)
+        if nameLen is 0 or (length of rowTitle) < (nameLen + 2) then return ""
+        set statusText to text (nameLen + 2) thru -1 of rowTitle
+        set lastPos to length of statusText
+        if lastPos > 20 then set lastPos to 20
+        repeat with pos from 1 to lastPos
+            set charId to id of (character pos of statusText)
+            if charId is in {48, 49, 50, 51, 52, 53, 54, 55, 56, 57} then
+                set shapeText to shapeText & "9"
+            else if charId is in {32, 160, 8194, 8195, 8201, 8239} then
+                set shapeText to shapeText & " "
+            else if charId is in {37, 44, 46, 58, 40, 41, 47} then
+                set shapeText to shapeText & (character id charId)
+            else if charId is in {45, 8211, 8212} then
+                set shapeText to shapeText & "-"
+            else
+                set shapeText to shapeText & "a"
+            end if
+        end repeat
+    on error
+        return ""
+    end try
+    return shapeText
+end statusShape
+
 on wantsButton(actionMode, btnLabel)
     -- The row button an action goes by: Retry for retry and restart, Cancel
     -- otherwise. Downloading and paused rows have a Cancel button; a paused
@@ -3274,6 +3402,7 @@ on showRowMenu(listRef, rowIdx, nameVariants, scanKind, frameText)
     if not shownOk then return {"show-error", "showing the row's menu reported an error; ", frameText}
     set rowSelected to missing value
     set nowTitle to ""
+    set readNote to ""
     tell application "System Events"
         try
             set rowSelected to value of attribute "AXSelected" of UI element rowIdx of listRef
@@ -3288,10 +3417,38 @@ on showRowMenu(listRef, rowIdx, nameVariants, scanKind, frameText)
     if rowSelected is false then return {"menu-changed", "the menu opened for another row; ", frameText}
     if nowTitle is not "" then
         if not (my rowIsForName(nowTitle, nameVariants)) then return {"menu-changed", "the row moved; ", frameText}
-        if scanKind is not "" and (my rowKind(nowTitle, nameVariants)) is not scanKind then return {"menu-changed", "the row changed; ", frameText}
+        if scanKind is not "" then
+            set nowKind to my rowKind(nowTitle, nameVariants)
+            if nowKind is "" then
+                -- No state word in the title. The pointer came onto the row
+                -- when its menu opened, and the browser then swaps the row's
+                -- status label for another: the title may have been read
+                -- between the two. It is read once more, a moment later;
+                -- the row must still be the selected one, this file's, and
+                -- show its state then. (The log says when this happened.)
+                delay 0.1
+                set laterSelected to missing value
+                set laterTitle to ""
+                tell application "System Events"
+                    try
+                        set laterSelected to value of attribute "AXSelected" of UI element rowIdx of listRef
+                    end try
+                    try
+                        set rawLater to value of attribute "AXTitle" of UI element rowIdx of listRef
+                        if rawLater is not missing value then set laterTitle to rawLater as string
+                    end try
+                end tell
+                if laterSelected is false then return {"menu-changed", "the row's title had no state word after the menu, and at a second read the menu was another row's; ", frameText}
+                if not (my rowIsForName(laterTitle, nameVariants)) then return {"menu-changed", "the row's title had no state word after the menu, and at a second read the row had moved; ", frameText}
+                set nowKind to my rowKind(laterTitle, nameVariants)
+                if nowKind is "" then return {"menu-changed", "the row's title had no state word after the menu, read twice; ", frameText}
+                set readNote to "the row's title had no state word right after the menu, and had one at a second read; "
+            end if
+            if nowKind is not scanKind then return {"menu-changed", "the row changed; ", frameText}
+        end if
     end if
     if not (my wholeNameStill(listRef, rowIdx, my wholeNameList)) then return {"menu-changed", "the row's file changed; ", frameText}
-    return {"menu-shown", "row menu shown (selected=" & (rowSelected as string) & "); ", frameText}
+    return {"menu-shown", readNote & "row menu shown (selected=" & (rowSelected as string) & "); ", frameText}
 end showRowMenu
 
 on pidText(procName)
@@ -3338,6 +3495,7 @@ on scanRows(listRef, nameVariants, batched, actionMode)
             set oneKind to ""
             if actionMode is not "cancel" then set oneKind to my rowKind(oneTitle, rowNames)
             set seenText to seenText & "row " & rowIdx & "=[" & my joinedTexts(labelList) & "]" & oneKind & " "
+            if actionMode is not "cancel" and oneKind is "" then set seenText to seenText & "(state not recognised; its status begins: " & my statusShape(oneTitle, rowNames) & ") "
             if (count of rowNames) > (count of nameVariants) then set seenText to seenText & "(name shortened in the panel) "
             set btnIdx to my buttonIndexFor(labelList, actionMode)
             if btnIdx > 0 then
@@ -3865,8 +4023,24 @@ on statusKindOf(statusText)
     -- after the file name) starts with Firefox's word for that state, in any
     -- language; "" otherwise (downloading, finished...). No word of one kind
     -- starts with a word of another kind, in any language.
-    set restText to statusText as string
-    -- leading spaces and direction marks (right-to-left languages)
+    -- A row with a progress bar (downloading, paused) has the bar's value
+    -- between the file name and the status: that value is passed over.
+    set restText to my withoutLeadingBlanks(statusText as string)
+    set restText to my withoutLeadingBlanks(my afterBarValue(restText))
+    if restText is "" then return ""
+    if my cachedStateWords is missing value then set my cachedStateWords to {{"paused", my pausedWords()}, {"failed", my failedWords()}, {"canceled", my canceledWords()}}
+    repeat with kindPair in my cachedStateWords
+        repeat with oneWord in (item 2 of kindPair)
+            if restText starts with (contents of oneWord) then return (item 1 of kindPair)
+        end repeat
+    end repeat
+    return ""
+end statusKindOf
+
+on withoutLeadingBlanks(someText)
+    -- The text without the spaces and direction marks (right-to-left
+    -- languages) it starts with.
+    set restText to someText as string
     repeat while (length of restText) > 0
         if (id of (character 1 of restText)) is in {32, 9, 10, 13, 160, 8194, 8195, 8201, 8206, 8207, 8234, 8235, 8236, 8237, 8238, 8239, 8294, 8295, 8296, 8297} then
             if (length of restText) is 1 then
@@ -3878,15 +4052,37 @@ on statusKindOf(statusText)
             exit repeat
         end if
     end repeat
-    if restText is "" then return ""
-    if my cachedStateWords is missing value then set my cachedStateWords to {{"paused", my pausedWords()}, {"failed", my failedWords()}, {"canceled", my canceledWords()}}
-    repeat with kindPair in my cachedStateWords
-        repeat with oneWord in (item 2 of kindPair)
-            if restText starts with (contents of oneWord) then return (item 1 of kindPair)
-        end repeat
+    return restText
+end withoutLeadingBlanks
+
+on afterBarValue(statusText)
+    -- A progress bar's value as the browser writes it in a row's title:
+    -- digits, perhaps a point and more digits, then a percent sign and a
+    -- space ("42% Paused", "7.5% Paused"). Returns what follows that value;
+    -- the text as it is when it doesn't start with exactly that (so a text
+    -- that only looks a bit like it is never cut).
+    set textLen to length of statusText
+    set digitCount to 0
+    set markCount to 0
+    set pos to 1
+    repeat while pos <= textLen and pos <= 20
+        set charId to id of (character pos of statusText)
+        if charId is in {48, 49, 50, 51, 52, 53, 54, 55, 56, 57} then
+            set digitCount to digitCount + 1
+        else if charId is 46 and digitCount > 0 and markCount is 0 then
+            set markCount to 1
+        else
+            exit repeat
+        end if
+        set pos to pos + 1
     end repeat
-    return ""
-end statusKindOf
+    if digitCount is 0 or pos > textLen then return statusText
+    if (id of (character pos of statusText)) is not 37 then return statusText
+    if (id of (character (pos - 1) of statusText)) is 46 then return statusText
+    if pos is textLen then return statusText
+    if (id of (character (pos + 1) of statusText)) is not in {32, 9, 160, 8194, 8195, 8201, 8239} then return statusText
+    return text (pos + 1) thru -1 of statusText
+end afterBarValue
 
 on pausedWords()
     -- Firefox's word for a paused download (statePaused), in every language.
@@ -4086,18 +4282,16 @@ end canceledWords
 
 on nameEnd(rowTitle, nameVariants)
     -- Length of the file name this row title starts with, or 0. A title
-    -- reads "<file name> <status> <button label>", so the name must match
-    -- with the same case and be followed by a space (or end the title): a
-    -- row for "report.pdf.zip" is not a row for "report.pdf".
+    -- reads "<file name> <status> <button label>", so the name must be
+    -- there character for character (see sameText) and be followed by a
+    -- space (or end the title): a row for "report.pdf.zip" is not a row for
+    -- "report.pdf".
     set titleLen to length of rowTitle
     repeat with v in nameVariants
         set oneName to (contents of v) as string
         set nameLen to length of oneName
         if nameLen > 0 and not (titleLen < nameLen) then
-            set samePrefix to false
-            considering case
-                if (text 1 thru nameLen of rowTitle) is oneName then set samePrefix to true
-            end considering
+            set samePrefix to my sameText(text 1 thru nameLen of rowTitle, oneName)
             if samePrefix then
                 if titleLen is nameLen then return nameLen
                 if (id of (character (nameLen + 1) of rowTitle)) is in {32, 9, 10, 13, 160, 8194, 8195, 8201, 8239} then return nameLen
@@ -4318,6 +4512,38 @@ on rowKind(rowTitle, nameVariants)
     return my statusKindOf(text (nameLen + 2) thru -1 of rowTitle)
 end rowKind
 
+on statusShape(rowTitle, nameVariants)
+    -- For the log, when a row's state isn't recognised: how its status text
+    -- (the title after the file name) begins, with every digit written 9
+    -- and every letter a, so that neither a name nor a site shows
+    -- ("99% aaaaaa - 9.9 aa"). "" when there's nothing to tell. Only read.
+    set shapeText to ""
+    try
+        set nameLen to my nameEnd(rowTitle, nameVariants)
+        if nameLen is 0 or (length of rowTitle) < (nameLen + 2) then return ""
+        set statusText to text (nameLen + 2) thru -1 of rowTitle
+        set lastPos to length of statusText
+        if lastPos > 20 then set lastPos to 20
+        repeat with pos from 1 to lastPos
+            set charId to id of (character pos of statusText)
+            if charId is in {48, 49, 50, 51, 52, 53, 54, 55, 56, 57} then
+                set shapeText to shapeText & "9"
+            else if charId is in {32, 160, 8194, 8195, 8201, 8239} then
+                set shapeText to shapeText & " "
+            else if charId is in {37, 44, 46, 58, 40, 41, 47} then
+                set shapeText to shapeText & (character id charId)
+            else if charId is in {45, 8211, 8212} then
+                set shapeText to shapeText & "-"
+            else
+                set shapeText to shapeText & "a"
+            end if
+        end repeat
+    on error
+        return ""
+    end try
+    return shapeText
+end statusShape
+
 on wantsButton(actionMode, btnLabel)
     -- The row button an action goes by: Retry for retry and restart, Cancel
     -- otherwise. Downloading and paused rows have a Cancel button; a paused
@@ -4460,6 +4686,7 @@ on showRowMenu(listRef, rowIdx, nameVariants, scanKind, frameText)
     if not shownOk then return {"show-error", "showing the row's menu reported an error; ", frameText}
     set rowSelected to missing value
     set nowTitle to ""
+    set readNote to ""
     tell application "System Events"
         try
             set rowSelected to value of attribute "AXSelected" of UI element rowIdx of listRef
@@ -4474,10 +4701,38 @@ on showRowMenu(listRef, rowIdx, nameVariants, scanKind, frameText)
     if rowSelected is false then return {"menu-changed", "the menu opened for another row; ", frameText}
     if nowTitle is not "" then
         if not (my rowIsForName(nowTitle, nameVariants)) then return {"menu-changed", "the row moved; ", frameText}
-        if scanKind is not "" and (my rowKind(nowTitle, nameVariants)) is not scanKind then return {"menu-changed", "the row changed; ", frameText}
+        if scanKind is not "" then
+            set nowKind to my rowKind(nowTitle, nameVariants)
+            if nowKind is "" then
+                -- No state word in the title. The pointer came onto the row
+                -- when its menu opened, and the browser then swaps the row's
+                -- status label for another: the title may have been read
+                -- between the two. It is read once more, a moment later;
+                -- the row must still be the selected one, this file's, and
+                -- show its state then. (The log says when this happened.)
+                delay 0.1
+                set laterSelected to missing value
+                set laterTitle to ""
+                tell application "System Events"
+                    try
+                        set laterSelected to value of attribute "AXSelected" of UI element rowIdx of listRef
+                    end try
+                    try
+                        set rawLater to value of attribute "AXTitle" of UI element rowIdx of listRef
+                        if rawLater is not missing value then set laterTitle to rawLater as string
+                    end try
+                end tell
+                if laterSelected is false then return {"menu-changed", "the row's title had no state word after the menu, and at a second read the menu was another row's; ", frameText}
+                if not (my rowIsForName(laterTitle, nameVariants)) then return {"menu-changed", "the row's title had no state word after the menu, and at a second read the row had moved; ", frameText}
+                set nowKind to my rowKind(laterTitle, nameVariants)
+                if nowKind is "" then return {"menu-changed", "the row's title had no state word after the menu, read twice; ", frameText}
+                set readNote to "the row's title had no state word right after the menu, and had one at a second read; "
+            end if
+            if nowKind is not scanKind then return {"menu-changed", "the row changed; ", frameText}
+        end if
     end if
     if not (my wholeNameStill(listRef, rowIdx, my wholeNameList)) then return {"menu-changed", "the row's file changed; ", frameText}
-    return {"menu-shown", "row menu shown (selected=" & (rowSelected as string) & "); ", frameText}
+    return {"menu-shown", readNote & "row menu shown (selected=" & (rowSelected as string) & "); ", frameText}
 end showRowMenu
 
 on pidText(procName)
@@ -6290,7 +6545,9 @@ ACTION_NAMES = {"stop": "Stop", "resume": "Resume", "retry": "Retry", "restart":
 # move up; when none is under way, the finished cards that waited show in
 # the main place one after the other, in the order the downloads finished,
 # each on a status card. Only finished cards wait: a pause, a failure or a
-# cancellation shows at once, as with the setting off.
+# cancellation shows at once, as with the setting off. On "Simplified",
+# the finished cards that wait show as one: a status card that says how
+# many there are ("3 Downloads Completed"; one alone shows as it is).
 #
 # DynamicLake never says where a card is: all this goes by the order above.
 # After a click on the capsule (which swaps the two cards), or beside
@@ -6585,8 +6842,10 @@ def main() -> None:
                 if dl is None:
                     continue
                 if kind == "show":
-                    if dl.final_path.exists():
-                        subprocess.run(["open", "-R", str(dl.final_path)])
+                    # (the one card for several finished downloads shows them all)
+                    found = [str(path) for path in (dl.summary or [dl.final_path]) if path.exists()]
+                    if found:
+                        subprocess.run(["open", "-R", *found])
                     continue
                 if kind == "open":
                     # Open File, on the finished card: the file, in the app for
@@ -6918,6 +7177,8 @@ def main() -> None:
                     log_event(f"{dl.filename}: its turn, it has a card ({now - dl.started_at:.0f} s after it started)")
             first = first_in_place(tracked.values())
             in_spot = any(d.spot for d in tracked.values())
+            QUEUE["waiting"] = sum(1 for d in tracked.values() if not d.place and not d.spot and d.resolved_at is None) \
+                if NOTCH_PLACES > 0 else 0
             for dl in tracked.values():
                 surfaces, signature = dl.current_surfaces(numeric_style)
                 kind = signature[0]
@@ -6965,7 +7226,7 @@ def main() -> None:
                     # and behind the finished ones that wait already.
                     away = waiting_for_you(away_cache)
                     others = [d for d in tracked.values() if d is not dl]
-                    queued = bool(SETTINGS["focusMode"]) and kind == "done" and not dl.spot and any(
+                    queued = SETTINGS["focusMode"] != "off" and kind == "done" and not dl.spot and any(
                         d.under_way(now) or (d.held is not None and d.held_why == "focus") for d in others)
                     behind = not dl.spot and any(d.held is not None and d.held_why == "turn" for d in others)
                     if away or queued or behind or not (NOTCH_PLACES <= 0 or dl.spot or (dl is first and not in_spot)):
@@ -7047,12 +7308,38 @@ def main() -> None:
             # made for that (see "Places").
             # Finished cards that wait because of "Focus Mode" join the line
             # when no download is under way (or the setting is turned off).
-            if not SETTINGS["focusMode"] or not any(d.under_way(now) for d in tracked.values()):
+            if SETTINGS["focusMode"] == "off" or not any(d.under_way(now) for d in tracked.values()):
                 for dl in tracked.values():
                     if dl.held is not None and dl.held_why == "focus":
                         dl.held_why = "turn"
             in_line = [d for d in tracked.values() if d.held is not None and d.held_why != "focus"]
-            if now >= next_replay_at and in_line \
+            together: list = []
+            if now >= next_replay_at and in_line and SETTINGS["focusMode"] == "simplified" and NOTCH_PLACES > 0 \
+                    and not any(dl.spot for dl in tracked.values()) and not waiting_for_you(away_cache):
+                # "Focus Mode" on Simplified: the finished downloads that wait
+                # for their card get one card between them, with their number.
+                # Their own cards and places go (if they still had them), and
+                # all but the first of them are done with here.
+                together = [d for d in sorted(in_line, key=lambda d: (d.held[2], d.seq))
+                            if d.resolved_at is not None and d.succeeded and not d.spot
+                            and d.current_surfaces(numeric_style)[1][0] == "done"]
+            if len(together) >= 2:
+                for dl in together:
+                    if dl.created:
+                        dlk.send({"schemaVersion": 1, "type": "dismiss", "activityID": dl.activity_id})
+                        dl.created = False
+                    if dl.place:
+                        dl.place = False
+                        places_free_from = now + PLACE_GAP_SECONDS
+                    dl.held = None
+                one = together[0]
+                one.summary = [d.final_path for d in together]
+                for dl in together[1:]:
+                    dl.resolved_at = now - keep_seconds(dl) - 1.0     # (step 5 lets it go at once)
+                start_spot(one, "done", now)
+                log_event(f"{len(together)} downloads done, shown on one card (Focus Mode on Simplified): "
+                          + ", ".join(d.filename for d in together))
+            elif now >= next_replay_at and in_line \
                     and not any(dl.spot for dl in tracked.values()) and not waiting_for_you(away_cache):
                 first = first_in_place(tracked.values())
                 for dl in sorted(in_line, key=lambda d: (d.held[2], d.seq)):
