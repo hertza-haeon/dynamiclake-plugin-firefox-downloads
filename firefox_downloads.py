@@ -1414,8 +1414,16 @@ class _CGRect(ctypes.Structure):
 
 BADGE_PIXELS = 96             # the pictures' size (DynamicLake scales them to the slot)
 BADGE_FONT = ".AppleSystemUIFontRounded-Bold"   # the system's rounded bold (else: its bold)
-_BADGE_BLUE = (10 / 255, 132 / 255, 1.0)        # the blue and red of DynamicLake's symbols
+_BADGE_BLUE = (10 / 255, 132 / 255, 1.0)        # the blue, red, green and orange of DynamicLake's symbols
 _BADGE_RED = (1.0, 69 / 255, 58 / 255)
+_BADGE_GREEN = (48 / 255, 209 / 255, 88 / 255)
+_BADGE_ORANGE = (1.0, 159 / 255, 10 / 255)
+# Every picture follows one rule: a full circle in its colour, dark, and the
+# symbol in the same colour, bright, inside it. (colour, how dark the circle)
+_BADGE_LOOK = {"type": (_BADGE_BLUE, 0.24), "arrow": (_BADGE_BLUE, 0.24),
+               "done": (_BADGE_GREEN, 0.22), "paused": (_BADGE_ORANGE, 0.22),
+               "canceled": (_BADGE_RED, 0.22), "failed": (_BADGE_RED, 0.22),
+               "stalled": (_BADGE_RED, 0.22), "blocked": (_BADGE_RED, 0.22)}
 _draw: dict = {}
 _badges: dict = {}
 
@@ -1603,15 +1611,17 @@ def same_width(shown: str, *others: str) -> str:
 
 def draw_badge(kind: str, text: str = "") -> bytes | None:
     """One picture, as PNG: kind "type" (`text`, a file's extension) or
-    "arrow" (the download arrow), in a blue circle; "failed" (!), "stalled"
-    (...) or "blocked" (a bar), in a red circle. None where it can't be
-    drawn."""
+    "arrow" (the download arrow), in a blue circle; "done" (a check mark) in
+    a green one; "paused" (two bars) in an orange one; "canceled" (a
+    cross), "failed" (!), "stalled" (...) or "blocked" (a bar) in a red one.
+    Each the same way: the circle full and dark, the symbol bright (see
+    _BADGE_LOOK). None where it can't be drawn."""
     libs = _draw_libs()
-    if libs is None:
+    if libs is None or kind not in _BADGE_LOOK:
         return None
     cf, cg, ct, _ = libs
     size = BADGE_PIXELS
-    colour, dim = (_BADGE_BLUE, 0.24) if kind in ("type", "arrow") else (_BADGE_RED, 0.22)
+    colour, dim = _BADGE_LOOK[kind]
     pixels = ctypes.create_string_buffer(size * size * 4)
     space = cg.CGColorSpaceCreateDeviceRGB()
     # (8 bits a colour, premultiplied alpha last, bytes in R G B A order)
@@ -1649,6 +1659,15 @@ def draw_badge(kind: str, text: str = "") -> bytes | None:
             stroke(0.085, 0.5, 0.71, 0.5, 0.30)
             stroke(0.085, 0.5, 0.29, 0.33, 0.46)
             stroke(0.085, 0.5, 0.29, 0.67, 0.46)
+        elif kind == "done":                                        # a check mark: the short arm, then the long one
+            stroke(0.085, 0.347, 0.467, 0.458, 0.32)
+            stroke(0.085, 0.458, 0.32, 0.68, 0.667)
+        elif kind == "canceled":                                    # a cross
+            stroke(0.085, 0.345, 0.345, 0.655, 0.655)
+            stroke(0.085, 0.345, 0.655, 0.655, 0.345)
+        elif kind == "paused":                                      # two upright bars
+            stroke(0.095, 0.41, 0.36, 0.41, 0.64)
+            stroke(0.095, 0.59, 0.36, 0.59, 0.64)
         elif kind == "failed":                                      # an exclamation mark: a bar and a dot
             stroke(0.085, 0.5, 0.70, 0.5, 0.46)
             stroke(0.094, 0.5, 0.31, 0.5, 0.31)
@@ -1768,10 +1787,12 @@ def extra_surface(dl: "Download") -> dict:
 
 
 def _state_symbol(kind: str) -> dict | None:
-    """The pill's right side for a state DynamicLake has no symbol of its
-    own for: "failed" (!), "stalled" (...) or "blocked" (a bar), each in a
-    red circle. None where it can't be drawn (the caller then uses
-    DynamicLake's nearest symbol)."""
+    """The pill's right side for a state, drawn by the plugin: "done" (a
+    check mark, green), "paused" (two bars, orange), "canceled" (a cross),
+    "failed" (!), "stalled" (...) or "blocked" (a bar), red -- all in one
+    look, whatever DynamicLake's own symbols look like in its version. None
+    where it can't be drawn (the caller then uses DynamicLake's nearest
+    symbol)."""
     return badge_image(kind)
 
 
@@ -1957,7 +1978,7 @@ def done_surfaces(dl: "Download", numeric_style: str = "compact", now: float | N
     return {
         "compactLiveActivity": {
             "leftSlot": _pill_icon(dl),
-            "rightSlot": {"type": "status", "status": "success", "tint": "green"},
+            "rightSlot": _state_symbol("done") or {"type": "status", "status": "success", "tint": "green"},
         },
         "sneakPeek": {
             "leftSlot": _show_button(dl),
@@ -1973,7 +1994,8 @@ def summary_surfaces(dl: "Download", count: int) -> dict:
     does, and Show in Finder shows them all (see main, step 1)."""
     icon = _icon(str(count) if SETTINGS["fileTypeIcons"] else "")
     return {
-        "compactLiveActivity": {"leftSlot": icon, "rightSlot": {"type": "status", "status": "success", "tint": "green"}},
+        "compactLiveActivity": {"leftSlot": icon, "rightSlot": _state_symbol("done")
+                                or {"type": "status", "status": "success", "tint": "green"}},
         "sneakPeek": {
             "leftSlot": _show_button(dl),
             "center": {"type": "text", "text": f"{count} Downloads Completed", "style": "marquee"},
@@ -1987,9 +2009,10 @@ def canceled_surfaces(dl: "Download", reason: str, now: float | None = None) -> 
     starts it over, like the panel's own Retry. Blocked: nothing to press
     here -- only you can decide about it, in the browser."""
     sneak_peek: dict = {"center": {"type": "text", "text": status_line(reason, dl, now), "style": "marquee"}}
-    symbol = {"type": "status", "status": "failed", "tint": "red"}     # (DynamicLake's red X)
+    symbol = {"type": "status", "status": "failed", "tint": "red"}     # (DynamicLake's red X, where none can be drawn)
     if reason == "Canceled":
         sneak_peek = {"leftSlot": _retry_button(dl, "restart"), **sneak_peek}
+        symbol = _state_symbol("canceled") or symbol
     else:
         symbol = _state_symbol("blocked") or symbol
     return {
@@ -2013,7 +2036,7 @@ def paused_surfaces(dl: "Download", numeric_style: str = "compact", with_button:
     return {
         "compactLiveActivity": {
             "leftSlot": _pill_icon(dl, now),
-            "rightSlot": {"type": "status", "status": "paused", "tint": "orange"},
+            "rightSlot": _state_symbol("paused") or {"type": "status", "status": "paused", "tint": "orange"},
         },
         "sneakPeek": sneak_peek,
     }
