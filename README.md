@@ -281,6 +281,9 @@ Its last lines usually tell what happened.
 
 ---
 
+<sub>Copyright © 2026 Hertza Haeon. Firefox Downloads is released under the
+[Mozilla Public License 2.0](https://mozilla.org/MPL/2.0/).</sub>
+
 <sub>Firefox and the Firefox logo are trademarks of the Mozilla Foundation.
 This plugin is an independent project. It is not affiliated with, or
 endorsed by, Mozilla or DynamicLake.</sub>
