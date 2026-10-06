@@ -91,7 +91,7 @@ A download shows in two ways:
   when a download finishes, pauses, fails or is canceled.
 
 The file's type is its extension in a blue circle (`pdf`, `dmg`, `zip`). A
-download starts with a blue arrow and shows its type 5 seconds later.
+download starts with a blue arrow and shows its type 4 seconds later.
 
 | The download is… | Pill, right side | Sneak peek | Buttons |
 | --- | --- | --- | --- |
@@ -152,7 +152,7 @@ and choose **Settings**. Changes apply within a few seconds.
 | Setting | Default | What it does |
 | --- | --- | --- |
 | **File-Type Icons** | On | Shows the file's extension in a blue circle. Off: the blue arrow. |
-| **Download Details** | Time | What follows the amount while downloading. **Speed**: `1.2 MB/s`. **Time**: `2 min 34 s`. **Queue**: how many downloads wait for their turn, `+2 Queuing` (nothing when none does). **All**: each of these in turn, 3 seconds at a time. |
+| **Download Details** | Time | What follows the amount while downloading. **Speed**: `1.2 MB/s`. **Time**: `2 min 34 s`, then `45 seconds` in the last minute. **Queue**: how many downloads wait for their turn, `+2 Queuing` (nothing when none does). **All**: each of these in turn, 3 seconds at a time. |
 | **App Switching After Resume** | On | Resume makes the browser take the keyboard and leave its Downloads panel open over your app. On: the plugin gives your app the keyboard back and has the browser close its panel; the browser comes to the front for an instant. Off: the panel stays until you click in the browser. |
 | **Focus Mode** | Off | When a finished download's card shows. Off: as soon as it finishes. On: it waits while another download is still running, then the finished cards show one after the other. A pause, a failure or a cancellation always shows at once. |
 | **Delayed Display** | On | While you're away, nothing opens the notch. When you're back, the sneak peeks you missed open one by one. |

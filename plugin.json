@@ -70,7 +70,7 @@
       "title": "Delayed Display",
       "description": "While you're away, a download that finishes, pauses, fails or is canceled doesn't open the notch. Its card opens when you're back.",
       "systemImage": "hourglass",
-      "tint": "pink",
+      "tint": "red",
       "default": true
     },
     {
@@ -79,7 +79,7 @@
       "title": "Away After",
       "description": "You count as away when the screen is locked, or after this long without touching the keyboard, mouse or trackpad.",
       "systemImage": "timer",
-      "tint": "purple",
+      "tint": "pink",
       "options": [
         {
           "title": "1 min",
@@ -106,7 +106,7 @@
       "title": "Smart Slideshows",
       "description": "For finished cards that waited, with Focus Mode or Delayed Display. Off: they show one after the other. On: a single card says how many downloads completed.",
       "systemImage": "sparkles.rectangle.stack",
-      "tint": "indigo",
+      "tint": "purple",
       "default": false
     },
     {
@@ -115,7 +115,7 @@
       "title": "Sneak Peek Duration",
       "description": "How long the sneak peek stays open when a download finishes, pauses, fails or is canceled.",
       "systemImage": "eye",
-      "tint": "gray",
+      "tint": "indigo",
       "options": [
         {
           "title": "3 s",
@@ -142,7 +142,7 @@
       "title": "Remain Visible",
       "description": "How long the closed pill of a finished or canceled download stays after its sneak peek. At 0 it goes away together with the sneak peek.",
       "systemImage": "capsule",
-      "tint": "gray",
+      "tint": "blue",
       "min": 0,
       "max": 30,
       "step": 1,

@@ -111,7 +111,7 @@ PAD_END = "\u034f"            # an invisible character after padding spaces, whi
                               # DynamicLake from trimming them (others, such as U+2060,
                               # make it refuse the whole update)
 MAX_TEXT_CHARS = 240          # ...and the longest text
-ICON_DELAY_SECONDS = 5        # a new download shows the blue arrow this long, then
+ICON_DELAY_SECONDS = 4        # a new download shows the blue arrow this long, then
                               # its file type
 EARLY_STOP_CONFIRM = 0.09     # the browser closed the partial file: looked at again
                               # this much later before the download counts as paused
@@ -549,12 +549,16 @@ def time_left_margin(shown: float) -> float:
     return max(2.0, 0.06 * shown)
 
 
+LAST_MINUTE_WIDEST = "88 seconds"   # the widest the time left gets under a minute (see rate_text)
+
+
 def human_time(seconds: int) -> str:
-    """"45 s", "2 min 34 s", "1 h 20 min 5 s": the time left, always with
-    its seconds."""
+    """"45 seconds", "2 min 34 s", "1 h 20 min 5 s": the time left, always
+    with its seconds. Under a minute the word is written out, so that the
+    line takes about the room it took with the minutes."""
     minutes, secs = divmod(max(0, int(seconds)), 60)
     if minutes == 0:
-        return f"{secs} s"
+        return "1 second" if secs == 1 else f"{secs} seconds"
     hours, minutes = divmod(minutes, 60)
     if hours == 0:
         return f"{minutes} min {secs} s"
@@ -1931,8 +1935,10 @@ def rate_text(dl: "Download", now: float) -> str:
     left, the downloads that wait ("+2 Queuing"; nothing when none does), or
     all of them in turn, DETAILS_TURN_SECONDS each -- each then as wide as
     the widest (same_width), so that the line stays where it is when they
-    change places. The speed also shows where the time left can't be told
-    yet. Sets `dl.text_due`: when this text changes by itself (the next
+    change places; under a minute the time left counts as its widest
+    ("88 seconds"), so that the line doesn't move at "9 seconds" or at
+    "1 second" either. The speed also shows where the time left can't be
+    told yet. Sets `dl.text_due`: when this text changes by itself (the next
     second of the time left, the next turn), for the main loop to send it
     on time."""
     details = SETTINGS["downloadDetails"]
@@ -1956,7 +1962,10 @@ def rate_text(dl: "Download", now: float) -> str:
         tick = dl.time_tick_at
         if tick is not None and (dl.text_due is None or tick < dl.text_due):
             dl.text_due = tick
-    return same_width(shown, *turns) if len(turns) > 1 else shown
+    if len(turns) < 2:
+        return shown
+    last_minute = [LAST_MINUTE_WIDEST] if timed is not None and left < 60 else []
+    return same_width(shown, *turns, *last_minute)
 
 
 def amount_line(amount: str, detail: str) -> str:
