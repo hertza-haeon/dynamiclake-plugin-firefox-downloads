@@ -1874,11 +1874,12 @@ def _show_button(dl: "Download") -> dict:
 
 
 def _open_button(dl: "Download") -> dict:
-    """Open File: the file itself in a blue circle, across from Show in
-    Finder's folder. It opens the finished file in the app for its type.
-    `title` is only the VoiceOver label."""
+    """Open File: an arrow in an app's square (macOS's sign for "open in its
+    app") in a blue circle, across from Show in Finder's folder. It opens
+    the finished file in the app for its type. `title` is only the VoiceOver
+    label."""
     return {
-        "type": "button", "title": "Open File", "systemImage": "doc.fill",
+        "type": "button", "title": "Open File", "systemImage": "arrow.up.forward.app.fill",
         "actionID": f"open:{dl.activity_id}", "shape": "circle", "tint": "blue",
     }
 

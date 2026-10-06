@@ -15,7 +15,7 @@
       "type": "switch",
       "title": "File-Type Icons",
       "description": "Show the file's extension (pdf, dmg, zip…) in the pill. Off: the pill keeps the download arrow.",
-      "systemImage": "doc.on.doc",
+      "systemImage": "doc.fill",
       "tint": "blue",
       "default": true
     },
