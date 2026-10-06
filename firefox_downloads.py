@@ -205,6 +205,9 @@ _activity_counter = itertools.count(1)
 # DynamicLake JSON socket protocol (see JSONPluginAPI)
 # --------------------------------------------------------------------------
 
+STATUS_CARD_SUFFIX = "-s"     # a status card's name: its download's card's, and this (see "Places")
+
+
 class DynamicLake:
     """Thin wrapper around the framed JSON protocol: a 4-byte big-endian
     length prefix followed by UTF-8 JSON, in both directions. The socket is
@@ -217,7 +220,13 @@ class DynamicLake:
         self.sock.setblocking(False)
         self._buf = b""
 
+    keep_last = ""               # the card that must stay the one updated last (see "Places")...
+    overtaken = False            # ...and whether another download's card got a message after it
+
     def send(self, payload: dict) -> None:
+        card = payload.get("activityID", "")
+        if self.keep_last and payload.get("type") != "dismiss" and not card.endswith(STATUS_CARD_SUFFIX):
+            self.overtaken = card != self.keep_last
         data = json.dumps(payload, separators=(",", ":")).encode("utf-8")
         left = memoryview(struct.pack(">I", len(data)) + data)
         # The socket doesn't block, and a frame with a picture in it is
@@ -278,10 +287,11 @@ SETTING_DEFAULTS = {
     "downloadDetails": "time",   # "Download Details": after the amounts, the "speed", the "time" left, the
                                  # "queue" (how many downloads wait for a card), or "all" of them in turn
     "returnFocus": True,         # "App Switching After Resume": after Resume, bring back the app you were in
-    "focusMode": "off",          # "Focus Mode": "on", a finished download's card waits until no download is under
-                                 # way; "simplified", and several then show as one card with their number
+    "focusMode": False,          # "Focus Mode": a finished download's card waits until no download is under way
     "waitWhenAway": True,        # "Delayed Display": hold sneak peeks while you're away; show them when you're back
     "awayAfter": AWAY_SECONDS,   # "Away After": ...away after this long without input ("1 min", "5 min"...)
+    "smartSlideshows": False,    # "Smart Slideshows": finished cards that waited (for the others with "Focus Mode",
+                                 # for you with "Delayed Display") show as one card, with their number
     "sneakPeekDuration": PEEK_SECONDS,   # "Sneak Peek Duration": how long a sneak peek opens ("3 s", "5 s"...)
     "remainVisible": REMAIN_SECONDS,     # "Remain Visible": how long a finished or canceled card's pill stays after it
 }
@@ -345,14 +355,12 @@ def _as_details(raw) -> str | None:
     return text if text in ("speed", "time", "queue", "all") else None
 
 
-def _as_focus(raw) -> str | None:
-    """The choice of "Focus Mode", by its title (it was a switch at first:
-    on or off)."""
-    text = raw.strip().lower() if isinstance(raw, str) else None
-    if text in ("off", "on", "simplified"):
-        return text
-    switch = _as_bool(raw)
-    return None if switch is None else ("on" if switch else "off")
+def _as_focus(raw) -> bool | None:
+    """The switch "Focus Mode" (for a while it was a choice of Off, On or
+    Simplified: a setting still stored that way reads as on, or off)."""
+    if isinstance(raw, str) and raw.strip().lower() == "simplified":
+        return True
+    return _as_bool(raw)
 
 
 def _as_whole_seconds(raw, lowest: int, highest: int) -> int | None:
@@ -1100,7 +1108,8 @@ class Download:
         self.created_at = 0.0                    # when the card it has was created
         self.peek_owed: tuple | None = None      # (seconds, not before): a sneak peek that card still has to open
         self.held_why = ""                       # what `held` waits for: you ("away") or the main place ("turn")
-        self.summary: list = []                  # "Focus Mode" on Simplified: the files of the finished downloads
+        self.sent_surfaces: dict | None = None   # what its own card shows, as sent last (for the last word: "Places")
+        self.summary: list = []                  # "Smart Slideshows": the files of the finished downloads
                                                  # this one's status card stands for (its own among them)
         # Stop / Resume / Retry bookkeeping -- see README.md
         self.job: ActionJob | None = None           # browser automation running
@@ -1118,7 +1127,7 @@ class Download:
     def card_id(self) -> str:
         """The card its updates go to: its own, or the one that shows its
         status in the main place (see "Places")."""
-        return self.activity_id + "-s" if self.spot else self.activity_id
+        return self.activity_id + STATUS_CARD_SUFFIX if self.spot else self.activity_id
 
     def move_to(self, part_path: Path) -> None:
         """Follow the download to another partial file (Retry after a
@@ -1420,7 +1429,7 @@ _BADGE_GREEN = (48 / 255, 209 / 255, 88 / 255)
 _BADGE_ORANGE = (1.0, 159 / 255, 10 / 255)
 # Every picture follows one rule: a full circle in its colour, dark, and the
 # symbol in the same colour, bright, inside it. (colour, how dark the circle)
-_BADGE_LOOK = {"type": (_BADGE_BLUE, 0.24), "arrow": (_BADGE_BLUE, 0.24),
+_BADGE_LOOK = {"type": (_BADGE_BLUE, 0.24), "arrow": (_BADGE_BLUE, 0.24), "count": (_BADGE_BLUE, 0.24),
                "done": (_BADGE_GREEN, 0.22), "paused": (_BADGE_ORANGE, 0.22),
                "canceled": (_BADGE_RED, 0.22), "failed": (_BADGE_RED, 0.22),
                "stalled": (_BADGE_RED, 0.22), "blocked": (_BADGE_RED, 0.22)}
@@ -1462,6 +1471,7 @@ def _draw_libs():
                     (ct, "CTFontGetXHeight", num, [ref]),
                     (ct, "CTLineCreateWithAttributedString", ref, [ref]),
                     (ct, "CTLineGetTypographicBounds", num, [ref, ctypes.POINTER(num), ctypes.POINTER(num), ctypes.POINTER(num)]),
+                    (ct, "CTLineGetBoundsWithOptions", _CGRect, [ref, ctypes.c_ulong]),
                     (ct, "CTLineDraw", None, [ref, ref])):
                 fn = getattr(lib, name)
                 fn.restype, fn.argtypes = restype, argtypes
@@ -1610,8 +1620,9 @@ def same_width(shown: str, *others: str) -> str:
 
 
 def draw_badge(kind: str, text: str = "") -> bytes | None:
-    """One picture, as PNG: kind "type" (`text`, a file's extension) or
-    "arrow" (the download arrow), in a blue circle; "done" (a check mark) in
+    """One picture, as PNG: kind "type" (`text`, a file's extension), "count"
+    (`text`, a number) or "arrow" (the download arrow), in a blue circle;
+    "done" (a check mark) in
     a green one; "paused" (two bars) in an orange one; "canceled" (a
     cross), "failed" (!), "stalled" (...) or "blocked" (a bar) in a red one.
     Each the same way: the circle full and dark, the symbol bright (see
@@ -1643,7 +1654,7 @@ def draw_badge(kind: str, text: str = "") -> bytes | None:
             cg.CGContextAddLineToPoint(context, size * x1, size * y1)
             cg.CGContextStrokePath(context)
 
-        if kind == "type":
+        if kind in ("type", "count"):
             # As large as fits: 80 % of the circle's width at most.
             biggest = size * (0.50 if len(text) <= 2 else 0.44)
             line, width, x_height = _text_line(libs, text, biggest)
@@ -1652,7 +1663,15 @@ def draw_badge(kind: str, text: str = "") -> bytes | None:
                 line, width, x_height = _text_line(libs, text, biggest * size * 0.80 / width)
             if not line:
                 return None
-            cg.CGContextSetTextPosition(context, (size - width) / 2.0, (size - x_height) / 2.0)
+            if kind == "count":
+                # A number sits in the middle of the circle by its own shape:
+                # the box around what is drawn of its digits, not the room the
+                # font gives them (digits are taller than the small letters an
+                # extension is centred by, and would sit too high).
+                ink = ct.CTLineGetBoundsWithOptions(line, 8)        # (8: the glyphs' own outlines)
+                cg.CGContextSetTextPosition(context, (size - ink.width) / 2.0 - ink.x, (size - ink.height) / 2.0 - ink.y)
+            else:
+                cg.CGContextSetTextPosition(context, (size - width) / 2.0, (size - x_height) / 2.0)
             ct.CTLineDraw(line, context)
             cf.CFRelease(line)
         elif kind == "arrow":                                       # pointing down: a shaft and its two-armed head
@@ -1989,10 +2008,10 @@ def done_surfaces(dl: "Download", numeric_style: str = "compact", now: float | N
 
 
 def summary_surfaces(dl: "Download", count: int) -> dict:
-    """"Focus Mode" on Simplified: one card for several finished downloads
-    ("3 Downloads Completed"). Their number stands where a file's type
-    does, and Show in Finder shows them all (see main, step 1)."""
-    icon = _icon(str(count) if SETTINGS["fileTypeIcons"] else "")
+    """"Smart Slideshows": one card for several finished downloads ("3
+    Downloads Completed"). Their number stands where a file's type or the
+    arrow does, and Show in Finder shows them all (see main, step 1)."""
+    icon = badge_image("count", str(count)) or _icon("")
     return {
         "compactLiveActivity": {"leftSlot": icon, "rightSlot": _state_symbol("done")
                                 or {"type": "status", "status": "success", "tint": "green"}},
@@ -6568,9 +6587,22 @@ ACTION_NAMES = {"stop": "Stop", "resume": "Resume", "retry": "Retry", "restart":
 # move up; when none is under way, the finished cards that waited show in
 # the main place one after the other, in the order the downloads finished,
 # each on a status card. Only finished cards wait: a pause, a failure or a
-# cancellation shows at once, as with the setting off. On "Simplified",
-# the finished cards that wait show as one: a status card that says how
-# many there are ("3 Downloads Completed"; one alone shows as it is).
+# cancellation shows at once, as with the setting off.
+#
+# With the setting "Smart Slideshows" on, finished cards that wait in line
+# together -- for the other downloads (Focus Mode), for you (Delayed
+# Display) -- show as one: a status card that says how many there are ("3
+# Downloads Completed"; one alone shows as it is).
+#
+# Beside another app's activity, the capsule is the plugin's card that was
+# updated last, and DynamicLake goes by that all the time, not only when a
+# card comes or goes. Two downloads' cards aren't updated in step (each has
+# updates of its own: its time left counting down, its details taking
+# turns), so they would keep taking the capsule from each other, which
+# blinks out for a second at every change. So the first download's card
+# always has the last word: in a pass it is sent after the others', and
+# when only another card had something to send, it is sent once more as it
+# is, right behind (last_word, in main; DynamicLake.keep_last).
 #
 # DynamicLake never says where a card is: all this goes by the order above.
 # After a click on the capsule (which swaps the two cards), or beside
@@ -6729,6 +6761,20 @@ def main() -> None:
 
     def send_priority(activity_id: str, priority: str) -> None:
         dlk.send({"schemaVersion": 1, "type": "update", "activityID": activity_id, "priority": priority})
+
+    def last_word() -> None:
+        """The first download's card is the one updated last: if another
+        download's own card got a message after it, it is sent once more,
+        as it is (see "Places"). Nothing while it has no card of its own
+        up, and nothing with NOTCH_PLACES at 0."""
+        first = first_in_place(tracked.values())
+        card = first.activity_id if NOTCH_PLACES > 0 and first is not None and first.created and not first.spot else ""
+        if card != dlk.keep_last:
+            dlk.keep_last = card
+            dlk.overtaken = bool(card) and any(
+                d is not first and (d.own_card if d.spot else d.created) for d in tracked.values())
+        if card and dlk.overtaken and first.sent_surfaces is not None:
+            dlk.send({"schemaVersion": 1, "type": "update", "activityID": card, "surfaces": first.sent_surfaces})
 
     def own_cards(but: str = "") -> list:
         """The downloads' own cards that are up (no status card), oldest download first."""
@@ -7202,7 +7248,10 @@ def main() -> None:
             in_spot = any(d.spot for d in tracked.values())
             QUEUE["waiting"] = sum(1 for d in tracked.values() if not d.place and not d.spot and d.resolved_at is None) \
                 if NOTCH_PLACES > 0 else 0
-            for dl in tracked.values():
+            in_turn = list(tracked.values())
+            if NOTCH_PLACES > 0 and first is not None and first.created and not first.spot:
+                in_turn.sort(key=lambda d: d is first)    # (its card's update goes after the others': the last word)
+            for dl in in_turn:
                 surfaces, signature = dl.current_surfaces(numeric_style)
                 kind = signature[0]
                 if dl.resolved_at is not None and dl.place and NOTCH_PLACES > 0 and dl is not first and not dl.spot:
@@ -7249,7 +7298,7 @@ def main() -> None:
                     # and behind the finished ones that wait already.
                     away = waiting_for_you(away_cache)
                     others = [d for d in tracked.values() if d is not dl]
-                    queued = SETTINGS["focusMode"] != "off" and kind == "done" and not dl.spot and any(
+                    queued = bool(SETTINGS["focusMode"]) and kind == "done" and not dl.spot and any(
                         d.under_way(now) or (d.held is not None and d.held_why == "focus") for d in others)
                     behind = not dl.spot and any(d.held is not None and d.held_why == "turn" for d in others)
                     if away or queued or behind or not (NOTCH_PLACES <= 0 or dl.spot or (dl is first and not in_spot)):
@@ -7315,6 +7364,8 @@ def main() -> None:
                     # in it when it's asked for again: for the time that's left.
                     payload["presentSneakPeek"] = max(1, min(MAX_PRESENT_SECONDS, int(round(dl.peek_until - now))))
                 dlk.send(payload)
+                if not dl.spot:
+                    dl.sent_surfaces = payload["surfaces"]
                 dl.created = True
                 dl.last_signature = signature
                 dl.line_phase_sent = dl.line_phase
@@ -7331,18 +7382,20 @@ def main() -> None:
             # made for that (see "Places").
             # Finished cards that wait because of "Focus Mode" join the line
             # when no download is under way (or the setting is turned off).
-            if SETTINGS["focusMode"] == "off" or not any(d.under_way(now) for d in tracked.values()):
+            if not SETTINGS["focusMode"] or not any(d.under_way(now) for d in tracked.values()):
                 for dl in tracked.values():
                     if dl.held is not None and dl.held_why == "focus":
                         dl.held_why = "turn"
             in_line = [d for d in tracked.values() if d.held is not None and d.held_why != "focus"]
             together: list = []
-            if now >= next_replay_at and in_line and SETTINGS["focusMode"] == "simplified" and NOTCH_PLACES > 0 \
+            if now >= next_replay_at and in_line and SETTINGS["smartSlideshows"] and NOTCH_PLACES > 0 \
                     and not any(dl.spot for dl in tracked.values()) and not waiting_for_you(away_cache):
-                # "Focus Mode" on Simplified: the finished downloads that wait
-                # for their card get one card between them, with their number.
-                # Their own cards and places go (if they still had them), and
-                # all but the first of them are done with here.
+                # "Smart Slideshows": the finished downloads that wait for
+                # their card (for the other downloads, with "Focus Mode"; for
+                # you, with "Delayed Display"; or for their turn) get one card
+                # between them, with their number. Their own cards and places
+                # go (if they still had them), and all but the first of them
+                # are done with here.
                 together = [d for d in sorted(in_line, key=lambda d: (d.held[2], d.seq))
                             if d.resolved_at is not None and d.succeeded and not d.spot
                             and d.current_surfaces(numeric_style)[1][0] == "done"]
@@ -7360,7 +7413,7 @@ def main() -> None:
                 for dl in together[1:]:
                     dl.resolved_at = now - keep_seconds(dl) - 1.0     # (step 5 lets it go at once)
                 start_spot(one, "done", now)
-                log_event(f"{len(together)} downloads done, shown on one card (Focus Mode on Simplified): "
+                log_event(f"{len(together)} downloads done, shown on one card (Smart Slideshows): "
                           + ", ".join(d.filename for d in together))
             elif now >= next_replay_at and in_line \
                     and not any(dl.spot for dl in tracked.values()) and not waiting_for_you(away_cache):
@@ -7398,6 +7451,7 @@ def main() -> None:
                                 else now + payload["presentSneakPeek"] + SPOT_MARGIN_SECONDS
                             dl.peek_owed = (payload["presentSneakPeek"], now + PEEK_AFTER_CREATE)
                     dlk.send(payload)
+                    dl.sent_surfaces = payload["surfaces"]
                     dl.last_signature = signature
                     dl.line_phase_sent = dl.line_phase
                     gap = REPLAY_GAP_SECONDS
@@ -7478,6 +7532,9 @@ def main() -> None:
                             baseline_sizes[part_path] = part_path.stat().st_size
                         except OSError:
                             pass
+
+            # 6. The first download's card has the last word (see "Places").
+            last_word()
         except (ConnectionError, OSError):
             raise                    # DynamicLake went away: the plugin ends (see __main__)
         except Exception as exc:     # a bug must not end the plugin: log it and carry on

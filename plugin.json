@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "identifier": "com.localtools.plugins.firefox-downloads",
   "name": "Firefox Downloads",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "developerName": "Local Build",
   "description": "Firefox downloads in the notch: progress, speed or time left, Stop, Resume, Retry, Show in Finder and Open File. No browser extension needed.",
   "executable": "firefox_downloads.py",
@@ -57,26 +57,12 @@
     },
     {
       "id": "focusMode",
-      "type": "select",
+      "type": "switch",
       "title": "Focus Mode",
-      "description": "Off: a finished download's card shows at once. On: it waits until every download is done; the cards then show one by one. Simplified: one card for all, with their number.",
+      "description": "Off: a finished download's card shows at once. On: it waits until every download is done, then the finished cards show one after the other.",
       "systemImage": "target",
       "tint": "orange",
-      "options": [
-        {
-          "title": "Off",
-          "systemImage": "circle"
-        },
-        {
-          "title": "On",
-          "systemImage": "checkmark.circle"
-        },
-        {
-          "title": "Simplified",
-          "systemImage": "number.circle"
-        }
-      ],
-      "default": "Off"
+      "default": false
     },
     {
       "id": "waitWhenAway",
@@ -115,12 +101,21 @@
       "default": "1 min"
     },
     {
+      "id": "smartSlideshows",
+      "type": "switch",
+      "title": "Smart Slideshows",
+      "description": "For finished cards that waited, with Focus Mode or Delayed Display. Off: they show one after the other. On: a single card says how many downloads completed.",
+      "systemImage": "sparkles.rectangle.stack",
+      "tint": "indigo",
+      "default": false
+    },
+    {
       "id": "sneakPeekDuration",
       "type": "select",
       "title": "Sneak Peek Duration",
       "description": "How long the sneak peek stays open when a download finishes, pauses, fails or is canceled.",
       "systemImage": "eye",
-      "tint": "indigo",
+      "tint": "gray",
       "options": [
         {
           "title": "3 s",
@@ -147,7 +142,7 @@
       "title": "Remain Visible",
       "description": "How long the closed pill of a finished or canceled download stays after its sneak peek. At 0 it goes away together with the sneak peek.",
       "systemImage": "capsule",
-      "tint": "indigo",
+      "tint": "gray",
       "min": 0,
       "max": 30,
       "step": 1,
