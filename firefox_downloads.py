@@ -50,6 +50,7 @@ the paused row's right-click menu.
 
 from __future__ import annotations
 
+import atexit
 import base64
 import ctypes
 import fcntl
@@ -64,6 +65,7 @@ import socket
 import struct
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 import traceback
@@ -2097,8 +2099,9 @@ def failed_surfaces(dl: "Download", numeric_style: str = "compact", with_button:
 # --------------------------------------------------------------------------
 
 # The script the buttons run ("mode:cancel", "mode:resume", "mode:retry").
-# It is compiled once (osacompile) into ~/Library/Caches/FirefoxDownloads, so
-# later runs skip the compile step.
+# It is compiled (osacompile) at each start, into a temporary folder of its
+# own, so that a press skips the compile step; the compiled file is checked
+# against its fingerprint before every use (checked_fast_script).
 _AX_CANCEL_SCRIPT = r'''
 -- Firefox Downloads: act on ONE download in a Firefox-family browser through
 -- the toolbar Downloads panel, without bringing the browser to the front.
@@ -5067,13 +5070,22 @@ STOP_GAVE_UP_NOTICE = GAVE_UP_NOTICES["stop"]
 # Outcomes that mean "the script itself broke", so the fallback script runs.
 _SCRIPT_FAILURES = {"script-error", "syntax-error", "error"}
 
+# The system's own programs, by their full path: never whatever carries the
+# same name in a folder that comes earlier in PATH.
+OSASCRIPT = "/usr/bin/osascript"
+OSACOMPILE = "/usr/bin/osacompile"
+OPEN = "/usr/bin/open"
+
 _AX_LOCK = threading.Lock()       # one browser automation at a time
 _COMPILE_LOCK = threading.Lock()  # guards _script_state
 _script_state: dict = {
-    "compiled": None,          # Path of the compiled script, once built
+    "compiled": None,          # Path of the compiled script, built by this process
+    "fingerprint": None,       # its SHA-256, as this process built it
+    "untrusted": False,        # it was found changed: the script runs from its text
     "compile_failed": False,   # osacompile could not build it
     "fast_broken": False,      # the main script failed: use the fallback
     "fast_failures": 0,
+    "cache_cleared": False,
 }
 
 
@@ -5093,57 +5105,140 @@ def script_cache_dir() -> Path:
     return Path.home() / "Library" / "Caches" / PLUGIN_FOLDER_NAME
 
 
-def compiled_fast_script() -> Path | None:
-    """Compile the Stop script once and reuse it: running a compiled script
-    skips parsing it and loading System Events' dictionary on every press.
-    Returns None when it can't be compiled (the script then runs as text)."""
-    with _COMPILE_LOCK:
-        cached = _script_state["compiled"]
-        if cached is not None and cached.exists():
-            return cached
-        if _script_state["compile_failed"] or _script_state["fast_broken"]:
-            return None
-        digest = hashlib.sha1(_AX_CANCEL_SCRIPT.encode("utf-8")).hexdigest()[:12]
-        cache_dir = script_cache_dir()
-        target = cache_dir / f"stop-{digest}.scpt"
-        if target.exists():
-            _script_state["compiled"] = target
-            return target
-        source = cache_dir / f"stop-{digest}.applescript"
-        scratch = cache_dir / f"stop-{digest}-{os.getpid()}.scpt"
+def clear_script_cache() -> None:
+    """A compiled script lying in ~/Library/Caches/FirefoxDownloads is not
+    this process's own: it is never run, and it is removed (the files named
+    like one, then the folder if that leaves it empty). A folder that is a
+    link to another place is left alone."""
+    folder = script_cache_dir()
+    try:
+        if folder.is_symlink():
+            return
+        for stale in list(folder.glob("stop-*.scpt")) + list(folder.glob("stop-*.applescript")):
+            try:
+                stale.unlink()
+            except OSError:
+                pass
+        folder.rmdir()
+    except OSError:
+        pass
+
+
+def file_fingerprint(path: Path) -> str | None:
+    """The SHA-256 of a file's bytes; None when it can't be read."""
+    try:
+        return hashlib.sha256(path.read_bytes()).hexdigest()
+    except OSError:
+        return None
+
+
+def _remove_compiled(path: Path) -> None:
+    """Remove a compiled script and the folder made for it (nothing through
+    a folder that has become a link to another place)."""
+    if os.path.islink(path.parent):
+        return
+    for leftover, remove in ((path, os.unlink), (path.parent, os.rmdir)):
         try:
-            cache_dir.mkdir(parents=True, exist_ok=True)
-            source.write_text(_AX_CANCEL_SCRIPT, encoding="utf-8")
-            result = subprocess.run(["osacompile", "-o", str(scratch), str(source)],
-                                    capture_output=True, text=True, timeout=60)
-            if result.returncode != 0 or not scratch.exists():
-                err = " ".join((result.stderr or "").split())
+            remove(leftover)
+        except OSError:
+            pass
+
+
+def _compiled_fast_script() -> tuple:
+    """(compiled script, its fingerprint), or (None, None): see
+    compiled_fast_script. Both are read in one go, under the lock."""
+    with _COMPILE_LOCK:
+        if (_script_state["compile_failed"] or _script_state["fast_broken"]
+                or _script_state["untrusted"]):
+            return None, None
+        if _script_state["compiled"] is not None:
+            return _script_state["compiled"], _script_state["fingerprint"]
+        if not _script_state["cache_cleared"]:
+            _script_state["cache_cleared"] = True
+            clear_script_cache()
+        target = None
+        try:
+            folder = Path(tempfile.mkdtemp(prefix=PLUGIN_FOLDER_NAME + "-"))
+            target = folder / "stop.scpt"
+            # (the text goes in on standard input: no copy of it on disk)
+            result = subprocess.run([OSACOMPILE, "-o", str(target)], input=_AX_CANCEL_SCRIPT.encode("utf-8"),
+                                    capture_output=True, timeout=60)
+            fingerprint = None
+            if result.returncode == 0:
+                # Read-only before its fingerprint is taken: osascript writes a
+                # script's properties back into a compiled file it can write
+                # to, which would make every run change the file.
+                os.chmod(target, 0o400)
+                fingerprint = file_fingerprint(target)
+            if fingerprint is None:
+                err = " ".join((result.stderr or b"").decode("utf-8", "replace").split())
                 _script_state["compile_failed"] = True
                 if "syntax error" in err.lower():
                     _script_state["fast_broken"] = True
                 log_event(f"compiling the Stop script failed ({err or result.returncode}); "
                           + ("using the fallback script" if _script_state["fast_broken"]
                              else "running it uncompiled"))
-                return None
-            os.replace(scratch, target)
-        except (OSError, subprocess.SubprocessError) as exc:
+                _remove_compiled(target)
+                return None, None
+        except Exception as exc:               # (whatever it is: the script then runs as text)
             _script_state["compile_failed"] = True
             log_event(f"compiling the Stop script failed ({exc!r}); running it uncompiled")
+            if target is not None:
+                _remove_compiled(target)
+            return None, None
+        _script_state["compiled"], _script_state["fingerprint"] = target, fingerprint
+        atexit.register(_remove_compiled, target)
+        log_event("the button script is compiled for this run; the compiled file is checked before every use")
+        return target, fingerprint
+
+
+def compiled_fast_script() -> Path | None:
+    """Compile the Stop script, once for this run, and remember the compiled
+    file's fingerprint: running a compiled script skips parsing it and
+    loading System Events' dictionary on every press. It goes into a
+    temporary folder made for this run alone (a name of its own each time,
+    open to this user only), read-only: a compiled script from another run,
+    or put there by another program, is never picked up. Returns None when
+    it can't be compiled, or isn't to be trusted (the script then runs as
+    text). Callers that run it use checked_fast_script."""
+    return _compiled_fast_script()[0]
+
+
+def checked_fast_script() -> Path | None:
+    """The compiled script, when it is still, byte for byte, the file this
+    process built: its fingerprint is taken again right before every use.
+    A file that has gone (the system clears temporary folders) is built
+    again, once, in a new folder. A file that is there but different is
+    never run: from then on the script runs from the plugin's own text, and
+    the log says so. None: run the text."""
+    for attempt in (1, 2):
+        compiled, expected = _compiled_fast_script()
+        if compiled is None:
             return None
-        finally:
-            for leftover in (source, scratch):
-                try:
-                    leftover.unlink()
-                except OSError:
-                    pass
-        for old in cache_dir.glob("stop-*.scpt"):
-            if old != target:
-                try:
-                    old.unlink()
-                except OSError:
-                    pass
-        _script_state["compiled"] = target
-        return target
+        found = file_fingerprint(compiled)
+        if found is not None and expected is not None and found == expected:
+            return compiled
+        gone = found is None and not os.path.lexists(compiled)
+        with _COMPILE_LOCK:
+            if _script_state["compiled"] != compiled:
+                continue                      # (another thread dealt with it meanwhile)
+            _script_state["compiled"] = _script_state["fingerprint"] = None
+            if gone:
+                _remove_compiled(compiled)    # (the folder it was in)
+            if gone and attempt == 1:
+                continue                      # gone: built again
+            if gone:
+                _script_state["compile_failed"] = True
+            else:
+                _script_state["untrusted"] = True
+        if gone:
+            log_event("the compiled button script keeps disappearing: the script runs from the plugin's own "
+                      "text from here on")
+        else:
+            log_event("the compiled button script isn't the file this plugin built (changed since): "
+                      "it isn't run; the script runs from the plugin's own text from here on")
+        return None
+    return None
 
 
 def start_precompile() -> None:
@@ -5201,6 +5296,9 @@ def parse_script_output(output: str) -> ScriptResult:
 
 
 _MENU_AT = re.compile(r"^menu-at\|(-?\d+,-?\d+,\d+,\d+)\|(\d+)[ \t]*\r?$", re.M)
+# (osascript says this at every run of the read-only compiled script, whose
+# properties it can't write back: it is no part of what went wrong)
+_NOT_SAVED = re.compile(r"^\S*osascript: couldn't save changes to script .*$\n?", re.M)
 
 
 def menu_breadcrumb(stderr) -> tuple[str, str, str]:
@@ -5213,7 +5311,7 @@ def menu_breadcrumb(stderr) -> tuple[str, str, str]:
     frame = pid = ""
     for m in _MENU_AT.finditer(text):
         frame, pid = m.group(1), m.group(2)
-    return _MENU_AT.sub("", text), frame, pid
+    return _NOT_SAVED.sub("", _MENU_AT.sub("", text)), frame, pid
 
 
 def _run_script(cmd: list[str]) -> ScriptResult:
@@ -5242,18 +5340,19 @@ def _run_script(cmd: list[str]) -> ScriptResult:
 
 def run_ax_script(script_args: list[str], allow_fallback: bool = True,
                   fallback_after_run: bool = True) -> ScriptResult:
-    """Run the main script (compiled when possible). If the script itself
+    """Run the main script (compiled when possible, the compiled file checked
+    first: checked_fast_script). If the script itself
     breaks, run the slower fallback script instead -- unless allow_fallback
     is False (the warm-up, which the fallback doesn't do), or the main script
     broke while running and fallback_after_run is False (Resume: it may have
     shown a menu already, and must not show another)."""
     notes = ""
     if not _script_state["fast_broken"]:
-        compiled = compiled_fast_script()
+        compiled = checked_fast_script()
         if compiled is not None:
-            cmd = ["osascript", str(compiled)]
+            cmd = [OSASCRIPT, str(compiled)]
         else:
-            cmd = ["osascript", "-e", _AX_CANCEL_SCRIPT]
+            cmd = [OSASCRIPT, "-e", _AX_CANCEL_SCRIPT]
         result = _run_script(cmd + script_args)
         if result[0] not in _SCRIPT_FAILURES:
             return result
@@ -5266,7 +5365,7 @@ def run_ax_script(script_args: list[str], allow_fallback: bool = True,
             return result[0], notes.strip(), result[2], "", result[4], result[5]
     elif not allow_fallback:
         return "unavailable", "the main script can't run in this session", "", "", "", ""
-    outcome, trace, browser, _, spot, pid = _run_script(["osascript", "-e", _AX_FALLBACK_SCRIPT] + script_args)
+    outcome, trace, browser, _, spot, pid = _run_script([OSASCRIPT, "-e", _AX_FALLBACK_SCRIPT] + script_args)
     return outcome, f"{notes}fallback script: {trace}", browser, "", spot, pid
 
 
@@ -6929,7 +7028,7 @@ def main() -> None:
                     # (the one card for several finished downloads shows them all)
                     found = [str(path) for path in (dl.summary or [dl.final_path]) if path.exists()]
                     if found:
-                        subprocess.run(["open", "-R", *found])
+                        subprocess.run([OPEN, "-R", *found])
                     continue
                 if kind == "open":
                     # Open File, on the finished card: the file, in the app for
@@ -6937,7 +7036,7 @@ def main() -> None:
                     # came from the internet, as it does in the Finder).
                     if dl.resolved_at is not None and dl.succeeded and dl.final_path.exists():
                         try:
-                            opened = subprocess.run(["open", str(dl.final_path)], capture_output=True, timeout=15).returncode
+                            opened = subprocess.run([OPEN, str(dl.final_path)], capture_output=True, timeout=15).returncode
                         except (OSError, subprocess.SubprocessError) as exc:
                             opened = repr(exc)
                         log_event(f"{dl.filename}: Open File" + ("" if opened == 0 else f": couldn't be opened ({opened})"))

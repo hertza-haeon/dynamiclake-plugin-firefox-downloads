@@ -228,7 +228,7 @@ that the Downloads button is on the browser's toolbar.
 **DynamicLake says the plugin can't be run.** In Terminal:
 
 ```bash
-chmod +x FirefoxDownloads.dynamiclakeplugin/firefox_downloads.py
+chmod +x FirefoxDownloads.dynamiclakeplugin/firefox-downloads-launcher
 ```
 
 **A button answers with a message.** Nothing wrong was pressed: when the
@@ -267,6 +267,10 @@ Its last lines usually tell what happened.
   anything is unclear, it presses nothing.
 - It **never types** anything and never touches the pages you browse.
 - It **sends nothing** over the internet.
+- DynamicLake starts it through `firefox-downloads-launcher`, a small
+  program whose only job is to run the plugin (`firefox_downloads.py`) with
+  your Mac's Python. Its source, `firefox-downloads-launcher.c`, is in
+  [the repository](https://github.com/hertza-haeon/dynamiclake-plugin-firefox-downloads).
 
 ## Uninstall
 
@@ -276,7 +280,6 @@ Its last lines usually tell what happened.
 
 ```
 ~/Library/Logs/FirefoxDownloads/
-~/Library/Caches/FirefoxDownloads/
 ```
 
 ---
