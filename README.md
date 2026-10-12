@@ -1,7 +1,7 @@
 # Firefox Downloads
 
 <p align="center">
-  <img src="icon.png" alt="Firefox Downloads icon" width="128">
+  <img src="icon-rounded.png" alt="Firefox Downloads icon" width="128">
 </p>
 
 <p align="center">
