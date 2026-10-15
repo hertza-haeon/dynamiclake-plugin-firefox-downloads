@@ -1,0 +1,426 @@
+[
+ {
+  "fn": "realName",
+  "args": [
+   "report.ab3_Xy9Q.pdf"
+  ],
+  "out": "report.pdf"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "report.pdf"
+  ],
+  "out": "report.pdf"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "two.Ab3_Xy9Q.zip"
+  ],
+  "out": "two.zip"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "archive.Ab3_Xy9Q.tar.gz"
+  ],
+  "out": "archive.tar.gz"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "noext"
+  ],
+  "out": "noext"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "noext.Ab3_Xy9Q"
+  ],
+  "out": "noext"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "a.b"
+  ],
+  "out": "a.b"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "a.12345678"
+  ],
+  "out": "a"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "a.12345678x"
+  ],
+  "out": "a.12345678x"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "a.1234567"
+  ],
+  "out": "a.1234567"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "a.123-5_78.x"
+  ],
+  "out": "a.x"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "a.123+5678.x"
+  ],
+  "out": "a.123+5678.x"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   ".hidden.Ab3_Xy9Q.txt"
+  ],
+  "out": ".hidden.Ab3_Xy9Q.txt"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "report.20260923.pdf"
+  ],
+  "out": "report.pdf"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "café.Ab3_Xy9Q.pdf"
+  ],
+  "out": "café.pdf"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "été.Zz9_Zz9_.mp4"
+  ],
+  "out": "été.mp4"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "x..Ab3_Xy9Q"
+  ],
+  "out": "x..Ab3_Xy9Q"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "日本語.Ab3_Xy9Q.zip"
+  ],
+  "out": "日本語.zip"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   "a.ab3_xy9é.pdf"
+  ],
+  "out": "a.ab3_xy9é.pdf"
+ },
+ {
+  "fn": "realName",
+  "args": [
+   ""
+  ],
+  "out": ""
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "report.pdf"
+  ],
+  "out": "pdf"
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "REPORT.PDF"
+  ],
+  "out": "pdf"
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "archive.tar.gz"
+  ],
+  "out": "gz"
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "noext"
+  ],
+  "out": ""
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   ".bashrc"
+  ],
+  "out": ""
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "a."
+  ],
+  "out": ""
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "a.."
+  ],
+  "out": ""
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "...x"
+  ],
+  "out": ""
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "x.y."
+  ],
+  "out": ""
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "photo.jpeg"
+  ],
+  "out": "jpeg"
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "movie.mkv5"
+  ],
+  "out": "mkv5"
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "data.tar.zst"
+  ],
+  "out": "zst"
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "file.ÉXT"
+  ],
+  "out": ""
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "file.e_x"
+  ],
+  "out": ""
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "file.123"
+  ],
+  "out": "123"
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "file.toolongext"
+  ],
+  "out": "tool"
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "a.b.c.d"
+  ],
+  "out": "d"
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "pic.Png"
+  ],
+  "out": "png"
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   "é.pdf"
+  ],
+  "out": "pdf"
+ },
+ {
+  "fn": "badgeText",
+  "args": [
+   ""
+  ],
+  "out": ""
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Complete",
+   "report.pdf"
+  ],
+  "out": "Complete • report.pdf"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Complete",
+   "Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.pdf"
+  ],
+  "out": "Complete • Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long…Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.pdf"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Complete",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  ],
+  "out": "Complete • xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx…xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Complete",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  ],
+  "out": "Complete • xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx…xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Complete",
+   "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé"
+  ],
+  "out": "Complete • éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé…ééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Complete",
+   "日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本"
+  ],
+  "out": "Complete • 日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本…本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Paused",
+   "report.pdf"
+  ],
+  "out": "Paused • report.pdf"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Paused",
+   "Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.pdf"
+  ],
+  "out": "Paused • Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.….Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.pdf"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Paused",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  ],
+  "out": "Paused • xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx…xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Paused",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  ],
+  "out": "Paused • xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx…xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Paused",
+   "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé"
+  ],
+  "out": "Paused • ééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé…éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Paused",
+   "日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本"
+  ],
+  "out": "Paused • 日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日…日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Browser closed",
+   "report.pdf"
+  ],
+  "out": "Browser closed • report.pdf"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Browser closed",
+   "Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.pdf"
+  ],
+  "out": "Browser closed • Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.L…g.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.Some.Very.Long.Name.pdf"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Browser closed",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  ],
+  "out": "Browser closed • xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx…xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Browser closed",
+   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  ],
+  "out": "Browser closed • xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx…xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Browser closed",
+   "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé"
+  ],
+  "out": "Browser closed • ééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé…éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé"
+ },
+ {
+  "fn": "statusText",
+  "args": [
+   "Browser closed",
+   "日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本"
+  ],
+  "out": "Browser closed • 日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日…日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本日本"
+ }
+]

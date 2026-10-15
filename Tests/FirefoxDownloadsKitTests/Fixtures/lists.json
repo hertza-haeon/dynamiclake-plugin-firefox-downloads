@@ -1,0 +1,382 @@
+{
+ "entries": [
+  {
+   "item": {},
+   "out": "active"
+  },
+  {
+   "item": {
+    "succeeded": true
+   },
+   "out": ""
+  },
+  {
+   "item": {
+    "canceled": true
+   },
+   "out": ""
+  },
+  {
+   "item": {
+    "canceled": true,
+    "hasPartialData": true
+   },
+   "out": "paused"
+  },
+  {
+   "item": {
+    "canceled": true,
+    "hasPartialData": false
+   },
+   "out": ""
+  },
+  {
+   "item": {
+    "canceled": 1,
+    "hasPartialData": true
+   },
+   "out": "active"
+  },
+  {
+   "item": {
+    "errorObj": {
+     "result": 1
+    }
+   },
+   "out": "failed"
+  },
+  {
+   "item": {
+    "errorObj": {}
+   },
+   "out": "failed"
+  },
+  {
+   "item": {
+    "errorObj": {
+     "becauseBlocked": true
+    }
+   },
+   "out": "blocked"
+  },
+  {
+   "item": {
+    "errorObj": {
+     "becauseBlockedByReputationCheck": true
+    }
+   },
+   "out": "blocked"
+  },
+  {
+   "item": {
+    "errorObj": {
+     "becauseBlocked": 1
+    }
+   },
+   "out": "failed"
+  },
+  {
+   "item": {
+    "errorObj": "x"
+   },
+   "out": "failed"
+  },
+  {
+   "item": {
+    "errorObj": ""
+   },
+   "out": "active"
+  },
+  {
+   "item": {
+    "errorObj": 0
+   },
+   "out": "active"
+  },
+  {
+   "item": {
+    "errorObj": 5
+   },
+   "out": "failed"
+  },
+  {
+   "item": {
+    "errorObj": []
+   },
+   "out": "active"
+  },
+  {
+   "item": {
+    "errorObj": [
+     1
+    ]
+   },
+   "out": "failed"
+  },
+  {
+   "item": {
+    "errorObj": null
+   },
+   "out": "active"
+  },
+  {
+   "item": {
+    "hasBlockedData": true
+   },
+   "out": "blocked"
+  },
+  {
+   "item": {
+    "hasBlockedData": true,
+    "errorObj": {
+     "result": 1
+    }
+   },
+   "out": "blocked"
+  },
+  {
+   "item": {
+    "hasBlockedData": 1
+   },
+   "out": "active"
+  },
+  {
+   "item": {
+    "succeeded": true,
+    "canceled": true,
+    "hasPartialData": true
+   },
+   "out": ""
+  },
+  {
+   "item": {
+    "succeeded": false,
+    "canceled": true,
+    "hasPartialData": true
+   },
+   "out": "paused"
+  }
+ ],
+ "files": [
+  {
+   "content": {
+    "list": [
+     {
+      "target": {
+       "path": "/D/a.zip",
+       "partFilePath": "/D/a.Ab3_Xy9Q.zip.part"
+      },
+      "totalBytes": 5000
+     }
+    ]
+   },
+   "out": [
+    [
+     "name",
+     "a.Ab3_Xy9Q.zip.part",
+     5000,
+     "active"
+    ],
+    [
+     "name",
+     "a.zip",
+     5000,
+     "active"
+    ],
+    [
+     "path",
+     "/D/a.Ab3_Xy9Q.zip.part",
+     5000,
+     "active"
+    ],
+    [
+     "path",
+     "/D/a.zip",
+     5000,
+     "active"
+    ]
+   ]
+  },
+  {
+   "content": {
+    "list": [
+     {
+      "target": "/D/b.zip",
+      "totalBytes": 0
+     },
+     {
+      "target": {
+       "path": "/D/c.zip"
+      },
+      "totalBytes": -3
+     },
+     {
+      "target": {
+       "path": "/D/d.zip"
+      },
+      "totalBytes": true
+     },
+     {
+      "target": {
+       "path": "/D/e.zip"
+      },
+      "totalBytes": "7"
+     },
+     {
+      "target": {
+       "path": "/D/f.zip"
+      },
+      "totalBytes": 2900000000.0
+     },
+     {
+      "target": {
+       "path": "/D//g/./h.zip"
+      },
+      "totalBytes": 1
+     },
+     {
+      "target": {
+       "path": "/D/café.zip"
+      },
+      "totalBytes": 2
+     },
+     {
+      "target": {
+       "path": "/D/café.zip"
+      },
+      "totalBytes": 3
+     },
+     {
+      "target": {
+       "partFilePath": 5,
+       "path": "/D/i.zip"
+      },
+      "canceled": true,
+      "hasPartialData": true
+     },
+     "not an item",
+     {
+      "target": null
+     }
+    ]
+   },
+   "out": [
+    [
+     "name",
+     "b.zip",
+     null,
+     "active"
+    ],
+    [
+     "name",
+     "c.zip",
+     null,
+     "active"
+    ],
+    [
+     "name",
+     "café.zip",
+     3,
+     "active"
+    ],
+    [
+     "name",
+     "d.zip",
+     null,
+     "active"
+    ],
+    [
+     "name",
+     "e.zip",
+     null,
+     "active"
+    ],
+    [
+     "name",
+     "f.zip",
+     2900000000,
+     "active"
+    ],
+    [
+     "name",
+     "h.zip",
+     1,
+     "active"
+    ],
+    [
+     "name",
+     "i.zip",
+     null,
+     "paused"
+    ],
+    [
+     "path",
+     "/D/b.zip",
+     null,
+     "active"
+    ],
+    [
+     "path",
+     "/D/c.zip",
+     null,
+     "active"
+    ],
+    [
+     "path",
+     "/D/café.zip",
+     3,
+     "active"
+    ],
+    [
+     "path",
+     "/D/d.zip",
+     null,
+     "active"
+    ],
+    [
+     "path",
+     "/D/e.zip",
+     null,
+     "active"
+    ],
+    [
+     "path",
+     "/D/f.zip",
+     2900000000,
+     "active"
+    ],
+    [
+     "path",
+     "/D/g/h.zip",
+     1,
+     "active"
+    ],
+    [
+     "path",
+     "/D/i.zip",
+     null,
+     "paused"
+    ]
+   ]
+  },
+  {
+   "content": {
+    "list": "nope"
+   },
+   "out": []
+  },
+  {
+   "content": [
+    1,
+    2
+   ],
+   "out": []
+  },
+  {
+   "content": {
+    "other": 1
+   },
+   "out": []
+  }
+ ]
+}

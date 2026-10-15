@@ -1,0 +1,2762 @@
+[
+ {
+  "parser": "bool",
+  "raw": null,
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": null,
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": null,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": null,
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": null,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": null,
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": true,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": true,
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": true,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": true,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": true,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": true,
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": false,
+  "out": false
+ },
+ {
+  "parser": "seconds",
+  "raw": false,
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": false,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": false,
+  "out": false
+ },
+ {
+  "parser": "peek",
+  "raw": false,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": false,
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": 0,
+  "out": false
+ },
+ {
+  "parser": "seconds",
+  "raw": 0,
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": 0,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 0,
+  "out": false
+ },
+ {
+  "parser": "peek",
+  "raw": 0,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": 0,
+  "out": 0
+ },
+ {
+  "parser": "bool",
+  "raw": 1,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 1,
+  "out": 60
+ },
+ {
+  "parser": "details",
+  "raw": 1,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 1,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 1,
+  "out": 1
+ },
+ {
+  "parser": "remain",
+  "raw": 1,
+  "out": 1
+ },
+ {
+  "parser": "bool",
+  "raw": 2,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 2,
+  "out": 120
+ },
+ {
+  "parser": "details",
+  "raw": 2,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 2,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 2,
+  "out": 2
+ },
+ {
+  "parser": "remain",
+  "raw": 2,
+  "out": 2
+ },
+ {
+  "parser": "bool",
+  "raw": -1,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": -1,
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": -1,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": -1,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": -1,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": -1,
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": 0.0,
+  "out": false
+ },
+ {
+  "parser": "seconds",
+  "raw": 0.0,
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": 0.0,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 0.0,
+  "out": false
+ },
+ {
+  "parser": "peek",
+  "raw": 0.0,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": 0.0,
+  "out": 0
+ },
+ {
+  "parser": "bool",
+  "raw": 0.4,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 0.4,
+  "out": 24
+ },
+ {
+  "parser": "details",
+  "raw": 0.4,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 0.4,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 0.4,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": 0.4,
+  "out": 0
+ },
+ {
+  "parser": "bool",
+  "raw": 0.6,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 0.6,
+  "out": 36
+ },
+ {
+  "parser": "details",
+  "raw": 0.6,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 0.6,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 0.6,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": 0.6,
+  "out": 1
+ },
+ {
+  "parser": "bool",
+  "raw": 1.0,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 1.0,
+  "out": 60
+ },
+ {
+  "parser": "details",
+  "raw": 1.0,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 1.0,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 1.0,
+  "out": 1
+ },
+ {
+  "parser": "remain",
+  "raw": 1.0,
+  "out": 1
+ },
+ {
+  "parser": "bool",
+  "raw": 1.5,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 1.5,
+  "out": 90
+ },
+ {
+  "parser": "details",
+  "raw": 1.5,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 1.5,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 1.5,
+  "out": 2
+ },
+ {
+  "parser": "remain",
+  "raw": 1.5,
+  "out": 2
+ },
+ {
+  "parser": "bool",
+  "raw": 3,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 3,
+  "out": 180
+ },
+ {
+  "parser": "details",
+  "raw": 3,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 3,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 3,
+  "out": 3
+ },
+ {
+  "parser": "remain",
+  "raw": 3,
+  "out": 3
+ },
+ {
+  "parser": "bool",
+  "raw": 5,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 5,
+  "out": 300
+ },
+ {
+  "parser": "details",
+  "raw": 5,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 5,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 5,
+  "out": 5
+ },
+ {
+  "parser": "remain",
+  "raw": 5,
+  "out": 5
+ },
+ {
+  "parser": "bool",
+  "raw": 9.4,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 9.4,
+  "out": 564
+ },
+ {
+  "parser": "details",
+  "raw": 9.4,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 9.4,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 9.4,
+  "out": 9
+ },
+ {
+  "parser": "remain",
+  "raw": 9.4,
+  "out": 9
+ },
+ {
+  "parser": "bool",
+  "raw": 9.6,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 9.6,
+  "out": 576
+ },
+ {
+  "parser": "details",
+  "raw": 9.6,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 9.6,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 9.6,
+  "out": 10
+ },
+ {
+  "parser": "remain",
+  "raw": 9.6,
+  "out": 10
+ },
+ {
+  "parser": "bool",
+  "raw": 10,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 10,
+  "out": 600
+ },
+ {
+  "parser": "details",
+  "raw": 10,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 10,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 10,
+  "out": 10
+ },
+ {
+  "parser": "remain",
+  "raw": 10,
+  "out": 10
+ },
+ {
+  "parser": "bool",
+  "raw": 10.4,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 10.4,
+  "out": 624
+ },
+ {
+  "parser": "details",
+  "raw": 10.4,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 10.4,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 10.4,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": 10.4,
+  "out": 10
+ },
+ {
+  "parser": "bool",
+  "raw": 10.6,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 10.6,
+  "out": 636
+ },
+ {
+  "parser": "details",
+  "raw": 10.6,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 10.6,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 10.6,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": 10.6,
+  "out": 11
+ },
+ {
+  "parser": "bool",
+  "raw": 11,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 11,
+  "out": 660
+ },
+ {
+  "parser": "details",
+  "raw": 11,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 11,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 11,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": 11,
+  "out": 11
+ },
+ {
+  "parser": "bool",
+  "raw": 30,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 30,
+  "out": 1800
+ },
+ {
+  "parser": "details",
+  "raw": 30,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 30,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 30,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": 30,
+  "out": 30
+ },
+ {
+  "parser": "bool",
+  "raw": 30.4,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 30.4,
+  "out": 1824
+ },
+ {
+  "parser": "details",
+  "raw": 30.4,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 30.4,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 30.4,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": 30.4,
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": 31,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 31,
+  "out": 1860
+ },
+ {
+  "parser": "details",
+  "raw": 31,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 31,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 31,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": 31,
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": 60,
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": 60,
+  "out": 3600
+ },
+ {
+  "parser": "details",
+  "raw": 60,
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": 60,
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": 60,
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": 60,
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": " ",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": " ",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": " ",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": " ",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": " ",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": " ",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "1",
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": "1",
+  "out": 60
+ },
+ {
+  "parser": "details",
+  "raw": "1",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "1",
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": "1",
+  "out": 1
+ },
+ {
+  "parser": "remain",
+  "raw": "1",
+  "out": 1
+ },
+ {
+  "parser": "bool",
+  "raw": "0",
+  "out": false
+ },
+ {
+  "parser": "seconds",
+  "raw": "0",
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": "0",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "0",
+  "out": false
+ },
+ {
+  "parser": "peek",
+  "raw": "0",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "0",
+  "out": 0
+ },
+ {
+  "parser": "bool",
+  "raw": "true",
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": "true",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "true",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "true",
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": "true",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "true",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "TRUE",
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": "TRUE",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "TRUE",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "TRUE",
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": "TRUE",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "TRUE",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": " yes ",
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": " yes ",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": " yes ",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": " yes ",
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": " yes ",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": " yes ",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "on",
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": "on",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "on",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "on",
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": "on",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "on",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "Off",
+  "out": false
+ },
+ {
+  "parser": "seconds",
+  "raw": "Off",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "Off",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "Off",
+  "out": false
+ },
+ {
+  "parser": "peek",
+  "raw": "Off",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "Off",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "no",
+  "out": false
+ },
+ {
+  "parser": "seconds",
+  "raw": "no",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "no",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "no",
+  "out": false
+ },
+ {
+  "parser": "peek",
+  "raw": "no",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "no",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "false",
+  "out": false
+ },
+ {
+  "parser": "seconds",
+  "raw": "false",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "false",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "false",
+  "out": false
+ },
+ {
+  "parser": "peek",
+  "raw": "false",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "false",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "maybe",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "maybe",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "maybe",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "maybe",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "maybe",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "maybe",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "1 min",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "1 min",
+  "out": 60
+ },
+ {
+  "parser": "details",
+  "raw": "1 min",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "1 min",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "1 min",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "1 min",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "1 minute",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "1 minute",
+  "out": 60
+ },
+ {
+  "parser": "details",
+  "raw": "1 minute",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "1 minute",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "1 minute",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "1 minute",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "3 min",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "3 min",
+  "out": 180
+ },
+ {
+  "parser": "details",
+  "raw": "3 min",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "3 min",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "3 min",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "3 min",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "5 min",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "5 min",
+  "out": 300
+ },
+ {
+  "parser": "details",
+  "raw": "5 min",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "5 min",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "5 min",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "5 min",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "10 min",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "10 min",
+  "out": 600
+ },
+ {
+  "parser": "details",
+  "raw": "10 min",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "10 min",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "10 min",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "10 min",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "2 minutes",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "2 minutes",
+  "out": 120
+ },
+ {
+  "parser": "details",
+  "raw": "2 minutes",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "2 minutes",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "2 minutes",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "2 minutes",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "30 s",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "30 s",
+  "out": 30
+ },
+ {
+  "parser": "details",
+  "raw": "30 s",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "30 s",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "30 s",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "30 s",
+  "out": 30
+ },
+ {
+  "parser": "bool",
+  "raw": "30 seconds",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "30 seconds",
+  "out": 30
+ },
+ {
+  "parser": "details",
+  "raw": "30 seconds",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "30 seconds",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "30 seconds",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "30 seconds",
+  "out": 30
+ },
+ {
+  "parser": "bool",
+  "raw": "5 sec",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "5 sec",
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": "5 sec",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "5 sec",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "5 sec",
+  "out": 5
+ },
+ {
+  "parser": "remain",
+  "raw": "5 sec",
+  "out": 5
+ },
+ {
+  "parser": "bool",
+  "raw": "5 secs.",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "5 secs.",
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": "5 secs.",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "5 secs.",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "5 secs.",
+  "out": 5
+ },
+ {
+  "parser": "remain",
+  "raw": "5 secs.",
+  "out": 5
+ },
+ {
+  "parser": "bool",
+  "raw": "1 h",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "1 h",
+  "out": 3600
+ },
+ {
+  "parser": "details",
+  "raw": "1 h",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "1 h",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "1 h",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "1 h",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "2 hours",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "2 hours",
+  "out": 3600
+ },
+ {
+  "parser": "details",
+  "raw": "2 hours",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "2 hours",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "2 hours",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "2 hours",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "0.5",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "0.5",
+  "out": 30
+ },
+ {
+  "parser": "details",
+  "raw": "0.5",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "0.5",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "0.5",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "0.5",
+  "out": 1
+ },
+ {
+  "parser": "bool",
+  "raw": "0,5",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "0,5",
+  "out": 30
+ },
+ {
+  "parser": "details",
+  "raw": "0,5",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "0,5",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "0,5",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "0,5",
+  "out": 1
+ },
+ {
+  "parser": "bool",
+  "raw": "1.5 min",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "1.5 min",
+  "out": 90
+ },
+ {
+  "parser": "details",
+  "raw": "1.5 min",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "1.5 min",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "1.5 min",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "1.5 min",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "1,5 min",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "1,5 min",
+  "out": 90
+ },
+ {
+  "parser": "details",
+  "raw": "1,5 min",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "1,5 min",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "1,5 min",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "1,5 min",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "5 s",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "5 s",
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": "5 s",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "5 s",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "5 s",
+  "out": 5
+ },
+ {
+  "parser": "remain",
+  "raw": "5 s",
+  "out": 5
+ },
+ {
+  "parser": "bool",
+  "raw": "5 seconds",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "5 seconds",
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": "5 seconds",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "5 seconds",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "5 seconds",
+  "out": 5
+ },
+ {
+  "parser": "remain",
+  "raw": "5 seconds",
+  "out": 5
+ },
+ {
+  "parser": "bool",
+  "raw": "3 s",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "3 s",
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": "3 s",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "3 s",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "3 s",
+  "out": 3
+ },
+ {
+  "parser": "remain",
+  "raw": "3 s",
+  "out": 3
+ },
+ {
+  "parser": "bool",
+  "raw": "8 s",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "8 s",
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": "8 s",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "8 s",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "8 s",
+  "out": 8
+ },
+ {
+  "parser": "remain",
+  "raw": "8 s",
+  "out": 8
+ },
+ {
+  "parser": "bool",
+  "raw": "10 s",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "10 s",
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": "10 s",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "10 s",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "10 s",
+  "out": 10
+ },
+ {
+  "parser": "remain",
+  "raw": "10 s",
+  "out": 10
+ },
+ {
+  "parser": "bool",
+  "raw": "11 s",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "11 s",
+  "out": 11
+ },
+ {
+  "parser": "details",
+  "raw": "11 s",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "11 s",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "11 s",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "11 s",
+  "out": 11
+ },
+ {
+  "parser": "bool",
+  "raw": "0 s",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "0 s",
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": "0 s",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "0 s",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "0 s",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "0 s",
+  "out": 0
+ },
+ {
+  "parser": "bool",
+  "raw": "2",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "2",
+  "out": 120
+ },
+ {
+  "parser": "details",
+  "raw": "2",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "2",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "2",
+  "out": 2
+ },
+ {
+  "parser": "remain",
+  "raw": "2",
+  "out": 2
+ },
+ {
+  "parser": "bool",
+  "raw": "30",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "30",
+  "out": 1800
+ },
+ {
+  "parser": "details",
+  "raw": "30",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "30",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "30",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "30",
+  "out": 30
+ },
+ {
+  "parser": "bool",
+  "raw": "31",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "31",
+  "out": 1860
+ },
+ {
+  "parser": "details",
+  "raw": "31",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "31",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "31",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "31",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "-1",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "-1",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "-1",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "-1",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "-1",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "-1",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "abc",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "abc",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "abc",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "abc",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "abc",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "abc",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "5 days",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "5 days",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "5 days",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "5 days",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "5 days",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "5 days",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "5s",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "5s",
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": "5s",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "5s",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "5s",
+  "out": 5
+ },
+ {
+  "parser": "remain",
+  "raw": "5s",
+  "out": 5
+ },
+ {
+  "parser": "bool",
+  "raw": " 5  s ",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": " 5  s ",
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": " 5  s ",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": " 5  s ",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": " 5  s ",
+  "out": 5
+ },
+ {
+  "parser": "remain",
+  "raw": " 5  s ",
+  "out": 5
+ },
+ {
+  "parser": "bool",
+  "raw": "5 S",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "5 S",
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": "5 S",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "5 S",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "5 S",
+  "out": 5
+ },
+ {
+  "parser": "remain",
+  "raw": "5 S",
+  "out": 5
+ },
+ {
+  "parser": "bool",
+  "raw": "speed",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "speed",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "speed",
+  "out": "speed"
+ },
+ {
+  "parser": "focus",
+  "raw": "speed",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "speed",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "speed",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "Speed",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "Speed",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "Speed",
+  "out": "speed"
+ },
+ {
+  "parser": "focus",
+  "raw": "Speed",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "Speed",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "Speed",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "time",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "time",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "time",
+  "out": "time"
+ },
+ {
+  "parser": "focus",
+  "raw": "time",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "time",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "time",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "TIME",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "TIME",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "TIME",
+  "out": "time"
+ },
+ {
+  "parser": "focus",
+  "raw": "TIME",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "TIME",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "TIME",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "queue",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "queue",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "queue",
+  "out": "queue"
+ },
+ {
+  "parser": "focus",
+  "raw": "queue",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "queue",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "queue",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "all",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "all",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "all",
+  "out": "all"
+ },
+ {
+  "parser": "focus",
+  "raw": "all",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "all",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "all",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "All",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "All",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "All",
+  "out": "all"
+ },
+ {
+  "parser": "focus",
+  "raw": "All",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "All",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "All",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "both",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "both",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "both",
+  "out": "all"
+ },
+ {
+  "parser": "focus",
+  "raw": "both",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "both",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "both",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "Both",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "Both",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "Both",
+  "out": "all"
+ },
+ {
+  "parser": "focus",
+  "raw": "Both",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "Both",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "Both",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": " both ",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": " both ",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": " both ",
+  "out": "all"
+ },
+ {
+  "parser": "focus",
+  "raw": " both ",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": " both ",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": " both ",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "other",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "other",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "other",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "other",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "other",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "other",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "Simplified",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "Simplified",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "Simplified",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "Simplified",
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": "Simplified",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "Simplified",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "simplified ",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "simplified ",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "simplified ",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "simplified ",
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": "simplified ",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "simplified ",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "On",
+  "out": true
+ },
+ {
+  "parser": "seconds",
+  "raw": "On",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "On",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "On",
+  "out": true
+ },
+ {
+  "parser": "peek",
+  "raw": "On",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "On",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "11111111111111111111111111111111111111111",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "11111111111111111111111111111111111111111",
+  "out": null
+ },
+ {
+  "parser": "details",
+  "raw": "11111111111111111111111111111111111111111",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "11111111111111111111111111111111111111111",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "11111111111111111111111111111111111111111",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "11111111111111111111111111111111111111111",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "999999999999999999999999999999 min",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "999999999999999999999999999999 min",
+  "out": 3600
+ },
+ {
+  "parser": "details",
+  "raw": "999999999999999999999999999999 min",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "999999999999999999999999999999 min",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "999999999999999999999999999999 min",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "999999999999999999999999999999 min",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "0 min",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "0 min",
+  "out": 10
+ },
+ {
+  "parser": "details",
+  "raw": "0 min",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "0 min",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "0 min",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "0 min",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "100000 hours",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "100000 hours",
+  "out": 3600
+ },
+ {
+  "parser": "details",
+  "raw": "100000 hours",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "100000 hours",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "100000 hours",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "100000 hours",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "0.5 h",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "0.5 h",
+  "out": 1800
+ },
+ {
+  "parser": "details",
+  "raw": "0.5 h",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "0.5 h",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "0.5 h",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "0.5 h",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "0,25 hours",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "0,25 hours",
+  "out": 900
+ },
+ {
+  "parser": "details",
+  "raw": "0,25 hours",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "0,25 hours",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "0,25 hours",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "0,25 hours",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "0.1 hr",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "0.1 hr",
+  "out": 360
+ },
+ {
+  "parser": "details",
+  "raw": "0.1 hr",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "0.1 hr",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "0.1 hr",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "0.1 hr",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "45 s",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "45 s",
+  "out": 45
+ },
+ {
+  "parser": "details",
+  "raw": "45 s",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "45 s",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "45 s",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "45 s",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "90 seconds",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "90 seconds",
+  "out": 90
+ },
+ {
+  "parser": "details",
+  "raw": "90 seconds",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "90 seconds",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "90 seconds",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "90 seconds",
+  "out": null
+ },
+ {
+  "parser": "bool",
+  "raw": "7.5 min",
+  "out": null
+ },
+ {
+  "parser": "seconds",
+  "raw": "7.5 min",
+  "out": 450
+ },
+ {
+  "parser": "details",
+  "raw": "7.5 min",
+  "out": null
+ },
+ {
+  "parser": "focus",
+  "raw": "7.5 min",
+  "out": null
+ },
+ {
+  "parser": "peek",
+  "raw": "7.5 min",
+  "out": null
+ },
+ {
+  "parser": "remain",
+  "raw": "7.5 min",
+  "out": null
+ }
+]

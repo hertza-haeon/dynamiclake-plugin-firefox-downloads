@@ -1,0 +1,102 @@
+[
+ {
+  "kind": "arrow",
+  "text": "",
+  "file": "arrow-plain.png"
+ },
+ {
+  "kind": "done",
+  "text": "",
+  "file": "done-plain.png"
+ },
+ {
+  "kind": "paused",
+  "text": "",
+  "file": "paused-plain.png"
+ },
+ {
+  "kind": "canceled",
+  "text": "",
+  "file": "canceled-plain.png"
+ },
+ {
+  "kind": "failed",
+  "text": "",
+  "file": "failed-plain.png"
+ },
+ {
+  "kind": "stalled",
+  "text": "",
+  "file": "stalled-plain.png"
+ },
+ {
+  "kind": "blocked",
+  "text": "",
+  "file": "blocked-plain.png"
+ },
+ {
+  "kind": "type",
+  "text": "pdf",
+  "file": "type-pdf.png"
+ },
+ {
+  "kind": "type",
+  "text": "zip",
+  "file": "type-zip.png"
+ },
+ {
+  "kind": "type",
+  "text": "gz",
+  "file": "type-gz.png"
+ },
+ {
+  "kind": "type",
+  "text": "7z",
+  "file": "type-7z.png"
+ },
+ {
+  "kind": "type",
+  "text": "dmg",
+  "file": "type-dmg.png"
+ },
+ {
+  "kind": "type",
+  "text": "mp4",
+  "file": "type-mp4.png"
+ },
+ {
+  "kind": "type",
+  "text": "jpeg",
+  "file": "type-jpeg.png"
+ },
+ {
+  "kind": "type",
+  "text": "mkv5",
+  "file": "type-mkv5.png"
+ },
+ {
+  "kind": "type",
+  "text": "w",
+  "file": "type-w.png"
+ },
+ {
+  "kind": "count",
+  "text": "2",
+  "file": "count-2.png"
+ },
+ {
+  "kind": "count",
+  "text": "3",
+  "file": "count-3.png"
+ },
+ {
+  "kind": "count",
+  "text": "10",
+  "file": "count-10.png"
+ },
+ {
+  "kind": "count",
+  "text": "128",
+  "file": "count-128.png"
+ }
+]

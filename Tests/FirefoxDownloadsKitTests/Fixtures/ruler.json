@@ -1,0 +1,293 @@
+[
+ {
+  "fn": "width",
+  "args": [
+   ""
+  ],
+  "out": 0.0
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   ""
+  ],
+  "out": null
+ },
+ {
+  "fn": "width",
+  "args": [
+   "x"
+  ],
+  "out": 7.68926477432251
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   "x"
+  ],
+  "out": null
+ },
+ {
+  "fn": "width",
+  "args": [
+   "Complete • report.pdf"
+  ],
+  "out": 147.93722939491272
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   "Complete • report.pdf"
+  ],
+  "out": null
+ },
+ {
+  "fn": "width",
+  "args": [
+   "Paused • Some.Long.Name.That.Goes.On.And.On.pdf"
+  ],
+  "out": 359.13101172447205
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   "Paused • Some.Long.Name.That.Goes.On.And.On.pdf"
+  ],
+  "out": "Paused • Some.Long.Name…"
+ },
+ {
+  "fn": "width",
+  "args": [
+   "Failed • éééééééééééééééééééééééééééééééééééééééé"
+  ],
+  "out": 378.0236437320709
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   "Failed • éééééééééééééééééééééééééééééééééééééééé"
+  ],
+  "out": "Failed • éééééééééééééééé…"
+ },
+ {
+  "fn": "width",
+  "args": [
+   "Canceled • 日本語のファイル名がとても長い場合.zip"
+  ],
+  "out": 331.4104108535189
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   "Canceled • 日本語のファイル名がとても長い場合.zip"
+  ],
+  "out": "Canceled • 日本語のファイ…"
+ },
+ {
+  "fn": "width",
+  "args": [
+   "294/871MB · 2 min 34 s"
+  ],
+  "out": 158.833411693573
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   "294/871MB · 2 min 34 s"
+  ],
+  "out": null
+ },
+ {
+  "fn": "width",
+  "args": [
+   "13.8 MB/s"
+  ],
+  "out": 65.70062756538391
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   "13.8 MB/s"
+  ],
+  "out": null
+ },
+ {
+  "fn": "width",
+  "args": [
+   "+2 Queuing"
+  ],
+  "out": 77.73745679855347
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   "+2 Queuing"
+  ],
+  "out": null
+ },
+ {
+  "fn": "width",
+  "args": [
+   "88 seconds"
+  ],
+  "out": 78.85785293579102
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   "88 seconds"
+  ],
+  "out": null
+ },
+ {
+  "fn": "width",
+  "args": [
+   "Browser closed • setup.dmg"
+  ],
+  "out": 189.44041562080383
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   "Browser closed • setup.dmg"
+  ],
+  "out": null
+ },
+ {
+  "fn": "width",
+  "args": [
+   "Complete • WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+  ],
+  "out": 491.7747151851654
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   "Complete • WWWWWWWWWWWWWWWWWWWWWWWWWWWWWW"
+  ],
+  "out": "Complete • WWWWWWW…"
+ },
+ {
+  "fn": "width",
+  "args": [
+   "Complete • iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+  ],
+  "out": 298.59742999076843
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   "Complete • iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+  ],
+  "out": "Complete • iiiiiiiiiiiiiiiiiiiiiiiiiiii…"
+ },
+ {
+  "fn": "width",
+  "args": [
+   "a . . . . . . . . . . . . . . . . . . . . . . . . . . .x"
+  ],
+  "out": 232.55491042137146
+ },
+ {
+  "fn": "fitted",
+  "args": [
+   "a . . . . . . . . . . . . . . . . . . . . . . . . . . .x"
+  ],
+  "out": "a…"
+ },
+ {
+  "fn": "padding",
+  "args": [
+   0.0
+  ],
+  "out": ""
+ },
+ {
+  "fn": "padding",
+  "args": [
+   0.2
+  ],
+  "out": ""
+ },
+ {
+  "fn": "padding",
+  "args": [
+   1.0
+  ],
+  "out": " ͏"
+ },
+ {
+  "fn": "padding",
+  "args": [
+   3.7
+  ],
+  "out": " ͏"
+ },
+ {
+  "fn": "padding",
+  "args": [
+   4.3
+  ],
+  "out": "  ͏"
+ },
+ {
+  "fn": "padding",
+  "args": [
+   10.0
+  ],
+  "out": "    ͏"
+ },
+ {
+  "fn": "padding",
+  "args": [
+   33.33
+  ],
+  "out": "          ͏"
+ },
+ {
+  "fn": "sameWidth",
+  "args": [
+   "13.8 MB/s",
+   [
+    "13.8 MB/s",
+    "2 min 34 s"
+   ]
+  ],
+  "out": "13.8 MB/s   ͏"
+ },
+ {
+  "fn": "sameWidth",
+  "args": [
+   "2 min 34 s",
+   [
+    "13.8 MB/s",
+    "2 min 34 s"
+   ]
+  ],
+  "out": "2 min 34 s ͏"
+ },
+ {
+  "fn": "sameWidth",
+  "args": [
+   "+2 Queuing",
+   [
+    "512 KB/s",
+    "45 seconds",
+    "+2 Queuing",
+    "88 seconds"
+   ]
+  ],
+  "out": "+2 Queuing ͏"
+ },
+ {
+  "fn": "sameWidth",
+  "args": [
+   "1 second",
+   [
+    "1 second",
+    "88 seconds"
+   ]
+  ],
+  "out": "1 second       ͏"
+ }
+]

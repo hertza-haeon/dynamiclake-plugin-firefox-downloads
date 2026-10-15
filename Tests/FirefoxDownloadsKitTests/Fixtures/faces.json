@@ -1,0 +1,3282 @@
+[
+ {
+  "label": "downloading, speed, queue 0, at 1004.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "speed"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 97.7 KB/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, speed, queue 0, at 1005.9",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1005.9,
+  "settings": {
+   "downloadDetails": "speed"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 97.7 KB/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, speed, queue 0, at 1007.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1007.0,
+  "settings": {
+   "downloadDetails": "speed"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 97.7 KB/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading without a total, speed, queue 0",
+  "name": "stream.Ab3_Xy9Q.bin",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "speed"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ]
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpiaW4=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"439KB \\u00b7 97.7 KB/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"\\u2014\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, speed, queue 2, at 1004.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "speed"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 97.7 KB/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, speed, queue 2, at 1005.9",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1005.9,
+  "settings": {
+   "downloadDetails": "speed"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 97.7 KB/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, speed, queue 2, at 1007.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1007.0,
+  "settings": {
+   "downloadDetails": "speed"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 97.7 KB/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading without a total, speed, queue 2",
+  "name": "stream.Ab3_Xy9Q.bin",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "speed"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ]
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpiaW4=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"439KB \\u00b7 97.7 KB/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"\\u2014\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, time, queue 0, at 1004.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "time"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 46 seconds\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1004.5,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1004.5
+  }
+ },
+ {
+  "label": "downloading, time, queue 0, at 1005.9",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1005.9,
+  "settings": {
+   "downloadDetails": "time"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 46 seconds\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1006.4,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1006.4
+  }
+ },
+ {
+  "label": "downloading, time, queue 0, at 1007.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1007.0,
+  "settings": {
+   "downloadDetails": "time"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 46 seconds\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1007.5,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1007.5
+  }
+ },
+ {
+  "label": "downloading without a total, time, queue 0",
+  "name": "stream.Ab3_Xy9Q.bin",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "time"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ]
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpiaW4=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"439KB \\u00b7 97.7 KB/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"\\u2014\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, time, queue 2, at 1004.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "time"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 46 seconds\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1004.5,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1004.5
+  }
+ },
+ {
+  "label": "downloading, time, queue 2, at 1005.9",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1005.9,
+  "settings": {
+   "downloadDetails": "time"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 46 seconds\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1006.4,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1006.4
+  }
+ },
+ {
+  "label": "downloading, time, queue 2, at 1007.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1007.0,
+  "settings": {
+   "downloadDetails": "time"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 46 seconds\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1007.5,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1007.5
+  }
+ },
+ {
+  "label": "downloading without a total, time, queue 2",
+  "name": "stream.Ab3_Xy9Q.bin",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "time"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ]
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpiaW4=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"439KB \\u00b7 97.7 KB/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"\\u2014\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, queue, queue 0, at 1004.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "queue"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, queue, queue 0, at 1005.9",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1005.9,
+  "settings": {
+   "downloadDetails": "queue"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, queue, queue 0, at 1007.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1007.0,
+  "settings": {
+   "downloadDetails": "queue"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading without a total, queue, queue 0",
+  "name": "stream.Ab3_Xy9Q.bin",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "queue"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ]
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpiaW4=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"439KB\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"\\u2014\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, queue, queue 2, at 1004.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "queue"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 +2 Queuing\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, queue, queue 2, at 1005.9",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1005.9,
+  "settings": {
+   "downloadDetails": "queue"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 +2 Queuing\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, queue, queue 2, at 1007.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1007.0,
+  "settings": {
+   "downloadDetails": "queue"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 +2 Queuing\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading without a total, queue, queue 2",
+  "name": "stream.Ab3_Xy9Q.bin",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "queue"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ]
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpiaW4=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"439KB \\u00b7 +2 Queuing\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"\\u2014\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, all, queue 0, at 1004.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "all"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 46 seconds\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1004.5,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1004.5
+  }
+ },
+ {
+  "label": "downloading, all, queue 0, at 1005.9",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1005.9,
+  "settings": {
+   "downloadDetails": "all"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 46 seconds\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1006.0,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1006.4
+  }
+ },
+ {
+  "label": "downloading, all, queue 0, at 1007.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1007.0,
+  "settings": {
+   "downloadDetails": "all"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 97.7 KB/s    \\u2009\\u200a\\u034f\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1009.0,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1007.5
+  }
+ },
+ {
+  "label": "downloading without a total, all, queue 0",
+  "name": "stream.Ab3_Xy9Q.bin",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "all"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ]
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpiaW4=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"439KB \\u00b7 97.7 KB/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"\\u2014\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1006.0,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, all, queue 2, at 1004.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "all"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 46 seconds\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1004.5,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1004.5
+  }
+ },
+ {
+  "label": "downloading, all, queue 2, at 1005.9",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1005.9,
+  "settings": {
+   "downloadDetails": "all"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 46 seconds\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1006.0,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1006.4
+  }
+ },
+ {
+  "label": "downloading, all, queue 2, at 1007.0",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1007.0,
+  "settings": {
+   "downloadDetails": "all"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 +2 Queuing\\u200a\\u034f\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1009.0,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1007.5
+  }
+ },
+ {
+  "label": "downloading without a total, all, queue 2",
+  "name": "stream.Ab3_Xy9Q.bin",
+  "call": "in_progress",
+  "args": {},
+  "now": 1004.0,
+  "settings": {
+   "downloadDetails": "all"
+  },
+  "queue": 2,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ]
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpiaW4=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"439KB \\u00b7 +2 Queuing\\u200a\\u034f\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"\\u2014\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1006.0,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, the first seconds: the arrow",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1001.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"YXJyb3c6\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.04}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 97.7 KB/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"4%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, File-Type Icons off",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1006.0,
+  "settings": {
+   "fileTypeIcons": false
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"YXJyb3c6\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 46 seconds\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1006.5,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1006.5
+  }
+ },
+ {
+  "label": "downloading, no extension",
+  "name": "README",
+  "call": "in_progress",
+  "args": {},
+  "now": 1006.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"YXJyb3c6\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 46 seconds\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1006.5,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1006.5
+  }
+ },
+ {
+  "label": "downloading, compact style",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1006.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "compact",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.09}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 46 seconds\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9\",\"style\":\"compact\"}}}",
+  "after": {
+   "text_due": 1006.5,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 45.5,
+   "eta_shown": 45.5,
+   "time_tick_at": 1006.5
+  }
+ },
+ {
+  "label": "downloading, bigger than its total",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1006.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 200000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"439KB \\u00b7 97.7 KB/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"\\u2014\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading slowly (under 1 KB/s)",
+  "name": "slow.Ab3_Xy9Q.zip",
+  "call": "in_progress",
+  "args": {},
+  "now": 1006.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     10000
+    ],
+    [
+     1000.5,
+     10100
+    ],
+    [
+     1001.0,
+     10200
+    ],
+    [
+     1001.5,
+     10300
+    ],
+    [
+     1002.0,
+     10400
+    ],
+    [
+     1002.5,
+     10500
+    ],
+    [
+     1003.0,
+     10600
+    ],
+    [
+     1003.5,
+     10700
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTp6aXA=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.0021}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"0/5MB \\u00b7 200 B/s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"0%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "downloading, last minute",
+  "name": "movie.Ab3_Xy9Q.mp4",
+  "call": "in_progress",
+  "args": {},
+  "now": 1006.0,
+  "settings": {
+   "downloadDetails": "all"
+  },
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 900000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTptcDQ=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.5}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"439/879KB \\u00b7 97.7 KB/s    \\u2009\\u200a\\u034f\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"50%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1009.0,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 4.5,
+   "eta_shown": 4.5,
+   "time_tick_at": 1006.5
+  }
+ },
+ {
+  "label": "downloading, gigabytes",
+  "name": "big.Ab3_Xy9Q.iso",
+  "call": "in_progress",
+  "args": {},
+  "now": 1006.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     1500000000
+    ],
+    [
+     1000.5,
+     1520000000
+    ],
+    [
+     1001.0,
+     1540000000
+    ],
+    [
+     1001.5,
+     1560000000
+    ],
+    [
+     1002.0,
+     1580000000
+    ],
+    [
+     1002.5,
+     1600000000
+    ],
+    [
+     1003.0,
+     1620000000
+    ],
+    [
+     1003.5,
+     1640000000
+    ]
+   ],
+   "total_size": 4700000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTppc28=\"},\"rightSlot\":{\"type\":\"progress\",\"tint\":\"blue\",\"value\":0.3489}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"1.52/4.38GB \\u00b7 1 min 17 s\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"34%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1006.5,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": 76.5,
+   "eta_shown": 76.5,
+   "time_tick_at": 1006.5
+  }
+ },
+ {
+  "label": "stalled",
+  "name": "slow.Ab3_Xy9Q.tar.gz",
+  "call": "in_progress",
+  "args": {
+   "stalled": true
+  },
+  "now": 1030.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpneg==\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"c3RhbGxlZDo=\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"Stalled \\u2022 slow.tar.gz\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": "Stalled",
+   "line_from": 1030.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "stalled, long name, held still",
+  "name": "Some.Very.Long.Name.That.Goes.On.pdf",
+  "call": "in_progress",
+  "args": {
+   "stalled": true
+  },
+  "now": 1030.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000,
+   "line_word": "Stalled",
+   "line_from": 1029.0
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpwZGY=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"c3RhbGxlZDo=\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"Stalled \\u2022 Some.Very.Long\\u2026\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": 1032.0,
+   "line_phase": "held",
+   "line_word": "Stalled",
+   "line_from": 1029.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "stalled, long name, scrolling",
+  "name": "Some.Very.Long.Name.That.Goes.On.pdf",
+  "call": "in_progress",
+  "args": {
+   "stalled": true
+  },
+  "now": 1030.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000,
+   "line_word": "Stalled",
+   "line_from": 1020.0
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpwZGY=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"c3RhbGxlZDo=\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Stop\",\"systemImage\":\"stop.fill\",\"actionID\":\"stop:dl-1\",\"shape\":\"circle\",\"tint\":\"red\",\"role\":\"destructive\"},\"center\":{\"type\":\"text\",\"text\":\"\\u2800Stalled \\u2022 Some.Very.Long.Name.That.Goes.On.pdf\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "scrolling",
+   "line_word": "Stalled",
+   "line_from": 1020.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "paused",
+  "name": "setup.Ab3_Xy9Q.dmg",
+  "call": "paused",
+  "args": {},
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpkbWc=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"cGF1c2VkOg==\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Resume\",\"systemImage\":\"play.fill\",\"actionID\":\"resume:dl-1\",\"shape\":\"circle\",\"tint\":\"green\"},\"center\":{\"type\":\"text\",\"text\":\"Paused \\u2022 setup.dmg\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": "Paused",
+   "line_from": 1010.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "paused, no total",
+  "name": "setup.Ab3_Xy9Q.dmg",
+  "call": "paused",
+  "args": {},
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ]
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpkbWc=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"cGF1c2VkOg==\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Resume\",\"systemImage\":\"play.fill\",\"actionID\":\"resume:dl-1\",\"shape\":\"circle\",\"tint\":\"green\"},\"center\":{\"type\":\"text\",\"text\":\"Paused \\u2022 setup.dmg\",\"style\":\"marquee\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": "Paused",
+   "line_from": 1010.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "paused, its browser closed",
+  "name": "setup.Ab3_Xy9Q.dmg",
+  "call": "paused",
+  "args": {
+   "button": false
+  },
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpkbWc=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"cGF1c2VkOg==\"}},\"sneakPeek\":{\"center\":{\"type\":\"text\",\"text\":\"Paused \\u2022 setup.dmg\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": "Paused",
+   "line_from": 1010.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "paused, compact style",
+  "name": "setup.Ab3_Xy9Q.dmg",
+  "call": "paused",
+  "args": {},
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "compact",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpkbWc=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"cGF1c2VkOg==\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Resume\",\"systemImage\":\"play.fill\",\"actionID\":\"resume:dl-1\",\"shape\":\"circle\",\"tint\":\"green\"},\"center\":{\"type\":\"text\",\"text\":\"Paused \\u2022 setup.dmg\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9\",\"style\":\"compact\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": "Paused",
+   "line_from": 1010.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "failed",
+  "name": "setup.Ab3_Xy9Q.dmg",
+  "call": "failed",
+  "args": {},
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpkbWc=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"ZmFpbGVkOg==\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Retry\",\"systemImage\":\"arrow.clockwise\",\"actionID\":\"retry:dl-1\",\"shape\":\"circle\",\"tint\":\"blue\"},\"center\":{\"type\":\"text\",\"text\":\"Failed \\u2022 setup.dmg\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": "Failed",
+   "line_from": 1010.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "failed, no total",
+  "name": "setup.Ab3_Xy9Q.dmg",
+  "call": "failed",
+  "args": {},
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ]
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpkbWc=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"ZmFpbGVkOg==\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Retry\",\"systemImage\":\"arrow.clockwise\",\"actionID\":\"retry:dl-1\",\"shape\":\"circle\",\"tint\":\"blue\"},\"center\":{\"type\":\"text\",\"text\":\"Failed \\u2022 setup.dmg\",\"style\":\"marquee\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": "Failed",
+   "line_from": 1010.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "failed, its browser closed",
+  "name": "setup.Ab3_Xy9Q.dmg",
+  "call": "failed",
+  "args": {
+   "button": false
+  },
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpkbWc=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"ZmFpbGVkOg==\"}},\"sneakPeek\":{\"center\":{\"type\":\"text\",\"text\":\"Failed \\u2022 setup.dmg\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": "Failed",
+   "line_from": 1010.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "failed, compact style",
+  "name": "setup.Ab3_Xy9Q.dmg",
+  "call": "failed",
+  "args": {},
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "compact",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpkbWc=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"ZmFpbGVkOg==\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Retry\",\"systemImage\":\"arrow.clockwise\",\"actionID\":\"retry:dl-1\",\"shape\":\"circle\",\"tint\":\"blue\"},\"center\":{\"type\":\"text\",\"text\":\"Failed \\u2022 setup.dmg\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9\",\"style\":\"compact\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": "Failed",
+   "line_from": 1010.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "browser closed",
+  "name": "setup.Ab3_Xy9Q.dmg",
+  "call": "paused",
+  "args": {
+   "button": false,
+   "word": "Browser closed"
+  },
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "total_size": 5000000
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpkbWc=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"cGF1c2VkOg==\"}},\"sneakPeek\":{\"center\":{\"type\":\"text\",\"text\":\"Browser closed \\u2022 setup.dmg\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"text\",\"text\":\"9%\",\"style\":\"numeric\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": "Browser closed",
+   "line_from": 1010.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "done",
+  "name": "slides.Ab3_Xy9Q.pdf",
+  "call": "done",
+  "args": {},
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "resolved_at": 1009.0,
+   "succeeded": true
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpwZGY=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"ZG9uZTo=\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Show in Finder\",\"systemImage\":\"folder.fill\",\"actionID\":\"show:dl-1\",\"shape\":\"circle\",\"tint\":\"blue\"},\"center\":{\"type\":\"text\",\"text\":\"Complete \\u2022 slides.pdf\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"button\",\"title\":\"Open File\",\"systemImage\":\"arrow.up.forward.app.fill\",\"actionID\":\"open:dl-1\",\"shape\":\"circle\",\"tint\":\"blue\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": "Complete",
+   "line_from": 1010.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "done, long name",
+  "name": "A.Very.Long.File.Name.For.The.Slides.Of.Today.pdf",
+  "call": "done",
+  "args": {},
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "resolved_at": 1009.0,
+   "succeeded": true
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpwZGY=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"ZG9uZTo=\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Show in Finder\",\"systemImage\":\"folder.fill\",\"actionID\":\"show:dl-1\",\"shape\":\"circle\",\"tint\":\"blue\"},\"center\":{\"type\":\"text\",\"text\":\"Complete \\u2022 A.Very.Long.Fil\\u2026\",\"style\":\"marquee\"},\"rightSlot\":{\"type\":\"button\",\"title\":\"Open File\",\"systemImage\":\"arrow.up.forward.app.fill\",\"actionID\":\"open:dl-1\",\"shape\":\"circle\",\"tint\":\"blue\"}}}",
+  "after": {
+   "text_due": 1013.0,
+   "line_phase": "held",
+   "line_word": "Complete",
+   "line_from": 1010.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "summary",
+  "name": "alpha.Ab3_Xy9Q.zip",
+  "call": "summary",
+  "args": {
+   "count": 3
+  },
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "resolved_at": 1009.0,
+   "succeeded": true
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"Y291bnQ6Mw==\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"ZG9uZTo=\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Show in Finder\",\"systemImage\":\"folder.fill\",\"actionID\":\"show:dl-1\",\"shape\":\"circle\",\"tint\":\"blue\"},\"center\":{\"type\":\"text\",\"text\":\"3 Downloads Completed\",\"style\":\"marquee\"}},\"extraLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"Y291bnQ6Mw==\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": null,
+   "line_from": 0.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "canceled",
+  "name": "five.Ab3_Xy9Q.iso",
+  "call": "canceled",
+  "args": {
+   "reason": "Canceled"
+  },
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "resolved_at": 1009.0
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTppc28=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"Y2FuY2VsZWQ6\"}},\"sneakPeek\":{\"leftSlot\":{\"type\":\"button\",\"title\":\"Retry\",\"systemImage\":\"arrow.clockwise\",\"actionID\":\"restart:dl-1\",\"shape\":\"circle\",\"tint\":\"blue\"},\"center\":{\"type\":\"text\",\"text\":\"Canceled \\u2022 five.iso\",\"style\":\"marquee\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": "Canceled",
+   "line_from": 1010.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ },
+ {
+  "label": "blocked",
+  "name": "virus.Ab3_Xy9Q.exe",
+  "call": "canceled",
+  "args": {
+   "reason": "Blocked"
+  },
+  "now": 1010.0,
+  "settings": {},
+  "queue": 0,
+  "numeric": "numeric",
+  "fields": {
+   "samples": [
+    [
+     1000.0,
+     100000
+    ],
+    [
+     1000.5,
+     150000
+    ],
+    [
+     1001.0,
+     200000
+    ],
+    [
+     1001.5,
+     250000
+    ],
+    [
+     1002.0,
+     300000
+    ],
+    [
+     1002.5,
+     350000
+    ],
+    [
+     1003.0,
+     400000
+    ],
+    [
+     1003.5,
+     450000
+    ]
+   ],
+   "resolved_at": 1009.0,
+   "resolved_reason": "Blocked"
+  },
+  "out": "{\"compactLiveActivity\":{\"leftSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"dHlwZTpleGU=\"},\"rightSlot\":{\"type\":\"image\",\"source\":\"inlineData\",\"mimeType\":\"image/png\",\"base64Data\":\"YmxvY2tlZDo=\"}},\"sneakPeek\":{\"center\":{\"type\":\"text\",\"text\":\"Blocked \\u2022 virus.exe\",\"style\":\"marquee\"}}}",
+  "after": {
+   "text_due": null,
+   "line_phase": "",
+   "line_word": "Blocked",
+   "line_from": 1010.0,
+   "eta": null,
+   "eta_shown": null,
+   "time_tick_at": null
+  }
+ }
+]

@@ -37,19 +37,10 @@ download and open the finished file without going back to the browser.
 - One of the browsers above. The plugin shows what's saved to the download
   folder set in the browser (your Downloads folder unless you changed it).
 - The **Downloads button on the browser's toolbar** (it's there unless you
-  removed it). The plugin's buttons work through it.
-- **Python 3** (3.9 or later). The plugin is a Python program, and macOS
-  doesn't always have Python. To check, open Terminal and type:
+  removed it). Resume and Retry work through it.
 
-  ```bash
-  python3 --version
-  ```
-
-  If it answers with a number such as `Python 3.9.6`, you're set. If macOS
-  offers to install the "command line developer tools" instead, click
-  **Install**: Python comes with them. Python from
-  [Homebrew](https://brew.sh) or [python.org](https://www.python.org/downloads/)
-  works too.
+Nothing else: the plugin is a program of its own, for Apple silicon and
+Intel Macs.
 
 ## Install
 
@@ -60,7 +51,8 @@ download and open the finished file without going back to the browser.
 3. Click **Install Local** and choose the
    `FirefoxDownloads.dynamiclakeplugin` folder you unzipped. Keep that exact
    name.
-4. Give DynamicLake the two [permissions](#permissions) below.
+4. Give DynamicLake the two [permissions](#permissions) below, for Resume
+   and Retry.
 
 That's all: start a download in your browser and it shows in the notch.
 
@@ -73,11 +65,12 @@ The plugin runs inside DynamicLake, so the permissions are DynamicLake's.
 
 | Permission | What it's for | Where to turn it on |
 | --- | --- | --- |
-| **Accessibility** | Stop, Resume and Retry: pressing the browser's own buttons for you | System Settings → Privacy & Security → Accessibility → DynamicLake |
-| **Automation** (System Events) | The same three buttons | Click **OK** when macOS asks, or System Settings → Privacy & Security → Automation → DynamicLake |
+| **Accessibility** | Resume and Retry: pressing the browser's own buttons for you | System Settings → Privacy & Security → Accessibility → DynamicLake |
+| **Automation** (System Events) | The same two buttons | Click **OK** when macOS asks, or System Settings → Privacy & Security → Automation → DynamicLake |
 
 Without them, everything else still works: progress, Show in Finder and
-Open File need no permission. The three buttons then say
+Open File need no permission, and neither does Stop, almost always (see
+[The buttons](#the-buttons)). Resume and Retry then say
 `Needs Accessibility access` or `Needs Automation access`.
 
 ## What you see
@@ -117,7 +110,7 @@ to fit stays still for 3 seconds, then scrolls.
 
 | Button | What it does |
 | --- | --- |
-| **Stop** | Cancels the download in the browser. |
+| **Stop** | Cancels the download in the browser, at once. |
 | **Resume** | Carries on with a paused download. |
 | **Retry** | Carries on with a failed download from where it stopped, when the server allows. On a canceled card, starts the download over. |
 | **Show in Finder** | Shows the finished file in the Finder. |
@@ -126,6 +119,13 @@ to fit stays still for 3 seconds, then scrolls.
 While a button works, the line reads `Stopping…`, `Resuming…` or
 `Retrying…`. If it can't do what you asked, it says why: see
 [If something goes wrong](#if-something-goes-wrong).
+
+Stop needs no permission and leaves the browser alone: the browser tells
+macOS about each download it saves (that's how the Finder shows a progress
+bar on the file), and Stop cancels that download through macOS, as the
+Finder's own cancel button does. Should that ever be impossible, Stop
+presses the browser's Cancel button instead, which needs the two
+permissions.
 
 ## Several downloads at once
 
@@ -178,8 +178,8 @@ and choose **Settings**. Changes apply within a few seconds.
 - Resume can't be invisible: the browser's menu flashes, the pointer moves
   for an instant and is put back, and with App Switching After Resume on,
   the browser's window comes to the front for an instant.
-- After Stop or Retry, the browser's Downloads panel stays open in the
-  browser window until your next click there.
+- After Retry, the browser's Downloads panel stays open in the browser
+  window until your next click there.
 - The buttons reach the 5 most recent downloads in the browser's panel.
 - Retry on a canceled card has to be pressed while the card is up. Later,
   retry in the browser.
@@ -218,17 +218,16 @@ and choose **Settings**. Changes apply within a few seconds.
 
 ## If something goes wrong
 
-**Nothing shows in the notch when a download starts.** Check that Python 3
-is installed (see [What you need](#what-you-need)), then quit DynamicLake
+**Nothing shows in the notch when a download starts.** Quit DynamicLake
 and open it again.
 
-**The buttons don't work.** Check the two [permissions](#permissions), and
-that the Downloads button is on the browser's toolbar.
+**Resume or Retry doesn't work.** Check the two [permissions](#permissions),
+and that the Downloads button is on the browser's toolbar.
 
 **DynamicLake says the plugin can't be run.** In Terminal:
 
 ```bash
-chmod +x FirefoxDownloads.dynamiclakeplugin/firefox-downloads-launcher
+chmod +x FirefoxDownloads.dynamiclakeplugin/firefox-downloads
 ```
 
 **A button answers with a message.** Nothing wrong was pressed: when the
@@ -262,14 +261,16 @@ Its last lines usually tell what happened.
 
 - It **watches** your browser's download folder and **reads** the browser's
   own list of downloads. It never changes the browser's files.
-- For Stop, Resume and Retry, it **presses the browser's own button** for
-  that one download, after checking twice that it's the right one. If
-  anything is unclear, it presses nothing.
+- For Stop, it **asks the browser, through macOS,** to cancel that one
+  download, which it names by its file. When that can't be done, it
+  presses the browser's Cancel button, as below.
+- For Resume and Retry, it **presses the browser's own button** for that
+  one download, after checking twice that it's the right one. If anything
+  is unclear, it presses nothing.
 - It **never types** anything and never touches the pages you browse.
 - It **sends nothing** over the internet.
-- DynamicLake starts it through `firefox-downloads-launcher`, a small
-  program whose only job is to run the plugin (`firefox_downloads.py`) with
-  your Mac's Python. Its source, `firefox-downloads-launcher.c`, is in
+- The plugin is `firefox-downloads`, one program for Apple silicon and
+  Intel Macs. Its source (Swift) and its tests are in
   [the repository](https://github.com/hertza-haeon/dynamiclake-plugin-firefox-downloads).
 
 ## Uninstall

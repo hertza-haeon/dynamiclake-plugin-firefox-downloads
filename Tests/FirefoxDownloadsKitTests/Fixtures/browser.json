@@ -1,0 +1,106 @@
+{
+ "prefs": [
+  {
+   "text": "",
+   "folder": "/Users/someone/Downloads"
+  },
+  {
+   "text": "user_pref(\"browser.download.useDownloadDir\", true);\n",
+   "folder": "/Users/someone/Downloads"
+  },
+  {
+   "text": "user_pref(\"browser.download.folderList\", 0);\n",
+   "folder": "/Users/someone/Desktop"
+  },
+  {
+   "text": "user_pref(\"browser.download.folderList\", 1);\n",
+   "folder": "/Users/someone/Downloads"
+  },
+  {
+   "text": "user_pref(\"browser.download.folderList\", 2);\nuser_pref(\"browser.download.dir\", \"/Volumes/Big/Downloads\");\n",
+   "folder": "/Volumes/Big/Downloads"
+  },
+  {
+   "text": "user_pref(\"browser.download.folderList\", 2);\nuser_pref(\"browser.download.dir\", \"~/Elsewhere\");\n",
+   "folder": "/Users/someone/Elsewhere"
+  },
+  {
+   "text": "user_pref(\"browser.download.folderList\", 2);\n",
+   "folder": "/Users/someone/Downloads"
+  },
+  {
+   "text": "user_pref(\"browser.download.folderList\", 2);\nuser_pref(\"browser.download.dir\", \"\");\n",
+   "folder": "/Users/someone/Downloads"
+  },
+  {
+   "text": "user_pref(\"browser.download.folderList\",2);user_pref(\"browser.download.dir\",\"/X/Y/\");\n",
+   "folder": "/X/Y"
+  },
+  {
+   "text": "user_pref(\"browser.download.folderList\", false);\n",
+   "folder": "/Users/someone/Desktop"
+  },
+  {
+   "text": "user_pref(\"browser.download.folderList\", true);\n",
+   "folder": "/Users/someone/Downloads"
+  },
+  {
+   "text": "user_pref(\"browser.download.folderList\", \"2\");\n",
+   "folder": "/Users/someone/Downloads"
+  },
+  {
+   "text": "user_pref(\"browser.download.folderList\", +2);\nuser_pref(\"browser.download.dir\", \"/P\");\n",
+   "folder": "/P"
+  },
+  {
+   "text": "// comment\nuser_pref(\"browser.download.folderList\", 2);\r\nuser_pref(\"browser.download.dir\", \"/W\");\r\n",
+   "folder": "/W"
+  }
+ ],
+ "ini": [
+  {
+   "text": "",
+   "paths": []
+  },
+  {
+   "text": "[General]\nStartWithLastProfile=1\n\n[Profile0]\nName=default\nIsRelative=1\nPath=Profiles/abcd.default\n",
+   "paths": [
+    "Profiles/abcd.default"
+   ]
+  },
+  {
+   "text": "[Profile0]\nIsRelative=0\nPath=/Volumes/Other/profile\n[Profile1]\nPath=Profiles/x.y\n",
+   "paths": [
+    "/Volumes/Other/profile",
+    "Profiles/x.y"
+   ]
+  },
+  {
+   "text": "[Profile0]\r\nIsRelative=1\r\nPath=Profiles/crlf.default\r\n",
+   "paths": [
+    "Profiles/crlf.default"
+   ]
+  },
+  {
+   "text": "[Profile0]\nPath = spaced\nPath2=x\n[Install123]\nDefault=Profiles/abcd.default\n",
+   "paths": []
+  },
+  {
+   "text": "Path=before-any-section\n[Profile0]\nIsRelative=1\nPath=Profiles/trailing/\n",
+   "paths": [
+    "before-any-section",
+    "Profiles/trailing"
+   ]
+  },
+  {
+   "text": "[Profile0]\nIsRelative=1\nPath=/absolute/even/so\n",
+   "paths": [
+    "/absolute/even/so"
+   ]
+  },
+  {
+   "text": "[Profile0]\nPath=\n",
+   "paths": []
+  }
+ ]
+}
